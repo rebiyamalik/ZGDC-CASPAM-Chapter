@@ -1,0 +1,219 @@
+[
+  {
+    "name": "Member 1 (SAMPLE)",
+    "role": "Chapter Lead",
+    "photo": "",
+    "bio": "Short bio goes here. Replace this sample text.",
+    "skills": [
+      "Web",
+      "AI"
+    ],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    }
+  },
+  {
+    "name": "Member 2 (SAMPLE)",
+    "role": "Co-Lead",
+    "photo": "",
+    "bio": "Short bio goes here. Replace this sample text.",
+    "skills": [
+      "Web",
+      "AI",
+      "Design"
+    ],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    }
+  },
+  {
+    "name": "Member 3 (SAMPLE)",
+    "role": "General Secretary",
+    "photo": "",
+    "bio": "Short bio goes here. Replace this sample text.",
+    "skills": [
+      "Web",
+      "AI"
+    ],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    }
+  },
+  {
+    "name": "Member 4 (SAMPLE)",
+    "role": "Web Lead",
+    "photo": "",
+    "bio": "Short bio goes here. Replace this sample text.",
+    "skills": [
+      "Web",
+      "AI",
+      "Design"
+    ],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    }
+  },
+  {
+    "name": "Member 5 (SAMPLE)",
+    "role": "AI & Data Lead",
+    "photo": "",
+    "bio": "Short bio goes here. Replace this sample text.",
+    "skills": [
+      "Web",
+      "AI"
+    ],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    }
+  },
+  {
+    "name": "Member 6 (SAMPLE)",
+    "role": "UI/UX Lead",
+    "photo": "",
+    "bio": "Short bio goes here. Replace this sample text.",
+    "skills": [
+      "Web",
+      "AI",
+      "Design"
+    ],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    }
+  },
+  {
+    "name": "Member 7 (SAMPLE)",
+    "role": "Events Lead",
+    "photo": "",
+    "bio": "Short bio goes here. Replace this sample text.",
+    "skills": [
+      "Web",
+      "AI"
+    ],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    }
+  },
+  {
+    "name": "Member 8 (SAMPLE)",
+    "role": "Marketing Lead",
+    "photo": "",
+    "bio": "Short bio goes here. Replace this sample text.",
+    "skills": [
+      "Web",
+      "AI",
+      "Design"
+    ],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    }
+  },
+  {
+    "name": "Member 9 (SAMPLE)",
+    "role": "Design Lead",
+    "photo": "",
+    "bio": "Short bio goes here. Replace this sample text.",
+    "skills": [
+      "Web",
+      "AI"
+    ],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    }
+  },
+  {
+    "name": "Member 10 (SAMPLE)",
+    "role": "Content Lead",
+    "photo": "",
+    "bio": "Short bio goes here. Replace this sample text.",
+    "skills": [
+      "Web",
+      "AI",
+      "Design"
+    ],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    }
+  },
+  {
+    "name": "Member 11 (SAMPLE)",
+    "role": "Media Lead",
+    "photo": "",
+    "bio": "Short bio goes here. Replace this sample text.",
+    "skills": [
+      "Web",
+      "AI"
+    ],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    }
+  },
+  {
+    "name": "Member 12 (SAMPLE)",
+    "role": "Community Lead",
+    "photo": "",
+    "bio": "Short bio goes here. Replace this sample text.",
+    "skills": [
+      "Web",
+      "AI",
+      "Design"
+    ],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    }
+  },
+  {
+    "name": "Member 13 (SAMPLE)",
+    "role": "Mobile Dev",
+    "photo": "",
+    "bio": "Short bio goes here. Replace this sample text.",
+    "skills": [
+      "Web",
+      "AI"
+    ],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    }
+  },
+  {
+    "name": "Member 14 (SAMPLE)",
+    "role": "Outreach Lead",
+    "photo": "",
+    "bio": "Short bio goes here. Replace this sample text.",
+    "skills": [
+      "Web",
+      "AI",
+      "Design"
+    ],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    }
+  },
+  {
+    "name": "Member 15 (SAMPLE)",
+    "role": "Treasurer",
+    "photo": "",
+    "bio": "Short bio goes here. Replace this sample text.",
+    "skills": [
+      "Web",
+      "AI"
+    ],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    }
+  }
+]

@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== BRAND COLOURS — defined ONCE here. ===== */
+:root {
+  /* Sampled from ZGDC_logo.jpg */
+  --brand-blue: #4385F6;
+  --brand-red: #EA4235;
+  --brand-green: #109D58;
+  --brand-yellow: #FBBD06;
+  /* Darker blue for TEXT and buttons so contrast on white is >= 4.5:1 */
+  --brand-main: #1B5FD0;
+  --ink: #14171F;
+  --soft: #F6F7FA;
+}
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #fff; color: var(--ink); font-family: Inter, sans-serif; }
+h1, h2, h3 { font-family: Sora, sans-serif; }
+:focus-visible { outline: 3px solid var(--brand-main); outline-offset: 3px; border-radius: 6px; }
+.btn { display: inline-block; padding: .8rem 1.4rem; border-radius: 999px; font-weight: 600; transition: transform .2s; }
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--brand-main); color: #fff; box-shadow: 0 10px 24px -8px var(--brand-main); }
+.btn-ghost { border: 2px solid var(--ink); color: var(--ink); }
+.layered { box-shadow: 0 1px 2px rgba(20,23,31,.06), 0 8px 16px rgba(20,23,31,.06), 0 24px 48px rgba(20,23,31,.08); }
+.letter-block { display: inline-block; min-width: .5em; text-align: center; background: #fff; border-radius: 6px;
+  box-shadow: 0 2px 0 #d9dce3, 0 8px 14px rgba(20,23,31,.14); padding: 0 .12em; margin: 0 1px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
