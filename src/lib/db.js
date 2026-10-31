@@ -13,9 +13,12 @@ const cfg = {
 export const dbEnabled = Boolean(cfg.apiKey && cfg.projectId)
 
 /** Save one document. collectionName: 'registrations' | 'messages'. Allowed fields are enforced by firestore.rules. */
-export async function saveDoc(collectionName, data) {
+export async function saveDoc(collectionName, data, id) {
   const [{ initializeApp, getApps, getApp }, fs] = await Promise.all([import('firebase/app'), import('firebase/firestore')])
   const app = getApps().length ? getApp() : initializeApp(cfg)
   const db = fs.getFirestore(app)
-  return fs.addDoc(fs.collection(db, collectionName), { ...data, createdAt: fs.serverTimestamp() })
+  const payload = { ...data, createdAt: fs.serverTimestamp() }
+  // With an id, a second save of the same id is rejected by the rules (create-only) = duplicate protection.
+  if (id) return fs.setDoc(fs.doc(db, collectionName, id), payload)
+  return fs.addDoc(fs.collection(db, collectionName), payload)
 }
