@@ -1,219 +1,352 @@
 [
   {
-    "name": "Member 1 (SAMPLE)",
-    "role": "Chapter Lead",
+    "name": "Rebiya Ismail",
+    "role": "President",
+    "group": "leadership",
+    "program": "BS Mathematics",
     "photo": "",
-    "bio": "Short bio goes here. Replace this sample text.",
-    "skills": [
-      "Web",
-      "AI"
-    ],
+    "bio": "",
+    "skills": [],
     "links": {
       "linkedin": "",
       "github": ""
-    }
+    },
+    "class": "2023-27"
   },
   {
-    "name": "Member 2 (SAMPLE)",
-    "role": "Co-Lead",
+    "name": "Zainab Akram Rao",
+    "role": "Vice President",
+    "group": "leadership",
+    "program": "BS Mathematics",
     "photo": "",
-    "bio": "Short bio goes here. Replace this sample text.",
-    "skills": [
-      "Web",
-      "AI",
-      "Design"
-    ],
+    "bio": "",
+    "skills": [],
     "links": {
       "linkedin": "",
       "github": ""
-    }
+    },
+    "class": "2023-27"
   },
   {
-    "name": "Member 3 (SAMPLE)",
+    "name": "Ateeq ur Rehman",
+    "role": "Vice President",
+    "group": "leadership",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2023-27"
+  },
+  {
+    "name": "Mubashira Zainab",
     "role": "General Secretary",
+    "group": "leadership",
+    "program": "BS Mathematics",
     "photo": "",
-    "bio": "Short bio goes here. Replace this sample text.",
-    "skills": [
-      "Web",
-      "AI"
-    ],
+    "bio": "",
+    "skills": [],
     "links": {
       "linkedin": "",
       "github": ""
-    }
+    },
+    "class": "2024-28"
   },
   {
-    "name": "Member 4 (SAMPLE)",
-    "role": "Web Lead",
+    "name": "Umar Latif",
+    "role": "General Secretary",
+    "group": "leadership",
+    "program": "BS AI",
     "photo": "",
-    "bio": "Short bio goes here. Replace this sample text.",
-    "skills": [
-      "Web",
-      "AI",
-      "Design"
-    ],
+    "bio": "",
+    "skills": [],
     "links": {
       "linkedin": "",
       "github": ""
-    }
+    },
+    "class": "2025-29"
   },
   {
-    "name": "Member 5 (SAMPLE)",
-    "role": "AI & Data Lead",
+    "name": "Faiza Haneef",
+    "role": "Joint Secretary",
+    "group": "leadership",
+    "program": "BS Mathematics",
     "photo": "",
-    "bio": "Short bio goes here. Replace this sample text.",
-    "skills": [
-      "Web",
-      "AI"
-    ],
+    "bio": "",
+    "skills": [],
     "links": {
       "linkedin": "",
       "github": ""
-    }
+    },
+    "class": "2024-28"
   },
   {
-    "name": "Member 6 (SAMPLE)",
-    "role": "UI/UX Lead",
+    "name": "Uzair Sarfaraz",
+    "role": "Joint Secretary",
+    "group": "leadership",
+    "program": "BS AI",
     "photo": "",
-    "bio": "Short bio goes here. Replace this sample text.",
-    "skills": [
-      "Web",
-      "AI",
-      "Design"
-    ],
+    "bio": "",
+    "skills": [],
     "links": {
       "linkedin": "",
       "github": ""
-    }
+    },
+    "class": "2025-29"
   },
   {
-    "name": "Member 7 (SAMPLE)",
-    "role": "Events Lead",
+    "name": "Muhammad Ramzan",
+    "role": "Executive Member",
+    "group": "executive",
+    "program": "BS Mathematics",
     "photo": "",
-    "bio": "Short bio goes here. Replace this sample text.",
-    "skills": [
-      "Web",
-      "AI"
-    ],
+    "bio": "",
+    "skills": [],
     "links": {
       "linkedin": "",
       "github": ""
-    }
+    },
+    "class": "2024-28"
   },
   {
-    "name": "Member 8 (SAMPLE)",
-    "role": "Marketing Lead",
+    "name": "Sibghatullah",
+    "role": "Executive Member",
+    "group": "executive",
+    "program": "BS Mathematics",
     "photo": "",
-    "bio": "Short bio goes here. Replace this sample text.",
-    "skills": [
-      "Web",
-      "AI",
-      "Design"
-    ],
+    "bio": "",
+    "skills": [],
     "links": {
       "linkedin": "",
       "github": ""
-    }
+    },
+    "class": "2025-29"
   },
   {
-    "name": "Member 9 (SAMPLE)",
-    "role": "Design Lead",
+    "name": "Sania Yaqub",
+    "role": "Executive Member",
+    "group": "executive",
+    "program": "BS Mathematics",
     "photo": "",
-    "bio": "Short bio goes here. Replace this sample text.",
-    "skills": [
-      "Web",
-      "AI"
-    ],
+    "bio": "",
+    "skills": [],
     "links": {
       "linkedin": "",
       "github": ""
-    }
+    },
+    "class": "2025-29"
   },
   {
-    "name": "Member 10 (SAMPLE)",
-    "role": "Content Lead",
+    "name": "M Ali Abid",
+    "role": "Executive Member",
+    "group": "executive",
+    "program": "BS AI",
     "photo": "",
-    "bio": "Short bio goes here. Replace this sample text.",
-    "skills": [
-      "Web",
-      "AI",
-      "Design"
-    ],
+    "bio": "",
+    "skills": [],
     "links": {
       "linkedin": "",
       "github": ""
-    }
+    },
+    "class": "2025-29"
   },
   {
-    "name": "Member 11 (SAMPLE)",
-    "role": "Media Lead",
+    "name": "Ghulam Mustafa",
+    "role": "Executive Member",
+    "group": "executive",
+    "program": "BS Mathematics",
     "photo": "",
-    "bio": "Short bio goes here. Replace this sample text.",
-    "skills": [
-      "Web",
-      "AI"
-    ],
+    "bio": "",
+    "skills": [],
     "links": {
       "linkedin": "",
       "github": ""
-    }
+    },
+    "class": "2025-29"
   },
   {
-    "name": "Member 12 (SAMPLE)",
-    "role": "Community Lead",
+    "name": "Syed Arjumand Haider Shah",
+    "role": "Executive Member",
+    "group": "executive",
+    "program": "BS AI",
     "photo": "",
-    "bio": "Short bio goes here. Replace this sample text.",
-    "skills": [
-      "Web",
-      "AI",
-      "Design"
-    ],
+    "bio": "",
+    "skills": [],
     "links": {
       "linkedin": "",
       "github": ""
-    }
+    },
+    "class": "2025-29"
   },
   {
-    "name": "Member 13 (SAMPLE)",
-    "role": "Mobile Dev",
+    "name": "Ali Ahmad",
+    "role": "Executive Member",
+    "group": "executive",
+    "program": "BS Mathematics",
     "photo": "",
-    "bio": "Short bio goes here. Replace this sample text.",
-    "skills": [
-      "Web",
-      "AI"
-    ],
+    "bio": "",
+    "skills": [],
     "links": {
       "linkedin": "",
       "github": ""
-    }
+    },
+    "class": "2025-29"
   },
   {
-    "name": "Member 14 (SAMPLE)",
-    "role": "Outreach Lead",
+    "name": "Aisha Siddiqua",
+    "role": "Executive Member",
+    "group": "executive",
+    "program": "BS Mathematics",
     "photo": "",
-    "bio": "Short bio goes here. Replace this sample text.",
-    "skills": [
-      "Web",
-      "AI",
-      "Design"
-    ],
+    "bio": "",
+    "skills": [],
     "links": {
       "linkedin": "",
       "github": ""
-    }
+    },
+    "class": "2025-29"
   },
   {
-    "name": "Member 15 (SAMPLE)",
-    "role": "Treasurer",
+    "name": "Muhammad Saqib",
+    "role": "Executive Member",
+    "group": "executive",
+    "program": "BS Mathematics",
     "photo": "",
-    "bio": "Short bio goes here. Replace this sample text.",
-    "skills": [
-      "Web",
-      "AI"
-    ],
+    "bio": "",
+    "skills": [],
     "links": {
       "linkedin": "",
       "github": ""
-    }
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Samreen Fayyaz",
+    "role": "Executive Member",
+    "group": "executive",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Mehreen Sultana",
+    "role": "Executive Member",
+    "group": "executive",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Hamna Batool",
+    "role": "Executive Member",
+    "group": "executive",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Nuzhat Arshad",
+    "role": "Executive Member",
+    "group": "executive",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Shahid Hameed",
+    "role": "Executive Member",
+    "group": "executive",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Saim",
+    "role": "Media Head",
+    "group": "media",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Zaib un Nisa",
+    "role": "Graphics Head",
+    "group": "media",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "M Ahmad Akhtar",
+    "role": "Finance Secretary",
+    "group": "media",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Abdullah",
+    "role": "Information Secretary",
+    "group": "media",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
   }
 ]
