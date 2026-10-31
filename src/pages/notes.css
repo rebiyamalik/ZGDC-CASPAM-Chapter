@@ -806,8 +806,8 @@
 
 /* ---------- Hero: deep blue with drifting brand-colour glows ---------- */
 .zr-hero {
-  background: linear-gradient(135deg, #0a1235 0%, #11236a 55%, #1a3a96 100%);
-  border-bottom: 0;
+  background: #fff;
+  border-bottom: 1px solid var(--zr-border);
   isolation: isolate;
 }
 .zr-hero::before {
@@ -816,10 +816,10 @@
   inset: -20%;
   z-index: -1;
   background:
-    radial-gradient(circle at 12% 25%, rgba(16, 157, 88, 0.38), transparent 34%),
-    radial-gradient(circle at 88% 12%, rgba(67, 133, 246, 0.55), transparent 40%),
-    radial-gradient(circle at 78% 90%, rgba(234, 66, 53, 0.34), transparent 36%),
-    radial-gradient(circle at 28% 100%, rgba(251, 189, 6, 0.26), transparent 32%);
+    radial-gradient(circle at 12% 25%, rgba(16, 157, 88, 0.10), transparent 34%),
+    radial-gradient(circle at 88% 12%, rgba(67, 133, 246, 0.14), transparent 40%),
+    radial-gradient(circle at 78% 90%, rgba(234, 66, 53, 0.08), transparent 36%),
+    radial-gradient(circle at 28% 100%, rgba(251, 189, 6, 0.12), transparent 32%);
   animation: zr-drift 16s ease-in-out infinite alternate;
 }
 .zr-hero::after {
@@ -827,7 +827,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1.6px);
+  background-image: radial-gradient(rgba(67, 133, 246, 0.16) 1px, transparent 1.6px);
   background-size: 28px 28px;
   -webkit-mask-image: linear-gradient(to bottom, #000, transparent 85%);
   mask-image: linear-gradient(to bottom, #000, transparent 85%);
@@ -836,14 +836,9 @@
   from { transform: translate3d(-2%, -1%, 0) scale(1); }
   to { transform: translate3d(3%, 2%, 0) scale(1.08); }
 }
-.zr-hero__title { color: #fff; }
 .zr-hero__highlight {
-  background: linear-gradient(transparent 62%, rgba(251, 189, 6, 0.75) 62%, rgba(251, 189, 6, 0.75) 90%, transparent 90%);
+  background: linear-gradient(transparent 62%, rgba(251, 189, 6, 0.55) 62%, rgba(251, 189, 6, 0.55) 90%, transparent 90%);
 }
-.zr-hero__intro { color: #d3dcf6; }
-.zr-hero__hint { color: #c2cdee; }
-.zr-eyebrow { box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.6); border-color: transparent; }
-.zr-status { border-color: transparent; box-shadow: 0 18px 34px -14px rgba(0, 0, 0, 0.7); }
 
 /* ---------- Scene: bigger, visible on phones too ---------- */
 .zr-scene { display: block; width: min(300px, 100%); height: 300px; perspective: 1200px; }
@@ -852,17 +847,17 @@
 .zr-scene__wash {
   inset: 4%;
   background-color: transparent;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.32) 1px, transparent 1.6px);
+  background-image: radial-gradient(circle, rgba(67, 133, 246, 0.4) 1px, transparent 1.6px);
   -webkit-mask-image: radial-gradient(circle, #000 45%, transparent 70%);
   mask-image: radial-gradient(circle, #000 45%, transparent 70%);
 }
-.zr-slab { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5), 0 26px 36px -14px rgba(0, 0, 0, 0.65); }
+.zr-slab { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5), 0 26px 36px -14px rgba(20, 23, 31, 0.4); }
 
 /* Orbiting rings tilted in 3D, each carrying a glowing satellite */
 .zr-orbit { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(68deg) translateY(calc(var(--my) * 10px)); }
 .zr-ring { position: absolute; border-radius: 50%; animation: zr-spin 18s linear infinite; }
-.zr-ring--one { inset: 2%; border: 2px dashed rgba(255, 255, 255, 0.38); }
-.zr-ring--two { inset: 14%; border: 2px solid rgba(251, 189, 6, 0.5); animation-duration: 26s; animation-direction: reverse; }
+.zr-ring--one { inset: 2%; border: 2px dashed rgba(67, 133, 246, 0.45); }
+.zr-ring--two { inset: 14%; border: 2px solid rgba(251, 189, 6, 0.75); animation-duration: 26s; animation-direction: reverse; }
 .zr-ring i { position: absolute; top: -8px; left: calc(50% - 8px); width: 16px; height: 16px; border-radius: 50%; }
 .zr-ring--one i { background: var(--zr-green); box-shadow: 0 0 18px 4px rgba(16, 157, 88, 0.85); }
 .zr-ring--two i { background: var(--zr-red); box-shadow: 0 0 18px 4px rgba(234, 66, 53, 0.85); }
@@ -886,7 +881,7 @@
   border-radius: 50%;
   background: #fff;
   border: 4px solid #fff;
-  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.18), 0 26px 40px -10px rgba(0, 0, 0, 0.6), 0 0 60px rgba(67, 133, 246, 0.7);
+  box-shadow: 0 0 0 6px rgba(67, 133, 246, 0.12), 0 26px 40px -12px rgba(20, 23, 31, 0.35), 0 0 50px rgba(67, 133, 246, 0.25);
 }
 @keyframes zr-coin {
   from { transform: translateY(0) rotateY(-26deg) rotateX(6deg); }
