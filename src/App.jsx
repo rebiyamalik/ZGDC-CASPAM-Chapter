@@ -8,9 +8,17 @@ import About from './pages/About'
 import Members from './pages/Members'
 import Events from './pages/Events'
 import Contact from './pages/Contact'
+import RegistrationForm from './components/RegistrationForm' // 1. Imported your form component
 
-/** The 5 pages. To add a page: create it in /pages and add a line here + in Navbar. */
-const pages = { home: Home, about: About, members: Members, events: Events, contact: Contact }
+/** Pages available in the app */
+const pages = { 
+  home: Home, 
+  about: About, 
+  members: Members, 
+  events: Events, 
+  contact: Contact,
+  register: RegistrationForm // 2. Added your registration form route
+}
 
 export default function App() {
   const route = useRoute()
@@ -29,3 +37,4 @@ export default function App() {
     </>
   )
 }
+
