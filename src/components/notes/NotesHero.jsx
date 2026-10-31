@@ -46,8 +46,8 @@ export default function NotesHero({ hasResources, searchTerm, onSearchChange }) 
       <div className="zr-container zr-hero__inner">
         <div className="zr-hero__content">
           <p className="zr-eyebrow">
-            <img className="zr-eyebrow__logo" src={`${import.meta.env.BASE_URL}zgdc-logo.jpg`} alt="Zakariyan Google Developer Club logo" width="80" height="80" />
-            <span>ZGDC Resource Library</span>
+            <span className="zr-eyebrow__dots" aria-hidden="true"><i /><i /><i /><i /></span>
+            ZGDC Resource Library
           </p>
 
           <h1 className="zr-hero__title">
