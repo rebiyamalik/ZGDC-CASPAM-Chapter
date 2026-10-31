@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Public visitors can ONLY create validated registrations. Nobody can read/edit/delete from the website.
+    match /registrations/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['eventId','event','name','email','phone','roll','dept','semester','createdAt'])
+        && request.resource.data.name is string && request.resource.data.name.size() < 100
+        && request.resource.data.email is string && request.resource.data.email.size() < 150
+        && request.resource.data.phone is string && request.resource.data.phone.size() < 30
+        && request.resource.data.roll is string && request.resource.data.roll.size() < 50
+        && request.resource.data.dept is string && request.resource.data.dept.size() < 150
+        && request.resource.data.semester is string && request.resource.data.semester.size() < 10
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if false;
+    }
+    match /messages/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['name','email','subject','message','createdAt'])
+        && request.resource.data.name is string && request.resource.data.name.size() < 100
+        && request.resource.data.email is string && request.resource.data.email.size() < 150
+        && request.resource.data.subject is string && request.resource.data.subject.size() < 150
+        && request.resource.data.message is string && request.resource.data.message.size() < 2000
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if false;
+    }
+  }
+}
