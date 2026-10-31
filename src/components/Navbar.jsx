@@ -5,6 +5,7 @@ const links = [
   ["About Us",   "about"],
   ["Members",    "members"],
   ["Events",     "events"],
+  ["Notes",      "notes"],
   ["Contact Us", "contact"],
 ];
 
@@ -222,7 +223,7 @@ export default function Navbar({ route }) {
       {/* Keyframe + responsive styles */}
       <style>{`
         @keyframes navSpin { to { transform: rotate(360deg); } }
-        @media (max-width: 680px) {
+        @media (max-width: 800px) {
           .nav-links-desktop { display: none !important; }
           .nav-burger { display: block !important; }
         }
