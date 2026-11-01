@@ -44,7 +44,7 @@ const remember = (name, value) => { memo[name] = value; try { sessionStorage.set
 
 function Avatar({ m, theme, className = '' }) {
   const [tried, setTried] = useState(typeof memo[m.name] === 'number' ? memo[m.name] : memo[m.name] === 'none' ? 99 : 0)
-  const sources = m.photo ? [m.photo] : PHOTO_TYPES.map((ext) => `/team/${encodeURIComponent(m.photoName || photoSlug(m.name))}.${ext}`)
+  const sources = m.photo ? [m.photo] : PHOTO_TYPES.map((ext) => `/${encodeURIComponent(m.photoName || photoSlug(m.name))}.${ext}`)
   if (tried < sources.length) {
     return (
       <img src={sources[tried]} alt={`Portrait of ${m.name}`}
