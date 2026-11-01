@@ -1,29 +1,13 @@
 [
   {
-    "id": "intro-web",
-    "title": "Intro to Web Development (SAMPLE)",
-    "date": "2026-11-15",
-    "time": "2:00 PM",
+    "id": "AI BAITHAK",
+    "title": "AI BAITHAK",
+    "date": "6-11-2026",
+    "time": "1:30PM-3:00PM",
     "venue": "BZU Multan, CS Lab",
     "status": "upcoming",
-    "desc": "Replace with a real event.",
+    "desc": "Only 20 seats are available",
     "registerUrl": "",
     "notes": []
-  },
-  {
-    "id": "code-meet",
-    "title": "CODE MEET (SAMPLE)",
-    "date": "2025-05-10",
-    "time": "10:00 AM",
-    "venue": "BZU Multan",
-    "status": "past",
-    "desc": "Replace with a real event.",
-    "registerUrl": "",
-    "notes": [
-      {
-        "title": "Session slides (sample)",
-        "file": "/notes/sample-notes.pdf"
-      }
-    ]
   }
 ]
