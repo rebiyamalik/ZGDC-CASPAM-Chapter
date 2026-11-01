@@ -1,0 +1,402 @@
+[
+  {
+    "name": "Rebiya Ismail",
+    "role": "President",
+    "photoName": "Rebiya ismail (President)",
+    "group": "leadership",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://rebiyamalik.github.io/rebiyamalik/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2023-27"
+  },
+  {
+    "name": "Zainab Akram Rao",
+    "role": "Vice President",
+    "photoName": "Zainab Akram Rao (Vice president)",
+    "group": "leadership",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://zainabakramrao18.github.io/My-Portfolio/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2023-27"
+  },
+  {
+    "name": "Ateeq ur Rehman",
+    "role": "Vice President",
+    "photoName": "Ateeq ur rehman (Vice president)",
+    "group": "leadership",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://callmemrsheeqa-oss.github.io/PersonalPortfolio/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2023-27"
+  },
+  {
+    "name": "Mubashira Zainab",
+    "role": "General Secretary",
+    "photoName": "Mubashra Zainab (General Secretary)",
+    "group": "leadership",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://mubashira-zainab.github.io/My-Portfolio-Website/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2024-28"
+  },
+  {
+    "name": "Umar Latif",
+    "role": "General Secretary",
+    "photoName": "Umar Latif (General Secretary)",
+    "group": "leadership",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://umar265.github.io/umar-portfolio./",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Faiza Haneef",
+    "role": "Joint Secretary",
+    "photoName": "Faiza Hanif (Joint Secretary)",
+    "group": "leadership",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://portfolio-xi-amber-80.vercel.app/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2024-28"
+  },
+  {
+    "name": "Uzair Sarfaraz",
+    "role": "Joint Secretary",
+    "photoName": "Uzair Sarfraz (Joint Secretary)",
+    "group": "leadership",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://uzair-portfolio-netify-app.netlify.app",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Muhammad Ramzan",
+    "role": "Executive Member",
+    "photoName": "M. Ramzan (Executive Member)",
+    "group": "executive",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://rztech15.github.io/RZ-Portfolio-Website",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2024-28"
+  },
+  {
+    "name": "Sibghatullah",
+    "role": "Executive Member",
+    "photoName": "Sibghatullah (Executive Member)",
+    "group": "executive",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://SibghatUllah-SARAN.github.io/Portfolio/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Sania Yaqub",
+    "role": "Executive Member",
+    "photoName": "Sania Yaqub (Executive Member)",
+    "group": "executive",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://sania5257.github.io/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "M Ali Abid",
+    "role": "Executive Member",
+    "photoName": "M. Ali Abid (Executive Member)",
+    "group": "executive",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://ali-abid-ai.github.io/ali-ai-portfolio/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Ghulam Mustafa",
+    "role": "Executive Member",
+    "photoName": "Ghulam Mustafa (Executive Member)",
+    "group": "executive",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://SibghatUllah-SARAN.github.io/Mustafa/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Syed Arjumand Haider Shah",
+    "role": "Executive Member",
+    "photoName": "Syed Arjumand Haider Shah (Executive Member)",
+    "group": "executive",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://arjumand-portfolio.streamlit.app/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Ali Ahmad",
+    "role": "Executive Member",
+    "photoName": "",
+    "group": "executive",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://SibghatUllah-SARAN.github.io/Ali-Ahmad/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Aisha Siddiqua",
+    "role": "Executive Member",
+    "photoName": "",
+    "group": "executive",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://canva.link/828yswo1d5dpcl6",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Muhammad Saqib",
+    "role": "Executive Member",
+    "photoName": "Muhammad Saqib (Executive Member)",
+    "group": "executive",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://msaqib0963-wq.github.io/m.saqibkhan/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Samreen Fayyaz",
+    "role": "Executive Member",
+    "photoName": "Samreen fayyaz (Executive Member)",
+    "group": "executive",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://ai.studio/apps/b4ff4b90-e06b-44ca-bacf-27f931e48fb6",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Mehreen Sultana",
+    "role": "Executive Member",
+    "photoName": "Mehreen sultana(Executive Member)",
+    "group": "executive",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://mehreensultanaajmal786.netlify.app",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Hamna Batool",
+    "role": "Executive Member",
+    "photoName": "Hamna batool (Executive Member)",
+    "group": "executive",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://hamnabatool-portfolio.vercel.app/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Nuzhat Arshad",
+    "role": "Executive Member",
+    "photoName": "Nuzhat Arshad (Executive Member)",
+    "group": "executive",
+    "program": "BS Mathematics",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://nuzhatarshad.netlify.app/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Shahid Hameed",
+    "role": "Executive Member",
+    "photoName": "Shahid Hameed (Executive Member)",
+    "group": "executive",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://shahid-hameed-portfolio-r9nd.vercel.app/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Saim",
+    "role": "Media Head",
+    "photoName": "Saim Hassan (Media Head)",
+    "group": "media",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://mrsami315.github.io/saim-portfoilo-/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Zaib un Nisa",
+    "role": "Graphics Head",
+    "photoName": "Zaib un Nisa(Graphics Head)",
+    "group": "media",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://zaib123180.github.io/Repo1-Portfolio-website/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "M Ahmad Akhtar",
+    "role": "Finance Secretary",
+    "photoName": "M Ahmad Akhtar (Finance Secretary)",
+    "group": "media",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://ahmadakhtar-ai.github.io/BSAI_-portfolio",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  },
+  {
+    "name": "Abdullah",
+    "role": "Information Secretary",
+    "photoName": "Abdullah (Information Secretary)",
+    "group": "media",
+    "program": "BS AI",
+    "photo": "",
+    "bio": "",
+    "skills": [],
+    "links": {
+      "portfolio": "https://abdullahmughalworld.github.io/abdullah-ai-portfolio/",
+      "linkedin": "",
+      "github": ""
+    },
+    "class": "2025-29"
+  }
+]
