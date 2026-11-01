@@ -4,7 +4,8 @@ import './members.css'
 
 /** Members page. The people come from src/data/team.json (edit that file only).
  *  Each person: name, role, group ("leadership" | "executive" | "media"), program, class,
- *  and optional photo (e.g. "/team/ayesha.jpg"), bio, skills, links.linkedin / links.github. */
+ *  photoName (file name of the photo in public/team/, without the extension), and optional bio, skills,
+ *  links.portfolio / links.linkedin / links.github (leave a link empty to hide it). */
 
 const GROUPS = [
   { id: 'leadership', label: 'Leadership', blurb: 'The office bearers who lead the chapter.' },
@@ -24,12 +25,35 @@ const initials = (name) => {
   return words.length > 1 ? words.slice(0, 2).map((w) => w[0]).join('') : name.slice(0, 2).toUpperCase()
 }
 const themeOf = (index) => THEMES[index % THEMES.length]
+const isWeb = (u) => typeof u === 'string' && /^https?:\/\//i.test(u)
 const meta = (m) => [m.program, m.class].filter(Boolean).join(' · ')
 
+// Photos live in public/team/ and appear by themselves, no code change needed.
+// A member's photo is found by file name (without the extension). Order of preference:
+//   1. "photoName" in team.json, the exact name of the uploaded file, e.g. "M. Ramzan (Executive Member)"
+//   2. the member's name in lower case joined by "-", e.g. muhammad-ramzan  (used when photoName is empty)
+// A "photo" value in team.json (a full path like "/team/custom.jpg") overrides both.
+export const photoSlug = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
+// Upper-case endings are listed too because the web server is case sensitive.
+const PHOTO_TYPES = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG']
+
+// Remembers, for this visit only, which photo type worked (or that there is none),
+// so moving between pages does not ask the server for the same missing files again.
+const memo = (() => { try { return JSON.parse(sessionStorage.getItem('zm-photos') || '{}') } catch { return {} } })()
+const remember = (name, value) => { memo[name] = value; try { sessionStorage.setItem('zm-photos', JSON.stringify(memo)) } catch {} }
+
 function Avatar({ m, theme, className = '' }) {
-  return m.photo
-    ? <img src={m.photo} alt={`Portrait of ${m.name}`} loading="lazy" className={`zm-avatar zm-avatar--photo ${className}`} />
-    : <span aria-hidden="true" className={`zm-avatar zm-avatar--${theme} ${className}`}>{initials(m.name)}</span>
+  const [tried, setTried] = useState(typeof memo[m.name] === 'number' ? memo[m.name] : memo[m.name] === 'none' ? 99 : 0)
+  const sources = m.photo ? [m.photo] : PHOTO_TYPES.map((ext) => `/team/${encodeURIComponent(m.photoName || photoSlug(m.name))}.${ext}`)
+  if (tried < sources.length) {
+    return (
+      <img src={sources[tried]} alt={`Portrait of ${m.name}`}
+        onLoad={() => remember(m.name, tried)}
+        onError={() => { if (tried + 1 >= sources.length) remember(m.name, 'none'); setTried(tried + 1) }}
+        className={`zm-avatar zm-avatar--photo zm-avatar--${theme} ${className}`} />
+    )
+  }
+  return <span aria-hidden="true" className={`zm-avatar zm-avatar--${theme} ${className}`}>{initials(m.name)}</span>
 }
 
 /** 3D hero: a ring of coins (one per office bearer) turning around the chapter logo. */
@@ -74,6 +98,7 @@ function Card({ m, index, big, onOpen }) {
         <span className="zm-card__name">{m.name}</span>
         <span className="zm-card__role">{m.role}</span>
         <span className="zm-card__meta">{meta(m)}</span>
+        {isWeb(m.links?.portfolio) && <span className="zm-card__tag" aria-hidden="true">Portfolio</span>}
       </button>
     </li>
   )
@@ -97,7 +122,8 @@ function Profile({ m, theme, opener, onClose }) {
     return () => { window.removeEventListener('keydown', key); opener?.focus() }
   }, [])
   const group = GROUPS.find((g) => g.id === m.group)
-  const links = [['LinkedIn', m.links?.linkedin], ['GitHub', m.links?.github]].filter(([, url]) => url)
+  const portfolio = isWeb(m.links?.portfolio) ? m.links.portfolio : ''
+  const links = [['LinkedIn', m.links?.linkedin], ['GitHub', m.links?.github]].filter(([, url]) => isWeb(url))
   return (
     <div className="zm-backdrop" onClick={onClose}>
       <div ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-label={`${m.name} profile`} onClick={(e) => e.stopPropagation()} className={`zm-dialog zm-dialog--${theme}`}>
@@ -111,6 +137,9 @@ function Profile({ m, theme, opener, onClose }) {
         </dl>
         {m.bio && <p className="zm-dialog__bio">{m.bio}</p>}
         {m.skills?.length > 0 && <p className="zm-dialog__skills">{m.skills.join(' · ')}</p>}
+        {portfolio && (
+          <a className="zm-dialog__portfolio" href={portfolio} target="_blank" rel="noopener noreferrer">View portfolio <span aria-hidden="true">↗</span><span className="zm-sr"> (opens in a new tab)</span></a>
+        )}
         {links.length > 0 && (
           <div className="zm-dialog__links">{links.map(([label, url]) => <a key={label} href={url} target="_blank" rel="noopener noreferrer">{label}</a>)}</div>
         )}
@@ -127,6 +156,7 @@ export default function Members() {
 
   const people = useMemo(() => team.map((m, i) => ({ ...m, _i: i })), [])
   const counts = useMemo(() => Object.fromEntries(GROUPS.map((g) => [g.id, people.filter((m) => m.group === g.id).length])), [people])
+  const portfolios = useMemo(() => people.filter((m) => isWeb(m.links?.portfolio)).length, [people])
   const programs = useMemo(() => new Set(people.map((m) => m.program).filter(Boolean)).size, [people])
   const q = query.trim().toLowerCase()
   const visible = (m) => (group === 'all' || m.group === group) && (!q || `${m.name} ${m.role} ${m.program} ${m.class}`.toLowerCase().includes(q))
@@ -140,11 +170,12 @@ export default function Members() {
           <div className="zm-hero__content">
             <p className="zm-eyebrow"><span className="zm-dots" aria-hidden="true"><i /><i /><i /><i /></span>The ZGDC student team</p>
             <h1 className="zm-hero__title">Meet the <span className="zm-hl">people</span> behind ZGDC</h1>
-            <p className="zm-hero__intro">The students who lead, organise and build at the Zakariyan Google Developer Club, CASPAM Chapter. Select a card to see a profile.</p>
+            <p className="zm-hero__intro">The students who lead, organise and build at the Zakariyan Google Developer Club, CASPAM Chapter. Select a card to see a profile and portfolio.</p>
             <ul className="zm-stats">
               <li><b>{people.length}</b> members</li>
               <li><b>{counts.leadership}</b> office bearers</li>
               <li><b>{programs}</b> programs</li>
+              <li><b>{portfolios}</b> portfolios</li>
             </ul>
           </div>
           <Scene people={people.filter((m) => m.group === 'leadership')} />
