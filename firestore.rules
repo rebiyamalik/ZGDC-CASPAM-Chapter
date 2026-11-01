@@ -1,18 +1,47 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Public visitors can ONLY create validated registrations. Nobody can read/edit/delete from the website.
+
+    // ONE place to change the seat limit (also change SEATS in src/lib/db.js)
+    function maxSeats() { return 30; }
+
+    function regPath(id) { return /databases/$(database)/documents/registrations/$(id); }
+
+    // Public seat counter per event (holds only a number, no personal data).
+    // A counter can only go up by exactly 1, and only together with a NEW registration in the same transaction.
+    match /eventStats/{eventId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasOnly(['count', 'lastReg'])
+        && request.resource.data.count == 1
+        && request.resource.data.lastReg.matches('^' + eventId + '_.+')
+        && existsAfter(regPath(request.resource.data.lastReg))
+        && !exists(regPath(request.resource.data.lastReg));
+      allow update: if request.resource.data.keys().hasOnly(['count', 'lastReg'])
+        && request.resource.data.count == resource.data.count + 1
+        && request.resource.data.count <= maxSeats()
+        && request.resource.data.lastReg.matches('^' + eventId + '_.+')
+        && existsAfter(regPath(request.resource.data.lastReg))
+        && !exists(regPath(request.resource.data.lastReg));
+      allow delete: if false;
+    }
+
+    // Visitors can only CREATE validated registrations. Repeating the same event+email is rejected (duplicate).
     match /registrations/{id} {
       allow create: if request.resource.data.keys().hasOnly(['eventId','event','name','email','phone','roll','dept','semester','createdAt'])
+        && id == request.resource.data.eventId + '_' + request.resource.data.email
         && request.resource.data.name is string && request.resource.data.name.size() < 100
         && request.resource.data.email is string && request.resource.data.email.size() < 150
         && request.resource.data.phone is string && request.resource.data.phone.size() < 30
         && request.resource.data.roll is string && request.resource.data.roll.size() < 50
         && request.resource.data.dept is string && request.resource.data.dept.size() < 150
         && request.resource.data.semester is string && request.resource.data.semester.size() < 10
-        && request.resource.data.createdAt == request.time;
+        && request.resource.data.createdAt == request.time
+        // the seat counter must be bumped in the same transaction, and must not exceed the limit
+        && getAfter(/databases/$(database)/documents/eventStats/$(request.resource.data.eventId)).data.lastReg == id
+        && getAfter(/databases/$(database)/documents/eventStats/$(request.resource.data.eventId)).data.count <= maxSeats();
       allow read, update, delete: if false;
     }
+
     match /messages/{id} {
       allow create: if request.resource.data.keys().hasOnly(['name','email','subject','message','createdAt'])
         && request.resource.data.name is string && request.resource.data.name.size() < 100
