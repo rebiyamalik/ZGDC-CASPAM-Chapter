@@ -60,8 +60,8 @@ Bahauddin Zakariya University, Multan, Pakistan
 |--------|--------|
 | **Rebiya Ismail** | Project Lead, Homepage, Design System, Database |
 | **Mubashira Zainab** | About Us, Contact Us, Events, Notes (Basics & Notes section) |
-| **Muhammad Ramzan** | Notes Section (Resources) |
-| **Mehreen Sultana** | Members, Events Page |
+| **Muhammad Ramzan** | Notes Section , Members|
+| **Mehreen Sultana** | Events Page |
 | **Ateeq ur Rehman** | AI Integration |
 | **Others** | Registration |
 
