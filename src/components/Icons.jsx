@@ -41,3 +41,17 @@ export const GrowthIcon    = p => <Svg {...p}><polyline points="22 7 13.5 15.5 8
 export const SparkleIcon   = p => <Svg {...p}><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M5 3l.9 2.1L8 6l-2.1.9L5 9l-.9-2.1L2 6l2.1-.9z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/></Svg>;
 export const BrainIcon     = p => <Svg {...p}><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2z"/></Svg>;
 export const PhoneIcon     = p => <Svg {...p}><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A20 20 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7A2 2 0 0 1 22 17z"/></Svg>;
+
+/* ── AI Bot icon (used in AI Baithak section) ── */
+export const AIBotIcon = ({ size=22, ...rest }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
+    aria-hidden="true" {...rest}>
+    <rect x="3" y="8" width="18" height="12" rx="3"/>
+    <path d="M8 8V6a4 4 0 0 1 8 0v2"/>
+    <circle cx="9" cy="14" r="1.5" fill="currentColor" stroke="none"/>
+    <circle cx="15" cy="14" r="1.5" fill="currentColor" stroke="none"/>
+    <path d="M9.5 17.5c.7.7 4.3.7 5 0"/>
+    <line x1="12" y1="2" x2="12" y2="4"/>
+  </svg>
+);

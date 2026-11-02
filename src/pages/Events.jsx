@@ -1,49 +1,9 @@
 import events from '../data/events.json'
-import site from '../data/site.json'
-import { dbEnabled, saveDoc } from '../lib/db'
-import { useState } from 'react'
-import { CalendarIcon, PinIcon, SparkleIcon, BrainIcon, CodeIcon, GlobeIcon, ArrowIcon } from '../components/Icons'
+import RegistrationForm from '../components/RegistrationForm'
+import { CalendarIcon, PinIcon, SparkleIcon, BrainIcon, CodeIcon, GlobeIcon } from '../components/Icons'
 
 const topicIcons  = { prompt: SparkleIcon, ai: BrainIcon, app: CodeIcon, google: GlobeIcon }
 const topicColors = { prompt:"#4285F4", ai:"#EA4335", app:"#34A853", google:"#FBBC05" }
-
-/* ── Registration form ── */
-function Register({ ev }) {
-  const [state, setState] = useState('idle')
-  const submit = async (e) => {
-    e.preventDefault()
-    const d = Object.fromEntries(new FormData(e.target))
-    if (d.website) return
-    if (dbEnabled) {
-      try { await saveDoc('registrations', { eventId:ev.id, event:ev.title, name:d.name, email:d.email, dept:d.dept }); setState('done') }
-      catch { setState('error') }
-      return
-    }
-    if (site.formEndpoint) {
-      try { await fetch(site.formEndpoint, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ event:ev.title, ...d }) }); setState('done') }
-      catch { setState('error') }
-    } else {
-      window.location.href = `mailto:${site.email}?subject=${encodeURIComponent('Registration: '+ev.title)}&body=${encodeURIComponent(`Name: ${d.name}\nEmail: ${d.email}\nRoll no / Dept: ${d.dept}`)}`
-      setState('done')
-    }
-  }
-  if (state === 'done') return <p role="status" style={{ color:"var(--green)", fontWeight:600, marginTop:16 }}>✅ Your registration was submitted. We'll be in touch!</p>
-  const inp = { style:{ width:"100%", padding:"10px 14px", borderRadius:10, border:"1.5px solid var(--border)", fontSize:14, fontFamily:"'Inter',sans-serif", outline:"none" } }
-  return (
-    <form onSubmit={submit} style={{ marginTop:20, display:"grid", gap:12 }}>
-      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:12 }}>
-        <label style={{ fontSize:13, fontWeight:600, color:"var(--ink)" }}>Name<input name="name" required autoComplete="name" {...inp}/></label>
-        <label style={{ fontSize:13, fontWeight:600, color:"var(--ink)" }}>Email<input name="email" type="email" required autoComplete="email" {...inp}/></label>
-        <label style={{ fontSize:13, fontWeight:600, color:"var(--ink)" }}>Roll No. / Dept<input name="dept" required {...inp}/></label>
-      </div>
-      <input name="website" tabIndex="-1" autoComplete="off" aria-hidden="true" style={{ display:"none" }}/>
-      <div style={{ display:"flex", gap:10 }}>
-        <button className="btn btn-primary" type="submit">Register Now</button>
-        {state==='error' && <span role="alert" style={{ fontSize:13, color:"var(--red)", alignSelf:"center" }}>Something went wrong. Try again.</span>}
-      </div>
-    </form>
-  )
-}
 
 /* ── Event card ── */
 function EventCard({ ev }) {
@@ -76,7 +36,7 @@ function EventCard({ ev }) {
         {/* Meta */}
         <div style={{ display:"flex", flexWrap:"wrap", gap:16, marginBottom:20, fontSize:14, color:"var(--text)" }}>
           <span style={{ display:"flex", alignItems:"center", gap:6 }}>
-            <CalendarIcon size={15} style={{ color:"var(--blue)" }}/> {ev.date}{ev.time !== "TBA" ? ` · ${ev.time}` : ""}
+            <CalendarIcon size={15} style={{ color:"var(--blue)" }}/> {ev.date}{ev.time && ev.time !== "TBA" ? ` · ${ev.time}` : ""}
           </span>
           <span style={{ display:"flex", alignItems:"center", gap:6 }}>
             <PinIcon size={15} style={{ color:"var(--red)" }}/> {ev.venue}
@@ -85,7 +45,7 @@ function EventCard({ ev }) {
 
         {/* Topics */}
         {ev.topics && ev.topics.length > 0 && (
-          <div>
+          <div style={{ marginBottom:24 }}>
             <p style={{ fontWeight:600, fontSize:13, color:"var(--muted)", textTransform:"uppercase", letterSpacing:".08em", marginBottom:12 }}>
               Topics Covered
             </p>
@@ -113,12 +73,21 @@ function EventCard({ ev }) {
           </div>
         )}
 
-        {/* Registration */}
+        {/* Seats notice for upcoming events */}
         {upcoming && (
-          ev.registerUrl
-            ? <a href={ev.registerUrl} className="btn btn-primary" style={{ marginTop:24 }} rel="noopener">Register Now <ArrowIcon size={16}/></a>
-            : <Register ev={ev}/>
+          <div style={{
+            background:"rgba(234,67,53,.06)", border:"1px solid rgba(234,67,53,.2)",
+            borderRadius:10, padding:"10px 16px", marginBottom:20,
+            fontSize:13, color:"#c5221f", fontWeight:600,
+            display:"flex", alignItems:"center", gap:8,
+          }}>
+            <span style={{ fontSize:16 }}>⚠️</span>
+            Seats are limited — only 20 seats available!
+          </div>
         )}
+
+        {/* Registration — using original RegistrationForm component */}
+        {upcoming && <RegistrationForm ev={ev}/>}
 
         {/* Past event notes */}
         {ev.notes && ev.notes.length > 0 && (
@@ -157,7 +126,7 @@ export default function Events() {
             Community Events
           </h1>
           <p style={{ fontSize:17, color:"var(--text)", maxWidth:560 }}>
-            Workshops, learning sessions, and community activities organized by ZGDC–CASPAM.
+            Workshops, learning sessions, and community activities organized by ZGDC&ndash;CASPAM.
           </p>
         </div>
 

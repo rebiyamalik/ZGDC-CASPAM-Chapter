@@ -1,6 +1,7 @@
 import Hero from '../components/Hero'
 import Tracks from '../components/Tracks'
-import { BrainIcon, SparkleIcon, CodeIcon, GlobeIcon, ArrowIcon, StarIcon } from '../components/Icons'
+import { BrainIcon, SparkleIcon, CodeIcon, GlobeIcon, StarIcon, PinIcon, AIBotIcon } from '../components/Icons'
+import { useState } from 'react'
 
 /* ── AI Baithak featured card ────────────────────────────── */
 const topics = [
@@ -23,15 +24,19 @@ function AIBaithakSection() {
               Upcoming Event
             </span>
           </div>
-          <h2 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:800, fontSize:"clamp(28px,4.5vw,42px)", color:"var(--ink)", marginBottom:16 }}>
-            🤖 AI Baithak
+          <h2 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:800, fontSize:"clamp(28px,4.5vw,42px)", color:"var(--ink)", marginBottom:16, display:"flex", alignItems:"center", justifyContent:"center", gap:14 }}>
+            {/* SVG icon instead of emoji */}
+            <span style={{ width:52, height:52, borderRadius:16, background:"rgba(66,133,244,.12)", display:"inline-grid", placeItems:"center", color:"#4285F4", flexShrink:0 }}>
+              <AIBotIcon size={28}/>
+            </span>
+            AI Baithak
           </h2>
           <p style={{ fontSize:17, color:"var(--text)", lineHeight:1.75 }}>
-            An upcoming learning session by <strong>ZGDC–CASPAM</strong>, designed to introduce students
+            An upcoming learning session by <strong>ZGDC&ndash;CASPAM</strong>, designed to introduce students
             to modern AI tools, emerging technologies, and practical development concepts.
           </p>
-          <div style={{ marginTop:8, fontSize:14, color:"var(--muted)" }}>
-            📍 CASPAM, Bahauddin Zakariya University, Multan
+          <div style={{ marginTop:10, fontSize:14, color:"var(--muted)", display:"flex", alignItems:"center", justifyContent:"center", gap:6 }}>
+            <PinIcon size={14} style={{ color:"#EA4335" }}/> CASPAM, Bahauddin Zakariya University, Multan
           </div>
         </div>
 
@@ -72,8 +77,6 @@ function AIBaithakSection() {
 }
 
 /* ── FAQ Section ─────────────────────────────────────────── */
-import { useState } from 'react'
-
 const faqs = [
   { q:"How can I get study notes and learning resources?", a:"You can explore our Notes section, where we share beginner-friendly notes, learning materials, and useful resources related to Artificial Intelligence, Prompt Engineering, Google AI Studio, App Development, and other technology topics. Stay connected for future updates." },
   { q:"How can I participate in upcoming events?", a:"Visit our Events section to discover upcoming workshops, sessions, and community activities. Event details and registration information will be provided whenever available." },
@@ -95,7 +98,7 @@ function FAQSection() {
           <h2 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:700, fontSize:"clamp(26px,4vw,36px)", color:"var(--ink)", marginBottom:12 }}>
             Frequently Asked Questions
           </h2>
-          <p style={{ color:"var(--text)", fontSize:16 }}>Everything you need to know about ZGDC–CASPAM.</p>
+          <p style={{ color:"var(--text)", fontSize:16 }}>Everything you need to know about ZGDC&ndash;CASPAM.</p>
         </div>
 
         <div style={{ display:"grid", gap:10 }}>
@@ -130,7 +133,7 @@ export default function Home() {
             Ready to join?
           </h2>
           <p style={{ color:"var(--text)", fontSize:17, marginBottom:32 }}>
-            Come to our next event or get in touch — we'd love to have you.
+            Come to our next event or get in touch &mdash; we'd love to have you.
           </p>
           <div style={{ display:"flex", justifyContent:"center", gap:12, flexWrap:"wrap" }}>
             <a href="#/events" className="btn btn-primary"><StarIcon size={16}/> See Events</a>
