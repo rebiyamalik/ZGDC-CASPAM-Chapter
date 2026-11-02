@@ -121,15 +121,16 @@ Bahauddin Zakariya University, Multan, Pakistan
 | Deployment | Vercel (auto-deploy from GitHub) |
 
 ---
-
 ## 👥 Team Assignments
 
 | Member | Module |
 |--------|--------|
 | **Rebiya Ismail** | Project Lead, Homepage, Design System, Database |
-| **Mubashira** | About Us, Contact, Notes pages |
-| Others | Members, Events, AI Assistant, Registration |
-
+| **Mubashira Zainab** | About Us, Contact Us |
+| **Muhammad Ramzan** | Notes Section |
+| **Mehreen Sultana** | Members, Events Page |
+| **Ateeq ur Rehman** | AI Integration |
+| **Others** | Registration |
 ---
 
 ## ⚙️ Local Development
