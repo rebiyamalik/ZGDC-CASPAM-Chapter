@@ -110,7 +110,7 @@
   color: #fff; background: var(--zm-main);
   border: 3px solid #fff;
   box-shadow: 0 0 0 2px var(--zm-edge, var(--zm-main)), 0 14px 18px -8px rgba(20, 23, 31, 0.45);
-  object-fit: cover;
+  object-fit: contain;
 }
 .zm-avatar--blue { --zm-edge: var(--zm-blue); background: linear-gradient(135deg, #6aa0f8, #1b5fd0); }
 .zm-avatar--red { --zm-edge: var(--zm-red); background: linear-gradient(135deg, #ff7a6b, #c5322a); }
