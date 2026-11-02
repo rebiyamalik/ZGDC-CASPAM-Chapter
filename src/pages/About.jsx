@@ -1,163 +1,77 @@
-import { useEffect } from "react";
-import {
-  ArrowIcon,
-  TargetIcon, EyeIcon,
-  CodeIcon, BulbIcon, BookIcon, UsersIcon,
-  RocketIcon, TerminalIcon, CalendarIcon, GlobeIcon,
-  StarIcon, HeartIcon,
-} from "../components/Icons";
-import "../styles/About.css";
+import { useEffect } from 'react'
+import { TargetIcon, EyeIcon, BookIcon, UsersIcon, BulbIcon, GrowthIcon, SparkleIcon, ArrowIcon, HeartIcon } from '../components/Icons'
+import '../styles/About.css'
 
-// ─── Static data (edit here, no layout changes needed) ────────
-const objectives = [
-  {
-    color: "blue",
-    Icon:  CodeIcon,
-    title: "Promote Programming",
-    text:  "Encourage every student to explore coding, problem-solving, and software development.",
-  },
-  {
-    color: "red",
-    Icon:  BulbIcon,
-    title: "Inspire Innovation",
-    text:  "Turn creative ideas into real projects that address genuine challenges.",
-  },
-  {
-    color: "yellow",
-    Icon:  BookIcon,
-    title: "Continuous Learning",
-    text:  "Support students in building solid technical skills through workshops and study jams.",
-  },
-  {
-    color: "green",
-    Icon:  UsersIcon,
-    title: "Build Community",
-    text:  "Foster teamwork, mentorship, and peer learning across all experience levels.",
-  },
-];
+const missionPillars = [
+  { color:"#4285F4", Icon:BookIcon,    title:"Learning",      desc:"Hands-on workshops, study sessions, and skill-building resources for every level." },
+  { color:"#EA4335", Icon:SparkleIcon, title:"Innovation",    desc:"Turn creative ideas into real projects that address genuine challenges." },
+  { color:"#34A853", Icon:UsersIcon,   title:"Collaboration", desc:"Teamwork, mentorship, and peer learning across all experience levels." },
+  { color:"#FBBC05", Icon:GrowthIcon,  title:"Growth",        desc:"Personal and professional development through community, practice, and leadership." },
+]
 
-const activities = [
-  {
-    color: "blue",
-    Icon:  RocketIcon,
-    title: "Workshops",
-    text:  "Hands-on sessions on programming, web dev, ML, and emerging technologies.",
-  },
-  {
-    color: "red",
-    Icon:  TerminalIcon,
-    title: "Coding Sessions",
-    text:  "Practice nights, peer learning, and friendly coding challenges.",
-  },
-  {
-    color: "yellow",
-    Icon:  CalendarIcon,
-    title: "Tech Events",
-    text:  "Speaker talks, hackathons, meetups, and community gatherings.",
-  },
-  {
-    color: "green",
-    Icon:  GlobeIcon,
-    title: "Learning Tracks",
-    text:  "Structured study groups, curated resources, and skill-building paths.",
-  },
-];
-
-const stats = [
-  { num: "50+",  label: "Members"  },
-  { num: "10+",  label: "Events"   },
-  { num: "2024", label: "Founded"  },
-  { num: "BZU",  label: "Campus"   },
-];
-
-// ─── Sub-components ───────────────────────────────────────────
-function InfoCard({ color, Icon, title, text }) {
-  return (
-    <article className={`zg-card ${color}`} role="article">
-      <div className="zg-icon" aria-hidden="true">
-        <Icon size={24} />
-      </div>
-      <h3>{title}</h3>
-      <p>{text}</p>
-    </article>
-  );
-}
-
-// ─── Page ─────────────────────────────────────────────────────
 export default function About() {
   useEffect(() => {
-    document.title = "About Us | ZGDC CASPAM Chapter";
-
-    const setMeta = (name, content) => {
-      let el = document.querySelector(`meta[name="${name}"]`);
-      if (!el) {
-        el = Object.assign(document.createElement("meta"), { name });
-        document.head.appendChild(el);
-      }
-      el.content = content;
-    };
-    setMeta(
-      "description",
-      "Learn about the Zakariyan Google Developer Club (ZGDC) CASPAM Chapter at BZU Multan — our mission, vision, objectives, and student activities."
-    );
-  }, []);
+    document.title = 'About Us | ZGDC CASPAM Chapter'
+    let m = document.querySelector('meta[name="description"]')
+    if (!m) { m = Object.assign(document.createElement('meta'),{name:'description'}); document.head.appendChild(m) }
+    m.content = 'Learn about the Zakariyan Google Developer Club (ZGDC) CASPAM Chapter at BZU Multan — our mission, vision, and objectives.'
+  }, [])
 
   return (
-    <main className="zg-page" id="about-main">
+    <main className="zg-page" style={{ background:'#fff' }}>
 
-      {/* ── HERO ─────────────────────────────────────────────── */}
+      {/* ── HERO ── */}
       <section className="about-hero" aria-labelledby="about-heading">
         <div className="zg-wrap about-hero-grid">
-
-          {/* Left: text */}
-          <div>
-            <div className="zg-dots" aria-hidden="true">
-              <i /><i /><i /><i />
-            </div>
+          <div className="fade-up">
+            <div className="zg-dots" aria-hidden="true"><i/><i/><i/><i/></div>
             <span className="zg-eyebrow">About Us</span>
-            <h1 id="about-heading">
-              We are the{" "}
-              <span className="about-gradient">
-                Zakariyan Google Developer Club
-              </span>
+            <h1 id="about-heading" style={{ fontSize:"clamp(30px,5vw,50px)", margin:"8px 0 20px" }}>
+              Who We Are
             </h1>
-            <p className="about-lead">
-              A student-led technology community at CASPAM, Bahauddin Zakariya
-              University — where curious learners build skills in programming,
-              technology, and innovation together.
+            <p style={{ fontSize:17, lineHeight:1.8, marginBottom:28, color:"var(--text)" }}>
+              Zakariyan Google Developer Club – CASPAM Chapter (ZGDC-CASPAM) is a student-driven
+              technology community at the Center for Advanced Studies in Pure and Applied Mathematics
+              (CASPAM), Bahauddin Zakariya University, Multan. We bring together curious minds,
+              aspiring developers, and technology enthusiasts who share a passion for learning,
+              innovation, and building meaningful solutions.
             </p>
-            <div className="about-actions">
-              <a className="zg-btn zg-btn-primary" href="#/contact">
-                Get in Touch <ArrowIcon size={18} />
-              </a>
-              <a className="zg-btn zg-btn-outline" href="#mission">
-                Our Mission
-              </a>
+            <p style={{ fontSize:16, lineHeight:1.8, marginBottom:32, color:"var(--text)" }}>
+              Our community provides a collaborative space where students can explore emerging
+              technologies, exchange ideas, develop practical skills, and turn their creativity
+              into real-world projects. Through learning opportunities, technical activities, and
+              community engagement, we aim to make technology more accessible and inspire students
+              to grow together.
+            </p>
+            <div style={{ display:"flex", gap:12, flexWrap:"wrap" }}>
+              <a className="zg-btn zg-btn-primary" href="#/contact">Get in Touch <ArrowIcon size={17}/></a>
+              <a className="zg-btn zg-btn-outline" href="#mission">Our Mission</a>
             </div>
           </div>
 
-          {/* Right: 3-D logo */}
+          {/* 3-D logo */}
           <div className="about-logo-wrap">
             <div className="about-logo-3d">
-              <img
-                className="about-logo-img"
-                src="/zgdc-logo.jpg"
-                alt="Zakariyan Google Developer Club logo"
-                width="360"
-                height="360"
-              />
+              <img className="about-logo-img" src="/zgdc-logo.jpg"
+                alt="Zakariyan Google Developer Club logo" width="360" height="360"/>
             </div>
           </div>
         </div>
 
-        {/* Stats strip */}
+        {/* Stats */}
         <div className="zg-wrap">
-          <div className="about-stats" role="list" aria-label="Club highlights">
-            {stats.map(({ num, label }) => (
-              <div className="about-stat" key={label} role="listitem">
-                <span className="about-stat-num" aria-label={`${num} ${label}`}>
-                  {num}
-                </span>
+          <div className="about-stats">
+            {[
+              { num:"25",    label:"Members",  color:"#4285F4" },
+              { num:"2024",  label:"Founded",  color:"#34A853" },
+              { num:"BZU",   label:"Campus",   color:"#FBBC05" },
+              { num:"CASPAM",label:"Chapter",  color:"#EA4335" },
+            ].map(({ num, label, color }) => (
+              <div key={label} className="about-stat">
+                <span className="about-stat-num" style={{
+                  background:`linear-gradient(135deg,${color},${color}bb)`,
+                  WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent",
+                }}>{num}</span>
                 <span className="about-stat-label">{label}</span>
               </div>
             ))}
@@ -165,128 +79,95 @@ export default function About() {
         </div>
       </section>
 
-      <hr className="zg-divider" />
+      <hr className="zg-divider"/>
 
-      {/* ── WHO WE ARE ───────────────────────────────────────── */}
-      <section className="zg-section zg-alt" aria-label="Who we are">
-        <div className="zg-wrap about-two">
-          <div className="about-photo">
-            <img
-              src="/team-work.jpg"
-              alt="ZGDC CASPAM members collaborating"
-              loading="lazy"
-              width="600"
-              height="420"
-              style={{ objectFit: "cover" }}
-            />
-            <span className="about-badge" aria-hidden="true">🤝 Teamwork</span>
-          </div>
-          <div className="about-who">
-            <span className="zg-eyebrow">Who We Are</span>
-            <h2>A community built on learning&nbsp;&amp;&nbsp;collaboration</h2>
-            <p>
-              ZGDC CASPAM brings together students who love technology. We create
-              a welcoming space to learn, share ideas, work on real projects, and
-              grow as developers and future leaders.
-            </p>
-            <p>
-              Our community is open to every student — from first-time coders
-              exploring their first "Hello World" to experienced builders pushing
-              the limits of what's possible.
-            </p>
-            <p>
-              As part of the global Google Developer Groups ecosystem, we connect
-              our campus to a worldwide network of learners and innovators.
-            </p>
+      {/* ── VISION ── */}
+      <section className="zg-section" aria-labelledby="vision-heading" style={{ background:"#fff" }}>
+        <div className="zg-wrap">
+          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:56, alignItems:"center" }}>
+            <div>
+              <span className="zg-eyebrow">Our Vision</span>
+              <h2 id="vision-heading" style={{ fontSize:"clamp(24px,3.5vw,34px)", marginBottom:20 }}>
+                <EyeIcon size={28} style={{ color:"#4285F4", verticalAlign:"middle", marginRight:10 }}/>
+                Where Curiosity Meets Creativity
+              </h2>
+              <p style={{ fontSize:16, lineHeight:1.85, color:"var(--text)" }}>
+                To build an innovative and inclusive student technology community where curiosity leads
+                to creativity, ideas turn into meaningful solutions, and students become confident
+                creators, problem-solvers, and future technology leaders. We envision a future where
+                our members contribute to the evolving world of technology through knowledge,
+                collaboration, and innovation.
+              </p>
+            </div>
+            <div style={{
+              background:"linear-gradient(135deg,rgba(66,133,244,.06),rgba(52,168,83,.06))",
+              border:"1px solid rgba(66,133,244,.15)", borderRadius:24,
+              padding:40, textAlign:"center",
+            }}>
+              <div style={{ fontSize:56, marginBottom:16 }}>🚀</div>
+              <p style={{ fontFamily:"'Poppins',sans-serif", fontWeight:600, fontSize:18, color:"var(--ink)", lineHeight:1.5 }}>
+                "From curious students to confident technology leaders."
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <hr className="zg-divider" />
+      <hr className="zg-divider"/>
 
-      {/* ── MISSION & VISION ─────────────────────────────────── */}
-      <section className="zg-section" id="mission" aria-labelledby="mv-heading">
+      {/* ── MISSION ── */}
+      <section className="zg-section zg-alt" id="mission" aria-labelledby="mission-heading">
         <div className="zg-wrap">
           <div className="zg-title">
-            <span className="zg-eyebrow">Purpose</span>
-            <h2 id="mv-heading">Our Mission &amp; Vision</h2>
-            <p>The values that drive everything we do as a community.</p>
+            <span className="zg-eyebrow">Our Mission</span>
+            <h2 id="mission-heading">Empowering Students Through Technology</h2>
+            <p style={{ fontSize:16, lineHeight:1.8, color:"var(--text)" }}>
+              Our mission is to empower students with the knowledge, skills, and confidence needed to
+              explore and build with modern technologies. We strive to create opportunities for
+              hands-on learning, encourage collaboration, promote emerging fields such as Artificial
+              Intelligence and software development, and support students in transforming their ideas
+              into practical projects.
+            </p>
           </div>
-          <div className="zg-grid about-mv">
-            <InfoCard
-              color="blue"
-              Icon={TargetIcon}
-              title="Mission"
-              text="To promote programming, technology, and innovation by giving students real opportunities to learn, collaborate, and develop practical technical skills that matter."
-            />
-            <InfoCard
-              color="green"
-              Icon={EyeIcon}
-              title="Vision"
-              text="A confident student developer community at BZU that learns together, builds useful solutions, and grows into the technology leaders of tomorrow."
-            />
-          </div>
-        </div>
-      </section>
 
-      <hr className="zg-divider" />
-
-      {/* ── OBJECTIVES ───────────────────────────────────────── */}
-      <section
-        className="zg-section zg-alt"
-        aria-labelledby="objectives-heading"
-      >
-        <div className="zg-wrap">
-          <div className="zg-title">
-            <span className="zg-eyebrow">Goals</span>
-            <h2 id="objectives-heading">Main Objectives</h2>
-            <p>Four pillars that guide our activities and decision-making.</p>
-          </div>
+          {/* 4 Pillars */}
           <div className="zg-grid">
-            {objectives.map((o) => (
-              <InfoCard key={o.title} {...o} />
+            {missionPillars.map(({ color, Icon, title, desc }) => (
+              <article key={title} style={{
+                background:"#fff", border:`1px solid ${color}22`,
+                borderTop:`4px solid ${color}`, borderRadius:20,
+                padding:28, boxShadow:"var(--shadow-sm)",
+                transition:"transform .25s, box-shadow .25s",
+              }}
+                onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-5px)";e.currentTarget.style.boxShadow="var(--shadow)";}}
+                onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow="var(--shadow-sm)";}}
+              >
+                <div style={{ width:52, height:52, borderRadius:14, background:`${color}15`,
+                  display:"grid", placeItems:"center", color, marginBottom:14 }}>
+                  <Icon size={24}/>
+                </div>
+                <h3 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:700, fontSize:18, color:"var(--ink)", marginBottom:8 }}>{title}</h3>
+                <p style={{ fontSize:15, color:"var(--text)", lineHeight:1.65 }}>{desc}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <hr className="zg-divider" />
+      <hr className="zg-divider"/>
 
-      {/* ── ACTIVITIES ───────────────────────────────────────── */}
-      <section className="zg-section" aria-labelledby="activities-heading">
-        <div className="zg-wrap">
-          <div className="zg-title">
-            <span className="zg-eyebrow">Activities</span>
-            <h2 id="activities-heading">What We Do</h2>
-            <p>Planned activities designed to grow your skills and network.</p>
-          </div>
-          <div className="zg-grid">
-            {activities.map((a) => (
-              <InfoCard key={a.title} {...a} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <hr className="zg-divider" />
-
-      {/* ── JOIN CTA ─────────────────────────────────────────── */}
-      <section className="zg-section zg-alt" aria-label="Join us">
+      {/* ── JOIN CTA ── */}
+      <section className="zg-section" style={{ background:"#fff" }}>
         <div className="zg-wrap">
           <div className="about-cta">
-            <StarIcon size={36} style={{ color: "#fff", margin: "0 auto 16px", display: "block" }} />
+            <HeartIcon size={36} style={{ color:"#fff", margin:"0 auto 16px", display:"block" }}/>
             <h2>Want to join or collaborate?</h2>
-            <p>
-              Reach out to the ZGDC CASPAM team — we would love to hear from you,
-              whether you are a student, faculty member, or industry partner.
-            </p>
-            <a className="zg-btn" href="#/contact">
-              <HeartIcon size={18} /> Contact Us
-            </a>
+            <p>Reach out to the ZGDC CASPAM team — we would love to hear from you.</p>
+            <a className="zg-btn" href="#/contact">Contact Us</a>
           </div>
         </div>
       </section>
 
     </main>
-  );
+  )
 }
