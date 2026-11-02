@@ -7,8 +7,18 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Members from './pages/Members'
 import Events from './pages/Events'
-import Notes from './pages/Notes'
 import Contact from './pages/Contact'
+import RegistrationForm from './components/RegistrationForm'
+
+/** Pages available in the app */
+const pages = { 
+  home: Home, 
+  about: About, 
+  members: Members, 
+  events: Events, 
+  contact: Contact,
+  register: RegistrationForm
+}
 
 /** The 6 pages. To add a page: create it in /pages and add a line here + in Navbar. */
 const pages = { home: Home, about: About, members: Members, events: Events, notes: Notes, contact: Contact }
