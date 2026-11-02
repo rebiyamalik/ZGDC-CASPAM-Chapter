@@ -1,14 +1,10 @@
 import events from '../data/events.json'
-<<<<<<< HEAD
-import RegistrationForm from '../components/RegistrationForm'
-
-=======
 import site from '../data/site.json'
 import { dbEnabled, saveDoc } from '../lib/db'
 import { useState } from 'react'
 import { CalendarIcon, PinIcon, SparkleIcon, BrainIcon, CodeIcon, GlobeIcon, ArrowIcon } from '../components/Icons'
 
-const topicIcons = { prompt: SparkleIcon, ai: BrainIcon, app: CodeIcon, google: GlobeIcon }
+const topicIcons  = { prompt: SparkleIcon, ai: BrainIcon, app: CodeIcon, google: GlobeIcon }
 const topicColors = { prompt:"#4285F4", ai:"#EA4335", app:"#34A853", google:"#FBBC05" }
 
 /* ── Registration form ── */
@@ -50,24 +46,9 @@ function Register({ ev }) {
 }
 
 /* ── Event card ── */
->>>>>>> f563fd9 (feat: complete redesign - About, Contact, Events, Notes, FAQ, LinkedIn added)
 function EventCard({ ev }) {
   const upcoming = ev.status === 'upcoming'
   return (
-<<<<<<< HEAD
-    <li className="layered mb-6 rounded-2xl bg-white p-6">
-      <time dateTime={ev.date} className="text-sm font-semibold text-brand">{ev.date} · {ev.time} · {ev.venue}</time>
-      <h3 className="mt-1 font-display text-xl font-bold">{ev.title}</h3>
-      <p className="mt-1">{ev.desc}</p>
-      {up && (ev.registerUrl
-        ? <a href={ev.registerUrl} className="btn btn-primary mt-4" rel="noopener">Register on form</a>
-        : <RegistrationForm ev={ev} />)}
-      {ev.notes.length > 0 && (
-        <div className="mt-4"><h4 className="text-sm font-bold">Notes (PDF)</h4>
-          <ul className="mt-1 list-disc pl-5">{ev.notes.map(n => <li key={n.file}><a className="text-brand underline" href={n.file} download>{n.title}</a></li>)}</ul></div>
-      )}
-    </li>
-=======
     <article style={{
       background:"#fff", border:"1px solid var(--border)", borderRadius:20,
       overflow:"hidden", boxShadow:"var(--shadow-sm)",
@@ -110,7 +91,7 @@ function EventCard({ ev }) {
             </p>
             <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))", gap:12 }}>
               {ev.topics.map(t => {
-                const Icon = topicIcons[t.icon] || SparkleIcon
+                const Icon  = topicIcons[t.icon]  || SparkleIcon
                 const color = topicColors[t.icon] || "#4285F4"
                 return (
                   <div key={t.title} style={{
@@ -156,7 +137,6 @@ function EventCard({ ev }) {
         )}
       </div>
     </article>
->>>>>>> f563fd9 (feat: complete redesign - About, Contact, Events, Notes, FAQ, LinkedIn added)
   )
 }
 

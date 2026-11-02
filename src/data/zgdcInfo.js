@@ -11,7 +11,7 @@ export const ZGDC = {
   instagram:     "https://www.instagram.com/zgdc_caspam_chapter?vrfl=d2V6djkwMDA2YXhx",
   linkedin:      "https://www.linkedin.com/company/zakariyan-google-developer-club-caspam-chapter",
   linkedinLabel: "ZGDC CASPAM Chapter on LinkedIn",
-  founded:       "2024",
+  founded:       "2026",
   lead:          "Rebiya Ismail",
   members:       25,
 };

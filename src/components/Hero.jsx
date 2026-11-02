@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+﻿import { lazy, Suspense } from 'react'
 import { ZGDC } from '../data/zgdcInfo'
 const Scene3D = lazy(() => import('./Scene3D'))
 
@@ -10,7 +10,7 @@ const dots = [
 export default function Hero() {
   return (
     <section style={{ background:"#fff" }}>
-      {/* ── Main hero grid ── */}
+      {/* â”€â”€ Main hero grid â”€â”€ */}
       <div style={{ maxWidth:1140, margin:"0 auto", padding:"0 24px" }}>
         <div className="hero-grid" style={{
           display:"grid", alignItems:"center", gap:48,
@@ -27,7 +27,7 @@ export default function Hero() {
 
             <p style={{ fontFamily:"'Poppins',sans-serif", fontWeight:600, fontSize:14,
               color:"#4285F4", letterSpacing:".06em", textTransform:"uppercase", marginBottom:14 }}>
-              BZU Multan · Google Developer Club
+              BZU Multan Â· Google Developer Club
             </p>
 
             <h1 style={{ fontFamily:"'Poppins','Sora',sans-serif", fontWeight:800,
@@ -42,7 +42,7 @@ export default function Hero() {
             </h1>
 
             <p style={{ fontSize:18, lineHeight:1.75, color:"var(--text)", maxWidth:480, marginBottom:32 }}>
-              ZGDC–CASPAM is where students at Bahauddin Zakariya University
+              ZGDCâ€“CASPAM is where students at Bahauddin Zakariya University
               explore technology, build real projects, and grow as developers and innovators.
             </p>
 
@@ -52,24 +52,24 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right — 3-D scene */}
+          {/* Right â€” 3-D scene */}
           <div style={{ height:340, minHeight:280 }}>
-            <Suspense fallback={<div style={{ height:"100%", display:"grid", placeItems:"center", color:"var(--muted)", fontSize:14 }}>Loading…</div>}>
+            <Suspense fallback={<div style={{ height:"100%", display:"grid", placeItems:"center", color:"var(--muted)", fontSize:14 }}>Loadingâ€¦</div>}>
               <Scene3D />
             </Suspense>
           </div>
         </div>
       </div>
 
-      {/* ── Stats strip ── */}
+      {/* â”€â”€ Stats strip â”€â”€ */}
       <div style={{ background:"var(--soft)", borderTop:"1px solid var(--border)", borderBottom:"1px solid var(--border)" }}>
         <div style={{ maxWidth:1140, margin:"0 auto", padding:"32px 24px" }}>
           <div className="stats-grid" style={{ display:"grid", gap:24, textAlign:"center" }}>
             {[
               { num:`${ZGDC.members}`, label:"Members",    color:"#4285F4" },
               { num:"1",              label:"Upcoming Event", color:"#EA4335" },
-              { num:"2024",           label:"Founded",     color:"#34A853" },
-              { num:"CASPAM",         label:"Campus",      color:"#FBBC05" },
+              { num:ZGDC.founded,    label:"Year",        color:"#34A853" },
+              { num:"CASPAM · BZU", label:"Campus",      color:"#FBBC05" },
             ].map(({ num, label, color }) => (
               <div key={label} style={{ padding:"20px 16px" }}>
                 <div style={{ fontFamily:"'Poppins',sans-serif", fontWeight:800,
@@ -103,3 +103,5 @@ export default function Hero() {
     </section>
   )
 }
+
+

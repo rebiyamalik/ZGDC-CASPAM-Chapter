@@ -9,12 +9,7 @@ import Members from './pages/Members'
 import Events from './pages/Events'
 import Notes from './pages/Notes'
 import Contact from './pages/Contact'
-import Notes from './pages/Notes'
 
-<<<<<<< HEAD
-/** The 6 pages. To add a page: create it in /pages and add a line here + in Navbar. */
-const pages = { home: Home, about: About, members: Members, events: Events, notes: Notes, contact: Contact }
-=======
 /** All pages. To add a page: create it in /pages and add a line here + in Navbar. */
 const pages = {
   home: Home,
@@ -24,7 +19,6 @@ const pages = {
   notes: Notes,
   contact: Contact,
 }
->>>>>>> f563fd9 (feat: complete redesign - About, Contact, Events, Notes, FAQ, LinkedIn added)
 
 export default function App() {
   const route = useRoute()

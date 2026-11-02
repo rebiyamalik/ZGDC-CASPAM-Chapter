@@ -1,21 +1,12 @@
 import { useState } from "react";
 
 const links = [
-<<<<<<< HEAD
-  ["Home",       "home"],
-  ["About Us",   "about"],
-  ["Members",    "members"],
-  ["Events",     "events"],
-  ["Notes",      "notes"],
-  ["Contact Us", "contact"],
-=======
   { label:"Home",       route:"home",    dot:false },
   { label:"About Us",   route:"about",   dot:false },
   { label:"Members",    route:"members", dot:false },
-  { label:"Events",     route:"events",  dot:true  },   // ← NEW event dot
+  { label:"Events",     route:"events",  dot:true  },   // ← upcoming event dot
   { label:"Notes",      route:"notes",   dot:false },
   { label:"Contact Us", route:"contact", dot:false },
->>>>>>> f563fd9 (feat: complete redesign - About, Contact, Events, Notes, FAQ, LinkedIn added)
 ];
 
 export default function Navbar({ route }) {
@@ -131,17 +122,10 @@ export default function Navbar({ route }) {
       )}
 
       <style>{`
-<<<<<<< HEAD
-        @keyframes navSpin { to { transform: rotate(360deg); } }
-        @media (max-width: 800px) {
-          .nav-links-desktop { display: none !important; }
-          .nav-burger { display: block !important; }
-=======
         @keyframes navGlow { to { transform: rotate(360deg); } }
         @media (max-width:720px) {
           .nav-desktop { display:none !important; }
           .nav-burger  { display:block !important; }
->>>>>>> f563fd9 (feat: complete redesign - About, Contact, Events, Notes, FAQ, LinkedIn added)
         }
       `}</style>
     </header>

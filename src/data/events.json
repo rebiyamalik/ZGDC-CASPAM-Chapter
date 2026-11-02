@@ -1,21 +1,12 @@
 [
   {
-<<<<<<< HEAD
-    "id": "AI BAITHAK",
-    "title": "AI BAITHAK",
-    "date": "6-11-2026",
-    "time": "1:30PM-3:00PM",
-    "venue": "BZU Multan, CS Lab",
-    "status": "upcoming",
-    "desc": "Only 20 seats are available",
-=======
     "id": "ai-baithak",
     "title": "AI Baithak",
-    "date": "Coming Soon",
-    "time": "TBA",
+    "date": "6-11-2026",
+    "time": "1:30 PM – 3:00 PM",
     "venue": "CASPAM, Bahauddin Zakariya University, Multan",
     "status": "upcoming",
-    "desc": "AI Baithak is an upcoming learning session by ZGDC-CASPAM, designed to introduce students to modern Artificial Intelligence tools, emerging technologies, and practical development concepts.",
+    "desc": "AI Baithak is an upcoming learning session by ZGDC-CASPAM, designed to introduce students to modern Artificial Intelligence tools, emerging technologies, and practical development concepts. Only 20 seats available.",
     "topics": [
       {
         "icon": "prompt",
@@ -38,7 +29,6 @@
         "desc": "Get introduced to Google's AI development platform and explore how to experiment with AI models and build AI-powered applications."
       }
     ],
->>>>>>> f563fd9 (feat: complete redesign - About, Contact, Events, Notes, FAQ, LinkedIn added)
     "registerUrl": "",
     "notes": []
   }
