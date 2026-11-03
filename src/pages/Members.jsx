@@ -35,6 +35,8 @@ const meta = (m) => [m.program, m.class].filter(Boolean).join(' · ')
 // A "photo" value in team.json (a full path like "/team/custom.jpg") overrides both.
 export const photoSlug = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
 // Upper-case endings are listed too because the web server is case sensitive.
+// Photos are looked up in public/team/ first, then in the public/ folder itself.
+const PHOTO_FOLDERS = ['/team/', '/']
 const PHOTO_TYPES = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG']
 
 // Remembers, for this visit only, which photo type worked (or that there is none),
@@ -64,7 +66,7 @@ function edgeColor(img) {
 function Avatar({ m, theme, className = '' }) {
   const [bg, setBg] = useState(bgCache[m.name] || '')
   const [tried, setTried] = useState(typeof memo[m.name] === 'number' ? memo[m.name] : memo[m.name] === 'none' ? 99 : 0)
-  const sources = m.photo ? [m.photo] : PHOTO_TYPES.map((ext) => `/team/${encodeURIComponent(m.photoName || photoSlug(m.name))}.${ext}`)
+  const sources = m.photo ? [m.photo] : PHOTO_FOLDERS.flatMap((dir) => PHOTO_TYPES.map((ext) => `${dir}${encodeURIComponent(m.photoName || photoSlug(m.name))}.${ext}`))
   if (tried < sources.length) {
     return (
       <img src={sources[tried]} alt={`Portrait of ${m.name}`}
