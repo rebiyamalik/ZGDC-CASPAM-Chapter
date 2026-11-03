@@ -12,13 +12,14 @@ export const dbEnabled = Boolean(
   cfg.apiKey && cfg.projectId
 )
 
-
 async function load() {
-  const [{ initializeApp, getApps, getApp }, fs] =
-    await Promise.all([
-      import('firebase/app'),
-      import('firebase/firestore'),
-    ])
+  const [
+    { initializeApp, getApps, getApp },
+    fs,
+  ] = await Promise.all([
+    import('firebase/app'),
+    import('firebase/firestore'),
+  ])
 
   const app = getApps().length
     ? getApp()
@@ -30,7 +31,7 @@ async function load() {
   }
 }
 
-
+// Keep this function for other parts of your website.
 export async function saveDoc(collectionName, data, id) {
   const { fs, db } = await load()
 
@@ -52,9 +53,7 @@ export async function saveDoc(collectionName, data, id) {
   )
 }
 
-/**
- * Get occupied seats for an event.
- */
+// Public counter: contains no student information.
 export async function getSeatsTaken(eventId) {
   const { fs, db } = await load()
 
@@ -67,12 +66,14 @@ export async function getSeatsTaken(eventId) {
     : 0
 }
 
-
+// Free Firestore-only registration.
 export async function registerForEvent(rec) {
   const { fs, db } = await load()
 
+  const eventId = rec.eventId
   const email = rec.email.trim().toLowerCase()
-  const id = `${rec.eventId}_${email}`
+
+  const id = `${eventId}_${email}`
 
   const regRef = fs.doc(
     db,
@@ -80,50 +81,50 @@ export async function registerForEvent(rec) {
     id
   )
 
+  const lockRef = fs.doc(
+    db,
+    'registrationLocks',
+    id
+  )
+
   const statRef = fs.doc(
     db,
     'eventStats',
-    rec.eventId
+    eventId
   )
 
   await fs.runTransaction(db, async (tx) => {
+    // The counter is public, so this read is permitted.
+    const statSnap = await tx.get(statRef)
 
-    const [regSnap, statSnap] = await Promise.all([
-      tx.get(regRef),
-      tx.get(statRef),
-    ])
-
-    if (regSnap.exists()) {
-      const error = new Error(
-        'This email is already registered.'
-      )
-
-      error.code = 'already-registered'
-      throw error
-    }
-
-    
     const count = statSnap.exists()
-      ? statSnap.data().count
+      ? Number(statSnap.data().count || 0)
       : 0
 
-   
     if (count >= SEATS) {
-      const error = new Error(
-        'All registration seats are full.'
-      )
-
+      const error = new Error('All seats are full.')
       error.code = 'full'
       throw error
     }
 
-   
+    // Do not read registration or lock documents.
+    // Security rules enforce create-only behavior.
     tx.set(regRef, {
-      ...rec,
+      eventId,
+      event: rec.event,
+      name: rec.name.trim(),
       email,
+      phone: rec.phone.trim(),
+      roll: rec.roll.trim(),
+      dept: rec.dept.trim(),
+      semester: String(rec.semester),
       createdAt: fs.serverTimestamp(),
     })
 
+    // Contains no personal information in its fields.
+    tx.set(lockRef, {
+      eventId,
+    })
 
     tx.set(statRef, {
       count: count + 1,
