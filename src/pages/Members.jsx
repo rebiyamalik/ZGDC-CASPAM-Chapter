@@ -42,13 +42,34 @@ const PHOTO_TYPES = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG']
 const memo = (() => { try { return JSON.parse(sessionStorage.getItem('zm-photos') || '{}') } catch { return {} } })()
 const remember = (name, value) => { memo[name] = value; try { sessionStorage.setItem('zm-photos', JSON.stringify(memo)) } catch {} }
 
+// Finds the colour of a photo's own background (its outer edge) so the circle can be filled with it.
+const bgCache = {}
+function edgeColor(img) {
+  try {
+    const n = 48, c = document.createElement('canvas'); c.width = c.height = n
+    const x = c.getContext('2d', { willReadFrequently: true }); x.drawImage(img, 0, 0, n, n)
+    const d = x.getImageData(0, 0, n, n).data, ch = [[], [], []]
+    let seen = 0, solid = 0
+    for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
+      if (i > 1 && i < n - 2 && j > 1 && j < n - 2) continue
+      const k = (i * n + j) * 4; seen++
+      if (d[k + 3] > 200) { solid++; ch[0].push(d[k]); ch[1].push(d[k + 1]); ch[2].push(d[k + 2]) }
+    }
+    if (solid < seen * 0.6) return ''
+    const med = (a) => a.sort((p, q) => p - q)[a.length >> 1]
+    return `rgb(${med(ch[0])}, ${med(ch[1])}, ${med(ch[2])})`
+  } catch { return '' }
+}
+
 function Avatar({ m, theme, className = '' }) {
+  const [bg, setBg] = useState(bgCache[m.name] || '')
   const [tried, setTried] = useState(typeof memo[m.name] === 'number' ? memo[m.name] : memo[m.name] === 'none' ? 99 : 0)
-  const sources = m.photo ? [m.photo] : PHOTO_TYPES.map((ext) => `/${encodeURIComponent(m.photoName || photoSlug(m.name))}.${ext}`)
+  const sources = m.photo ? [m.photo] : PHOTO_TYPES.map((ext) => `/team/${encodeURIComponent(m.photoName || photoSlug(m.name))}.${ext}`)
   if (tried < sources.length) {
     return (
       <img src={sources[tried]} alt={`Portrait of ${m.name}`}
-        onLoad={() => remember(m.name, tried)}
+        style={bg ? { background: bg } : undefined}
+        onLoad={(e) => { remember(m.name, tried); if (!bgCache[m.name]) { bgCache[m.name] = edgeColor(e.currentTarget); setBg(bgCache[m.name]) } }}
         onError={() => { if (tried + 1 >= sources.length) remember(m.name, 'none'); setTried(tried + 1) }}
         className={`zm-avatar zm-avatar--photo zm-avatar--${theme} ${className}`} />
     )
