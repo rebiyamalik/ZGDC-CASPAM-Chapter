@@ -1,5 +1,5 @@
 /* ============================================================
-   ZGDC CASPAM – Shared Design Tokens & Utility Classes
+   ZGDC CASPAM â€“ Shared Design Tokens & Utility Classes
    Scoped under .zg-page so it never leaks to other pages.
    ============================================================ */
 
@@ -37,7 +37,23 @@
   color: var(--zg-text);
 }
 
-/* Force light mode always � no dark mode on this website */
+
+/* Dark mode: follows the theme button (data-theme is set on <html> by useTheme.js) */
+:root[data-theme="dark"] .zg-page {
+  --zg-bg:      #121316;
+  --zg-bg2:     #181a1e;
+  --zg-card:    #1c1e23;
+  --zg-border:  #33363d;
+  --zg-heading: #F1F3F4;
+  --zg-text:    #BDC1C6;
+  --zg-muted:   #8a9099;
+  --zg-shadow-sm: 0 2px 10px rgba(0,0,0,.4);
+  --zg-shadow:    0 4px 20px rgba(0,0,0,.5);
+  --zg-shadow-lg: 0 8px 32px rgba(0,0,0,.6);
+}
+=======
+/* Force light mode always — no dark mode on this website */
+
 
 .zg-page * { box-sizing: border-box; }
 .zg-page h1, .zg-page h2, .zg-page h3,
@@ -86,7 +102,7 @@
 .zg-dots i:nth-child(3) { background: var(--zg-yellow); }
 .zg-dots i:nth-child(4) { background: var(--zg-green); }
 
-/* ── Buttons ── */
+/* â”€â”€ Buttons â”€â”€ */
 .zg-btn {
   display: inline-flex;
   align-items: center;
@@ -121,7 +137,7 @@
   transform: translateY(-2px);
 }
 
-/* ── Cards ── */
+/* â”€â”€ Cards â”€â”€ */
 .zg-grid {
   display: grid;
   gap: 22px;

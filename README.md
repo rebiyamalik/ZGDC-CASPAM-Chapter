@@ -53,24 +53,14 @@ Bahauddin Zakariya University, Multan, Pakistan
 | Database | Firebase Firestore (free Spark plan) |
 | Deployment | Vercel (auto-deploy from GitHub) |
 
----
+</details>
+ZGDC Agent, the AI assistant:
 
-## 👥 Team Assignments
+<p align="center">
+  <img src="screenshots/ZGDC-agent.jpg" alt="ZGDC Agent chat on the website" width="48%" />
+  <img src="screenshots/ZGDC-agent1.jpg" alt="ZGDC Agent answering a question" width="48%" />
+</p>
 
-*(As per ZGDC CASPAM Chapter Website Development Plan)*
-
-| Member | Module | Responsibility |
-|--------|--------|----------------|
-| **Rebiya Ismail** | Project Lead, Homepage & Database | Design system, homepage, shared components, repo coordination, Firebase schema & security |
-| **Mubashira Zainab** | About Us & Contact | About page (intro, vision, mission), Contact page, social links |
-| **Faiza Haneef** | Members & Executive Profiles | Member cards, team directory, profile display |
-| **Ramzan** | Notes & Learning Resources | Resource cards, categories, search/filter UI, Notes page |
-| **Sibghatullah** | Events & Activities | Event cards, upcoming/past events display |
-| **Mehreen Sultana** | Registration Forms & Database Integration | Registration form, form validation, database writes |
-| **Muhammad Saqib** | QA, SEO & Documentation | Testing, SEO metadata, README, maintenance guide |
-| **Ateeq ur Rehman** | AI Agent Integration | AI assistant, API integration, secure backend |
-
----
 
 ## ⚙️ Local Development
 

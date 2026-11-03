@@ -88,12 +88,12 @@
   width: 100%;
   border-radius: 50%;
   box-shadow:
-    0 0 0 6px #fff,
+    0 0 0 6px var(--zg-card),
     0 0 0 8px rgba(66,133,244,.2),
     0 4px 16px rgba(60,64,67,.18), 0 16px 40px rgba(60,64,67,.12);
   transform-style: preserve-3d;
   animation: logoFloat 4s ease-in-out infinite;
-  background: #fff;
+  background: var(--zg-card);
 }
 @keyframes logoFloat {
   0%, 100% { transform: translateY(0) rotateY(0deg); }
