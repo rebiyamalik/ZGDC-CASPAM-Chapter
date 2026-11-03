@@ -86,8 +86,8 @@ export const resources = [
     session: "Prompt Engineering",
     addedOn: "2026-11-06",
     approved: true,
-    resourceUrl: file("Prompt_Engineering_Presentation.pptx"),
-    downloadUrl: file("Prompt_Engineering_Presentation.pptx"),
+    resourceUrl: file("Prompt_Engineering_Presentation.pdf"),
+    downloadUrl: file("Prompt_Engineering_Presentation.pdf"),
   },
   {
     id: 3,
