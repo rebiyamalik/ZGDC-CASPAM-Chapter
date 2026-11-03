@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 const links = [
   ["Home",       "home"],
@@ -18,10 +19,10 @@ export default function Navbar({ route }) {
         position: "sticky",
         top: 0,
         zIndex: 50,
-        background: "rgba(255,255,255,0.92)",
+        background: "var(--nav-bg)",
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
-        borderBottom: "1px solid #E8EAED",
+        borderBottom: "1px solid var(--nav-border)",
         fontFamily: "'Inter', system-ui, sans-serif",
       }}
       role="banner"
@@ -91,8 +92,8 @@ export default function Navbar({ route }) {
                 height: "100%",
                 borderRadius: "50%",
                 objectFit: "contain",
-                background: "#fff",
-                border: "2px solid #fff",
+                background: "var(--nav-logo-bg)",
+                border: "2px solid var(--nav-logo-bg)",
                 boxShadow: "0 2px 8px rgba(66,133,244,.3)",
               }}
             />
@@ -104,12 +105,12 @@ export default function Navbar({ route }) {
               fontFamily: "'Poppins','Sora',sans-serif",
               fontWeight: 700,
               fontSize: 17,
-              color: "#202124",
+              color: "var(--nav-text)",
               lineHeight: 1,
             }}
           >
             ZGDC
-            <span style={{ color: "#4285F4" }}>–CASPAM</span>
+            <span style={{ color: "var(--nav-accent)" }}>–CASPAM</span>
           </span>
         </a>
 
@@ -137,20 +138,20 @@ export default function Navbar({ route }) {
                     borderRadius: 999,
                     fontSize: 14,
                     fontWeight: active ? 600 : 500,
-                    color: active ? "#4285F4" : "#5F6368",
-                    background: active ? "rgba(66,133,244,.10)" : "transparent",
+                    color: active ? "var(--nav-accent)" : "var(--nav-link)",
+                    background: active ? "var(--nav-active-bg)" : "transparent",
                     textDecoration: "none",
                     transition: "color .18s, background .18s",
                   }}
                   onMouseEnter={(e) => {
                     if (!active) {
-                      e.currentTarget.style.color = "#4285F4";
-                      e.currentTarget.style.background = "rgba(66,133,244,.06)";
+                      e.currentTarget.style.color = "var(--nav-accent)";
+                      e.currentTarget.style.background = "var(--nav-hover-bg)";
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!active) {
-                      e.currentTarget.style.color = "#5F6368";
+                      e.currentTarget.style.color = "var(--nav-link)";
                       e.currentTarget.style.background = "transparent";
                     }
                   }}
@@ -162,6 +163,9 @@ export default function Navbar({ route }) {
           })}
         </ul>
 
+        {/* Right side: theme button (Auto / Light / Dark) + mobile burger */}
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <ThemeToggle />
         {/* Mobile burger */}
         <button
           className="nav-burger"
@@ -171,24 +175,25 @@ export default function Navbar({ route }) {
           style={{
             display: "none",
             background: "none",
-            border: "1.5px solid #E8EAED",
+            border: "1.5px solid var(--nav-border)",
             borderRadius: 8,
             padding: "6px 10px",
             cursor: "pointer",
-            color: "#202124",
+            color: "var(--nav-text)",
           }}
         >
           {open ? "✕" : "☰"}
         </button>
+        </div>
       </nav>
 
       {/* Mobile drawer */}
       {open && (
         <div
           style={{
-            borderTop: "1px solid #E8EAED",
+            borderTop: "1px solid var(--nav-border)",
             padding: "12px 24px 20px",
-            background: "rgba(255,255,255,.97)",
+            background: "var(--nav-drawer-bg)",
           }}
         >
           <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 4 }}>
@@ -206,8 +211,8 @@ export default function Navbar({ route }) {
                       borderRadius: 10,
                       fontSize: 15,
                       fontWeight: active ? 600 : 400,
-                      color: active ? "#4285F4" : "#202124",
-                      background: active ? "rgba(66,133,244,.08)" : "transparent",
+                      color: active ? "var(--nav-accent)" : "var(--nav-text)",
+                      background: active ? "var(--nav-active-bg)" : "transparent",
                       textDecoration: "none",
                     }}
                   >

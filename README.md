@@ -68,6 +68,12 @@ Desktop view:
 <img src="screenshots/notes-desktop-full.jpg" alt="Full Notes page on desktop" width="100%" />
 
 </details>
+ZGDC Agent, the AI assistant:
+
+<p align="center">
+  <img src="screenshots/ZGDC-agent.jpg" alt="ZGDC Agent chat on the website" width="48%" />
+  <img src="screenshots/ZGDC-agent1.jpg" alt="ZGDC Agent answering a question" width="48%" />
+</p>
 
 ## Quick start
 

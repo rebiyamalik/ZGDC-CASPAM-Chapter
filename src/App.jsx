@@ -9,6 +9,7 @@ import Members from './pages/Members'
 import Events from './pages/Events'
 import Notes from './pages/Notes'
 import Contact from './pages/Contact'
+import ZenoChat from './components/ZenoChat'
 
 /** The 6 pages. To add a page: create it in /pages and add a line here + in Navbar. */
 const pages = { home: Home, about: About, members: Members, events: Events, notes: Notes, contact: Contact }
@@ -27,6 +28,7 @@ export default function App() {
       <Navbar route={route} />
       <main id="main" tabIndex={-1} className="outline-none"><Page /></main>
       <Footer onReplay={replay} />
+      <ZenoChat />
     </>
   )
 }

@@ -37,20 +37,18 @@
   color: var(--zg-text);
 }
 
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  .zg-page {
-    --zg-bg:      #17181A;
-    --zg-bg2:     #202124;
-    --zg-card:    #25262A;
-    --zg-border:  #3C4043;
-    --zg-heading: #F1F3F4;
-    --zg-text:    #BDC1C6;
-    --zg-muted:   #80868B;
-    --zg-shadow-sm: 0 2px 10px rgba(0,0,0,.4);
-    --zg-shadow:    0 4px 20px rgba(0,0,0,.5);
-    --zg-shadow-lg: 0 8px 32px rgba(0,0,0,.6);
-  }
+/* Dark mode: follows the theme button (data-theme is set on <html> by useTheme.js) */
+:root[data-theme="dark"] .zg-page {
+  --zg-bg:      #121316;
+  --zg-bg2:     #181a1e;
+  --zg-card:    #1c1e23;
+  --zg-border:  #33363d;
+  --zg-heading: #F1F3F4;
+  --zg-text:    #BDC1C6;
+  --zg-muted:   #8a9099;
+  --zg-shadow-sm: 0 2px 10px rgba(0,0,0,.4);
+  --zg-shadow:    0 4px 20px rgba(0,0,0,.5);
+  --zg-shadow-lg: 0 8px 32px rgba(0,0,0,.6);
 }
 
 .zg-page * { box-sizing: border-box; }
