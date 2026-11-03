@@ -12,7 +12,13 @@ function describeDate(addedOn) {
   const ageInDays = (Date.now() - date.getTime()) / 86400000;
   return { text, isNew: ageInDays >= 0 && ageInDays <= 14 };
 }
+const OFFICE_FILE = /\.(pptx?|potx?|ppsx?|docx?|dotx?|xlsx?)(\?.*)?$/i;
 
+function getOpenHref(url) {
+  if (!OFFICE_FILE.test(url)) return url;
+  const absolute = new URL(url, window.location.origin).href;
+  return `https://view.officeapps.live.com/op/view.aspx?src=${encodeURIComponent(absolute)}`;
+}
 // A published resource. The page only passes in approved, complete entries, and
 // the buttons below still check each link, so a button never points nowhere.
 export default function ResourceCard({ resource, index, query = "", featured = false }) {
@@ -96,7 +102,7 @@ export default function ResourceCard({ resource, index, query = "", featured = f
 
       <div className="zr-actions">
         {hasOpenLink && (
-          <a className="zr-btn zr-btn--primary" href={resourceUrl} target="_blank" rel="noopener noreferrer">
+          <a className="zr-btn zr-btn--primary" href={getOpenHref(resourceUrl)} target="_blank" rel="noopener noreferrer">
             Open
             <span className="zr-sr-only"> {title} (opens in a new tab)</span>
             <span aria-hidden="true"> ↗</span>
