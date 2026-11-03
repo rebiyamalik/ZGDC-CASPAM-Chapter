@@ -1,9 +1,8 @@
 import Hero from '../components/Hero'
 import Tracks from '../components/Tracks'
 import {
-  BrainIcon, SparkleIcon, CodeIcon, GlobeIcon,
-  StarIcon, PinIcon, CalendarIcon,
-  BookIcon, UsersIcon, GrowthIcon, RocketIcon,
+  StarIcon, PinIcon, CalendarIcon, BookIcon, UsersIcon,
+  GrowthIcon, SparkleIcon, CodeIcon, GlobeIcon,
 } from '../components/Icons'
 
 /* ─────────────────────────────────────────
@@ -33,7 +32,8 @@ function HodSection() {
 
           {/* Text */}
           <div>
-            <div className="eyebrow" style={{ marginBottom:12 }}>A Message of Gratitude</div>
+            <p style={{ fontSize:12, fontWeight:600, color:"#4285F4", textTransform:"uppercase",
+              letterSpacing:".12em", marginBottom:12 }}>A Message of Gratitude</p>
             <h2 style={{
               fontFamily:"'Poppins',sans-serif", fontWeight:800,
               fontSize:"clamp(24px,3.5vw,36px)", color:"var(--ink)", marginBottom:20,
@@ -65,38 +65,28 @@ function HodSection() {
 }
 
 /* ─────────────────────────────────────────
-   What We Do — 6 cards
+   What We Do — 4 cards (matching About page)
 ───────────────────────────────────────── */
 const activities = [
   {
-    color:"#4285F4", Icon:GlobeIcon,
-    title:"Web Development",
-    desc:"Exploring modern web technologies, frameworks, and building responsive, user-friendly web applications.",
+    color:"#4285F4", Icon:SparkleIcon,
+    title:"Technology & AI Workshops",
+    desc:"Hands-on learning experiences in AI, programming, automation, and emerging technologies.",
   },
   {
-    color:"#EA4335", Icon:SparkleIcon,
-    title:"UI/UX Design",
-    desc:"Understanding user experience, interface design principles, and creating intuitive, accessible digital products.",
+    color:"#EA4335", Icon:CodeIcon,
+    title:"Projects & Development",
+    desc:"Building practical applications, experimenting with new ideas, and solving real-world problems.",
   },
   {
-    color:"#34A853", Icon:CodeIcon,
-    title:"App Development",
-    desc:"Exploring application development for mobile and desktop platforms using modern tools and technologies.",
-  },
-  {
-    color:"#FBBC05", Icon:BrainIcon,
-    title:"AI & Emerging Technologies",
-    desc:"Discovering Artificial Intelligence, machine learning concepts, and the technologies shaping our future.",
-  },
-  {
-    color:"#4285F4", Icon:BookIcon,
-    title:"Workshops & Technical Learning",
-    desc:"Interactive workshops, hands-on sessions, and practical learning activities for all experience levels.",
+    color:"#FBBC05", Icon:GrowthIcon,
+    title:"Competitions & Innovation",
+    desc:"Providing opportunities to showcase creativity, technical skills, and innovative thinking.",
   },
   {
     color:"#34A853", Icon:UsersIcon,
-    title:"Projects, Innovation & Collaboration",
-    desc:"Encouraging creative ideas, team collaboration, and turning concepts into real-world technology projects.",
+    title:"Community & Collaboration",
+    desc:"Connecting students, sharing knowledge, supporting one another, and growing together.",
   },
 ]
 
@@ -104,37 +94,40 @@ function WhatWeDoSection() {
   return (
     <section style={{ background:"var(--soft)", padding:"80px 0", borderTop:"1px solid var(--border)" }}>
       <div style={{ maxWidth:1140, margin:"0 auto", padding:"0 24px" }}>
-        <div style={{ textAlign:"center", maxWidth:620, margin:"0 auto 52px" }}>
-          <div className="eyebrow" style={{ justifyContent:"center" }}>What We Do</div>
+        <div style={{ textAlign:"center", maxWidth:600, margin:"0 auto 48px" }}>
+          <p style={{ fontSize:12, fontWeight:600, color:"#4285F4", textTransform:"uppercase",
+            letterSpacing:".12em", marginBottom:12 }}>What We Do</p>
           <h2 style={{
             fontFamily:"'Poppins',sans-serif", fontWeight:800,
-            fontSize:"clamp(26px,4vw,38px)", color:"var(--ink)", marginBottom:14, marginTop:10,
+            fontSize:"clamp(26px,4vw,38px)", color:"var(--ink)", marginBottom:14,
           }}>
-            Learning, Building &amp; Growing Together
+            Our Activities &amp; Focus Areas
           </h2>
           <p style={{ fontSize:16, color:"var(--text)", lineHeight:1.75 }}>
-            ZGDC&ndash;CASPAM brings students together to explore technology across a wide
-            range of domains — from web development to artificial intelligence.
+            ZGDC&ndash;CASPAM brings students together across a wide range of technology disciplines &mdash;
+            from AI workshops to collaborative community projects.
           </p>
         </div>
 
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:20 }}>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))", gap:20 }}>
           {activities.map(({ color, Icon, title, desc }) => (
             <div key={title} style={{
-              background:"#fff", border:`1px solid ${color}22`,
-              borderTop:`4px solid ${color}`, borderRadius:16,
-              padding:26, boxShadow:"var(--shadow-sm)",
+              background:"#fff", borderRadius:16,
+              border:`1px solid ${color}20`,
+              padding:28, boxShadow:"var(--shadow-sm)",
               transition:"transform .25s, box-shadow .25s",
             }}
-              onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-5px)";e.currentTarget.style.boxShadow="var(--shadow)";}}
+              onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-6px)";e.currentTarget.style.boxShadow="var(--shadow)";}}
               onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow="var(--shadow-sm)";}}
             >
+              <div style={{ width:40, height:4, borderRadius:4, background:color, marginBottom:20 }}/>
               <div style={{ width:48, height:48, borderRadius:12, background:`${color}15`,
-                display:"grid", placeItems:"center", color, marginBottom:14 }}>
+                display:"grid", placeItems:"center", color, marginBottom:16 }}>
                 <Icon size={22}/>
               </div>
-              <h3 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:700, fontSize:17, color:"var(--ink)", marginBottom:8 }}>{title}</h3>
-              <p style={{ fontSize:14, color:"var(--text)", lineHeight:1.65 }}>{desc}</p>
+              <h3 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:700, fontSize:17,
+                color:"var(--ink)", marginBottom:10 }}>{title}</h3>
+              <p style={{ fontSize:14, color:"var(--text)", lineHeight:1.7 }}>{desc}</p>
             </div>
           ))}
         </div>
@@ -144,68 +137,68 @@ function WhatWeDoSection() {
 }
 
 /* ─────────────────────────────────────────
-   AI Baithak — 4-session schedule
+   AI Baithak — event info + session dates only
+   (No topics — those are on the Events page)
 ───────────────────────────────────────── */
-const topics = [
-  { color:"#4285F4", Icon:SparkleIcon, title:"Prompt Engineering",   desc:"Communicate effectively with AI through structured prompts." },
-  { color:"#EA4335", Icon:BrainIcon,   title:"Artificial Intelligence", desc:"Explore AI fundamentals and real-world applications." },
-  { color:"#34A853", Icon:CodeIcon,    title:"App Development",      desc:"Design and build apps using modern development tools." },
-  { color:"#FBBC05", Icon:GlobeIcon,   title:"Google AI Studio",     desc:"Experiment with AI models and build AI-powered apps." },
-]
-
 const sessions = [
-  { num:1, date:"Friday, 06 November 2026" },
-  { num:2, date:"Friday, 20 November 2026" },
-  { num:3, date:"Friday, 04 December 2026" },
-  { num:4, date:"Friday, 18 December 2026" },
+  { num:1, date:"Friday, 06 November 2026", color:"#4285F4" },
+  { num:2, date:"Friday, 20 November 2026", color:"#EA4335" },
+  { num:3, date:"Friday, 04 December 2026", color:"#34A853" },
+  { num:4, date:"Friday, 18 December 2026", color:"#FBBC05" },
 ]
-
-const sessionColors = ["#4285F4","#EA4335","#34A853","#FBBC05"]
 
 function AIBaithakSection() {
   return (
     <section style={{ background:"#fff", padding:"80px 0", borderTop:"1px solid var(--border)" }}>
-      <div style={{ maxWidth:1140, margin:"0 auto", padding:"0 24px" }}>
+      <div style={{ maxWidth:860, margin:"0 auto", padding:"0 24px" }}>
 
         {/* Header */}
-        <div style={{ textAlign:"center", maxWidth:680, margin:"0 auto 52px" }}>
+        <div style={{ textAlign:"center", maxWidth:640, margin:"0 auto 48px" }}>
           <div style={{ display:"inline-flex", alignItems:"center", gap:8, marginBottom:14 }}>
             <span className="badge badge-red" style={{ fontSize:11 }}>
-              <span style={{ width:6, height:6, borderRadius:"50%", background:"#EA4335", display:"inline-block", animation:"pulse-dot 1.8s infinite" }}/>
+              <span style={{ width:6, height:6, borderRadius:"50%", background:"#EA4335",
+                display:"inline-block", animation:"pulse-dot 1.8s infinite" }}/>
               Upcoming Event
             </span>
           </div>
           <h2 style={{
             fontFamily:"'Poppins',sans-serif", fontWeight:800,
-            fontSize:"clamp(28px,4.5vw,42px)", color:"var(--ink)", marginBottom:16,
+            fontSize:"clamp(28px,4.5vw,42px)", color:"var(--ink)", marginBottom:14,
           }}>
             AI Baithak
           </h2>
-          <p style={{ fontSize:17, color:"var(--text)", lineHeight:1.75 }}>
-            An upcoming learning session by <strong>ZGDC&ndash;CASPAM</strong>, designed to introduce students
-            to modern AI tools, emerging technologies, and practical development concepts.
+          <p style={{ fontSize:17, color:"var(--text)", lineHeight:1.75, marginBottom:16 }}>
+            An upcoming learning session by <strong>ZGDC&ndash;CASPAM</strong>, designed to introduce
+            students to modern AI tools, emerging technologies, and practical development concepts.
           </p>
-          <div style={{ marginTop:10, fontSize:14, color:"var(--muted)", display:"flex", alignItems:"center", justifyContent:"center", gap:6 }}>
-            <PinIcon size={14} style={{ color:"#EA4335" }}/> CASPAM, Bahauddin Zakariya University, Multan
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", flexWrap:"wrap", gap:20, fontSize:14, color:"var(--muted)" }}>
+            <span style={{ display:"flex", alignItems:"center", gap:6 }}>
+              <PinIcon size={14} style={{ color:"#EA4335" }}/>
+              Computer Lab, CASPAM, Bahauddin Zakariya University, Multan
+            </span>
+            <span style={{ display:"flex", alignItems:"center", gap:6 }}>
+              <CalendarIcon size={14} style={{ color:"#4285F4" }}/>
+              Every alternate Friday
+            </span>
           </div>
         </div>
 
-        {/* Session Schedule */}
+        {/* Session dates */}
         <div style={{ marginBottom:44 }}>
           <p style={{ fontWeight:600, fontSize:13, color:"var(--muted)", textTransform:"uppercase",
             letterSpacing:".08em", textAlign:"center", marginBottom:20 }}>Session Schedule</p>
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))", gap:14 }}>
-            {sessions.map(({ num, date }) => (
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(190px,1fr))", gap:14 }}>
+            {sessions.map(({ num, date, color }) => (
               <div key={num} style={{
-                background:"#fff", border:`1px solid ${sessionColors[num-1]}33`,
-                borderLeft:`4px solid ${sessionColors[num-1]}`,
-                borderRadius:12, padding:"18px 20px",
-                boxShadow:"var(--shadow-sm)",
-                display:"flex", flexDirection:"column", gap:4,
+                background:"#fff", border:`1px solid ${color}33`,
+                borderLeft:`4px solid ${color}`, borderRadius:12,
+                padding:"18px 20px", boxShadow:"var(--shadow-sm)",
+                display:"flex", flexDirection:"column", gap:6,
               }}>
-                <div style={{ fontSize:12, fontWeight:700, color:sessionColors[num-1],
+                <div style={{ fontSize:11, fontWeight:700, color,
                   textTransform:"uppercase", letterSpacing:".06em" }}>Session {num}</div>
-                <div style={{ display:"flex", alignItems:"center", gap:7, fontSize:14, color:"var(--ink)", fontWeight:600 }}>
+                <div style={{ display:"flex", alignItems:"center", gap:7, fontSize:14,
+                  color:"var(--ink)", fontWeight:600 }}>
                   <CalendarIcon size={13} style={{ color:"var(--blue)", flexShrink:0 }}/>
                   {date}
                 </div>
@@ -214,36 +207,12 @@ function AIBaithakSection() {
           </div>
         </div>
 
-        {/* Topics grid */}
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))", gap:20, marginBottom:40 }}>
-          {topics.map(({ color, Icon, title, desc }) => (
-            <div key={title} style={{
-              background:"#fff", border:`1px solid ${color}22`,
-              borderTop:`4px solid ${color}`, borderRadius:16,
-              padding:24, boxShadow:"var(--shadow-sm)",
-              transition:"transform .25s, box-shadow .25s",
-            }}
-              onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-5px)";e.currentTarget.style.boxShadow="var(--shadow)";}}
-              onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow="var(--shadow-sm)";}}
-            >
-              <div style={{ width:48, height:48, borderRadius:12, background:`${color}15`,
-                display:"grid", placeItems:"center", color, marginBottom:14 }}>
-                <Icon size={22}/>
-              </div>
-              <h3 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:700, fontSize:17, color:"var(--ink)", marginBottom:8 }}>{title}</h3>
-              <p style={{ fontSize:14, color:"var(--text)", lineHeight:1.65 }}>{desc}</p>
-            </div>
-          ))}
-        </div>
-
         {/* CTA */}
         <div style={{ textAlign:"center", display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
           <a href="#/events" className="btn btn-primary">
-            <StarIcon size={16}/> View Event Details
+            <StarIcon size={16}/> View Full Event Details
           </a>
-          <a href="#/contact" className="btn btn-ghost">
-            Get More Info
-          </a>
+          <a href="#/contact" className="btn btn-ghost">Get More Info</a>
         </div>
       </div>
     </section>
@@ -265,7 +234,8 @@ export default function Home() {
       {/* Join CTA */}
       <section style={{ background:"var(--soft)", padding:"80px 0", borderTop:"1px solid var(--border)" }}>
         <div style={{ maxWidth:1140, margin:"0 auto", padding:"0 24px", textAlign:"center" }}>
-          <h2 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:700, fontSize:"clamp(26px,4vw,36px)", color:"var(--ink)", marginBottom:12 }}>
+          <h2 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:700,
+            fontSize:"clamp(26px,4vw,36px)", color:"var(--ink)", marginBottom:12 }}>
             Ready to join?
           </h2>
           <p style={{ color:"var(--text)", fontSize:17, marginBottom:32 }}>

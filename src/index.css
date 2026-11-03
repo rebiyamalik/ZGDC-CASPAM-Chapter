@@ -130,13 +130,7 @@ img { display: block; }
   color: var(--blue);
   margin-bottom: 12px;
 }
-.eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 18px; height: 2px;
-  background: var(--blue);
-  border-radius: 2px;
-}
+
 
 /* ── Section heading helper ─────────────────────────────────── */
 .section-title {

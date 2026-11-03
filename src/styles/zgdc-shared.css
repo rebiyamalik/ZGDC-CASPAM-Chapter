@@ -1,5 +1,5 @@
-﻿/* ============================================================
-   ZGDC CASPAM â€“ Shared Design Tokens & Utility Classes
+/* ============================================================
+   ZGDC CASPAM – Shared Design Tokens & Utility Classes
    Scoped under .zg-page so it never leaks to other pages.
    ============================================================ */
 
@@ -37,7 +37,7 @@
   color: var(--zg-text);
 }
 
-/* Force light mode always — no dark mode on this website */
+/* Force light mode always � no dark mode on this website */
 
 .zg-page * { box-sizing: border-box; }
 .zg-page h1, .zg-page h2, .zg-page h3,
@@ -65,14 +65,7 @@
   color: var(--zg-blue);
   margin-bottom: 12px;
 }
-.zg-eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 20px;
-  height: 2px;
-  background: var(--zg-blue);
-  border-radius: 2px;
-}
+
 
 /* Section title block */
 .zg-title {
@@ -93,7 +86,7 @@
 .zg-dots i:nth-child(3) { background: var(--zg-yellow); }
 .zg-dots i:nth-child(4) { background: var(--zg-green); }
 
-/* â”€â”€ Buttons â”€â”€ */
+/* ── Buttons ── */
 .zg-btn {
   display: inline-flex;
   align-items: center;
@@ -128,7 +121,7 @@
   transform: translateY(-2px);
 }
 
-/* â”€â”€ Cards â”€â”€ */
+/* ── Cards ── */
 .zg-grid {
   display: grid;
   gap: 22px;

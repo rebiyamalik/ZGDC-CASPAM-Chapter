@@ -1,4 +1,4 @@
-// ---------------------------------------------------------------------------
+﻿// ---------------------------------------------------------------------------
 // NOTES & LEARNING RESOURCES: the only file you edit after each session.
 //
 // The library starts EMPTY on purpose. Add one entry per published file.
@@ -65,12 +65,12 @@ export const CATEGORY_INFO = {
 export const resources = [
   {
     id: 1,
-    title: "App Development with Google AI Studio u2013 Session Notes",
+    title: "AI Baithak Session 1 – App Development Notes",
     description: "Practical session notes covering app development concepts using Google AI Studio, presented at AI Baithak Session 1.",
     category: "Workshop Materials",
     topic: "App Development",
     fileType: "PDF",
-    session: "AI Baithak u2013 Session 1",
+    session: "AI Baithak – Session 1",
     addedOn: "2026-11-06",
     approved: true,
     resourceUrl: file("app-development-session-notes.pdf"),
