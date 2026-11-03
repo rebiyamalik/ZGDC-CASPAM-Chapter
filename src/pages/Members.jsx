@@ -41,8 +41,8 @@ const PHOTO_TYPES = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG']
 
 // Remembers, for this visit only, which photo type worked (or that there is none),
 // so moving between pages does not ask the server for the same missing files again.
-const memo = (() => { try { return JSON.parse(sessionStorage.getItem('zm-photos') || '{}') } catch { return {} } })()
-const remember = (name, value) => { memo[name] = value; try { sessionStorage.setItem('zm-photos', JSON.stringify(memo)) } catch {} }
+const memo = (() => { try { return JSON.parse(sessionStorage.getItem('zm-photos-v2') || '{}') } catch { return {} } })()
+const remember = (name, value) => { memo[name] = value; try { sessionStorage.setItem('zm-photos-v2', JSON.stringify(memo)) } catch {} }
 
 // Finds the colour of a photo's own background (its outer edge) so the circle can be filled with it.
 const bgCache = {}
@@ -65,14 +65,14 @@ function edgeColor(img) {
 
 function Avatar({ m, theme, className = '' }) {
   const [bg, setBg] = useState(bgCache[m.name] || '')
-  const [tried, setTried] = useState(typeof memo[m.name] === 'number' ? memo[m.name] : memo[m.name] === 'none' ? 99 : 0)
+  const [tried, setTried] = useState(typeof memo[m.name] === 'number' ? memo[m.name] : 0)
   const sources = m.photo ? [m.photo] : PHOTO_FOLDERS.flatMap((dir) => PHOTO_TYPES.map((ext) => `${dir}${encodeURIComponent(m.photoName || photoSlug(m.name))}.${ext}`))
   if (tried < sources.length) {
     return (
       <img src={sources[tried]} alt={`Portrait of ${m.name}`}
         style={bg ? { background: bg } : undefined}
         onLoad={(e) => { remember(m.name, tried); if (!bgCache[m.name]) { bgCache[m.name] = edgeColor(e.currentTarget); setBg(bgCache[m.name]) } }}
-        onError={() => { if (tried + 1 >= sources.length) remember(m.name, 'none'); setTried(tried + 1) }}
+        onError={() => setTried(tried + 1)}
         className={`zm-avatar zm-avatar--photo zm-avatar--${theme} ${className}`} />
     )
   }
