@@ -116,7 +116,7 @@ function EventCard({ ev }) {
             display:"flex", alignItems:"center", gap:8,
           }}>
             <span style={{ fontSize:16 }}>⚠️</span>
-            Seats are limited &mdash; only 20 seats available!
+            Seats are limited &mdash; only 30 seats available!
           </div>
         )}
 
