@@ -5,7 +5,7 @@
  *
  * SEAT LIMIT: SEATS below must match maxSeats() in firestore.rules.
  */
-export const SEATS = 30
+export const SEATS = 20
 
 const cfg = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,

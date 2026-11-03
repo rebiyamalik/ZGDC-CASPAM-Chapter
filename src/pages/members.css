@@ -110,8 +110,9 @@
   color: #fff; background: var(--zm-main);
   border: 3px solid var(--surface, #fff);
   box-shadow: 0 0 0 2px var(--zm-edge, var(--zm-main)), 0 14px 18px -8px rgba(20, 23, 31, 0.45);
-  object-fit: contain;
+  object-fit: cover;
 }
+.zm-avatar--photo { object-fit: contain; object-position: center; }
 .zm-avatar--blue { --zm-edge: var(--zm-blue); background: linear-gradient(135deg, #6aa0f8, #1b5fd0); }
 .zm-avatar--red { --zm-edge: var(--zm-red); background: linear-gradient(135deg, #ff7a6b, #c5322a); }
 .zm-avatar--yellow { --zm-edge: var(--zm-yellow); color: #3d2b00; background: linear-gradient(135deg, #ffe07a, #f2b300); }

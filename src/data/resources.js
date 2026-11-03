@@ -1,4 +1,4 @@
-// ---------------------------------------------------------------------------
+﻿// ---------------------------------------------------------------------------
 // NOTES & LEARNING RESOURCES: the only file you edit after each session.
 //
 // The library starts EMPTY on purpose. Add one entry per published file.
@@ -61,5 +61,45 @@ export const CATEGORY_INFO = {
   "Workshop Materials": "Slides, handouts and exercises from ZGDC workshops.",
 };
 
-// Starts empty on purpose. Sessions have not started yet.
-export const resources = [];
+// Add one entry per published resource file.
+export const resources = [
+  {
+    id: 1,
+    title: "AI Baithak Session 1 – App Development Notes",
+    description: "Practical session notes covering app development concepts using Google AI Studio, presented at AI Baithak Session 1.",
+    category: "Workshop Materials",
+    topic: "App Development",
+    fileType: "PDF",
+    session: "AI Baithak – Session 1",
+    addedOn: "2026-11-06",
+    approved: true,
+    resourceUrl: file("app-development-session-notes.pdf"),
+    downloadUrl: file("app-development-session-notes.pdf"),
+  },
+  {
+    id: 2,
+    title: "Prompt Engineering: Presentation",
+    description: "Slides from the Prompt Engineering session. Speaker: Javaid Ahmad.",
+    category: "Workshop Materials",
+    topic: "Prompt Engineering",
+    fileType: "Slides",
+    session: "Prompt Engineering",
+    addedOn: "2026-11-06",
+    approved: true,
+    resourceUrl: file("Prompt_Engineering_Presentation.pptx"),
+    downloadUrl: file("Prompt_Engineering_Presentation.pptx"),
+  },
+  {
+    id: 3,
+    title: "Prompt Engineering: Teaching Notes",
+    description: "Detailed teaching notes for the Prompt Engineering session. Speaker: Javaid Ahmad.",
+    category: "Workshop Materials",
+    topic: "Prompt Engineering",
+    fileType: "PDF",
+    session: "Prompt Engineering",
+    addedOn: "2026-11-06",
+    approved: true,
+    resourceUrl: file("Prompt_Engineering_Teaching_Notes.pdf"),
+    downloadUrl: file("Prompt_Engineering_Teaching_Notes.pdf"),
+  },
+];

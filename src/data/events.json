@@ -1,12 +1,34 @@
 [
   {
-    "id": "AI BAITHAK",
-    "title": "AI BAITHAK",
+    "id": "ai-baithak",
+    "title": "AI Baithak",
     "date": "6-11-2026",
-    "time": "1:30PM-3:00PM",
-    "venue": "BZU Multan, CS Lab",
+    "time": "1:30 PM – 3:00 PM",
+    "venue": "CASPAM, Bahauddin Zakariya University, Multan",
     "status": "upcoming",
-    "desc": "Only 20 seats are available",
+    "desc": "AI Baithak is an upcoming learning session by ZGDC-CASPAM, designed to introduce students to modern Artificial Intelligence tools, emerging technologies, and practical development concepts. Only 20 seats available.",
+    "topics": [
+      {
+        "icon": "prompt",
+        "title": "Prompt Engineering",
+        "desc": "Learn how to communicate effectively with AI tools through structured prompts and improve the quality of AI-generated results."
+      },
+      {
+        "icon": "ai",
+        "title": "Artificial Intelligence",
+        "desc": "Explore AI fundamentals, real-world applications, and the growing impact of artificial intelligence on modern technology."
+      },
+      {
+        "icon": "app",
+        "title": "App Development",
+        "desc": "Discover how applications are designed and developed using modern development tools and technologies."
+      },
+      {
+        "icon": "google",
+        "title": "Google AI Studio",
+        "desc": "Get introduced to Google's AI development platform and explore how to experiment with AI models and build AI-powered applications."
+      }
+    ],
     "registerUrl": "",
     "notes": []
   }
