@@ -61,5 +61,19 @@ export const CATEGORY_INFO = {
   "Workshop Materials": "Slides, handouts and exercises from ZGDC workshops.",
 };
 
-// Starts empty on purpose. Sessions have not started yet.
-export const resources = [];
+// Add one entry per published resource file.
+export const resources = [
+  {
+    id: 1,
+    title: "App Development with Google AI Studio u2013 Session Notes",
+    description: "Practical session notes covering app development concepts using Google AI Studio, presented at AI Baithak Session 1.",
+    category: "Workshop Materials",
+    topic: "App Development",
+    fileType: "PDF",
+    session: "AI Baithak u2013 Session 1",
+    addedOn: "2026-11-06",
+    approved: true,
+    resourceUrl: file("app-development-session-notes.pdf"),
+    downloadUrl: file("app-development-session-notes.pdf"),
+  },
+];

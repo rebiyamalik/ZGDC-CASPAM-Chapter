@@ -1,19 +1,170 @@
 import Hero from '../components/Hero'
 import Tracks from '../components/Tracks'
-import { BrainIcon, SparkleIcon, CodeIcon, GlobeIcon, StarIcon, PinIcon, AIBotIcon } from '../components/Icons'
-import { useState } from 'react'
+import {
+  BrainIcon, SparkleIcon, CodeIcon, GlobeIcon,
+  StarIcon, PinIcon, CalendarIcon,
+  BookIcon, UsersIcon, GrowthIcon, RocketIcon,
+} from '../components/Icons'
 
-/* ── AI Baithak featured card ────────────────────────────── */
-const topics = [
-  { color:"#4285F4", Icon:SparkleIcon, title:"Prompt Engineering", desc:"Communicate effectively with AI through structured prompts." },
-  { color:"#EA4335", Icon:BrainIcon,   title:"Artificial Intelligence", desc:"Explore AI fundamentals and real-world applications." },
-  { color:"#34A853", Icon:CodeIcon,    title:"App Development", desc:"Design and build apps using modern development tools." },
-  { color:"#FBBC05", Icon:GlobeIcon,   title:"Google AI Studio", desc:"Experiment with AI models and build AI-powered apps." },
+/* ─────────────────────────────────────────
+   HOD Section — "A Message of Gratitude"
+───────────────────────────────────────── */
+function HodSection() {
+  return (
+    <section style={{ background:"#fff", padding:"80px 0", borderTop:"1px solid var(--border)" }}>
+      <div style={{ maxWidth:1100, margin:"0 auto", padding:"0 24px" }}>
+        <div className="hod-grid" style={{ display:"grid", gap:56, alignItems:"center" }}>
+
+          {/* Image */}
+          <div style={{ display:"flex", justifyContent:"center" }}>
+            <div style={{
+              width:300, height:300, borderRadius:24, overflow:"hidden",
+              boxShadow:"0 4px 24px rgba(66,133,244,.15)",
+              border:"3px solid rgba(66,133,244,.18)",
+              flexShrink:0,
+            }}>
+              <img
+                src="/hod.jpg"
+                alt="Head of Department"
+                style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"top center" }}
+              />
+            </div>
+          </div>
+
+          {/* Text */}
+          <div>
+            <div className="eyebrow" style={{ marginBottom:12 }}>A Message of Gratitude</div>
+            <h2 style={{
+              fontFamily:"'Poppins',sans-serif", fontWeight:800,
+              fontSize:"clamp(24px,3.5vw,36px)", color:"var(--ink)", marginBottom:20,
+            }}>
+              Guided by Excellence
+            </h2>
+            <p style={{ fontSize:16, lineHeight:1.85, color:"var(--text)", marginBottom:20 }}>
+              We sincerely acknowledge and appreciate the guidance, encouragement, and continuous
+              support of our respected Head of Department. His commitment to academic excellence,
+              innovation, and student development provides valuable encouragement to our community.
+            </p>
+            <p style={{ fontSize:16, lineHeight:1.85, color:"var(--text)" }}>
+              His support motivates us to explore new opportunities, strengthen our abilities, and
+              create a meaningful impact through technology and collaboration.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        .hod-grid { grid-template-columns: auto 1fr; }
+        @media (max-width:820px) {
+          .hod-grid { grid-template-columns: 1fr; }
+          .hod-grid > div:first-child { justify-content: center; }
+        }
+      `}</style>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────
+   What We Do — 6 cards
+───────────────────────────────────────── */
+const activities = [
+  {
+    color:"#4285F4", Icon:GlobeIcon,
+    title:"Web Development",
+    desc:"Exploring modern web technologies, frameworks, and building responsive, user-friendly web applications.",
+  },
+  {
+    color:"#EA4335", Icon:SparkleIcon,
+    title:"UI/UX Design",
+    desc:"Understanding user experience, interface design principles, and creating intuitive, accessible digital products.",
+  },
+  {
+    color:"#34A853", Icon:CodeIcon,
+    title:"App Development",
+    desc:"Exploring application development for mobile and desktop platforms using modern tools and technologies.",
+  },
+  {
+    color:"#FBBC05", Icon:BrainIcon,
+    title:"AI & Emerging Technologies",
+    desc:"Discovering Artificial Intelligence, machine learning concepts, and the technologies shaping our future.",
+  },
+  {
+    color:"#4285F4", Icon:BookIcon,
+    title:"Workshops & Technical Learning",
+    desc:"Interactive workshops, hands-on sessions, and practical learning activities for all experience levels.",
+  },
+  {
+    color:"#34A853", Icon:UsersIcon,
+    title:"Projects, Innovation & Collaboration",
+    desc:"Encouraging creative ideas, team collaboration, and turning concepts into real-world technology projects.",
+  },
 ]
+
+function WhatWeDoSection() {
+  return (
+    <section style={{ background:"var(--soft)", padding:"80px 0", borderTop:"1px solid var(--border)" }}>
+      <div style={{ maxWidth:1140, margin:"0 auto", padding:"0 24px" }}>
+        <div style={{ textAlign:"center", maxWidth:620, margin:"0 auto 52px" }}>
+          <div className="eyebrow" style={{ justifyContent:"center" }}>What We Do</div>
+          <h2 style={{
+            fontFamily:"'Poppins',sans-serif", fontWeight:800,
+            fontSize:"clamp(26px,4vw,38px)", color:"var(--ink)", marginBottom:14, marginTop:10,
+          }}>
+            Learning, Building &amp; Growing Together
+          </h2>
+          <p style={{ fontSize:16, color:"var(--text)", lineHeight:1.75 }}>
+            ZGDC&ndash;CASPAM brings students together to explore technology across a wide
+            range of domains — from web development to artificial intelligence.
+          </p>
+        </div>
+
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:20 }}>
+          {activities.map(({ color, Icon, title, desc }) => (
+            <div key={title} style={{
+              background:"#fff", border:`1px solid ${color}22`,
+              borderTop:`4px solid ${color}`, borderRadius:16,
+              padding:26, boxShadow:"var(--shadow-sm)",
+              transition:"transform .25s, box-shadow .25s",
+            }}
+              onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-5px)";e.currentTarget.style.boxShadow="var(--shadow)";}}
+              onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow="var(--shadow-sm)";}}
+            >
+              <div style={{ width:48, height:48, borderRadius:12, background:`${color}15`,
+                display:"grid", placeItems:"center", color, marginBottom:14 }}>
+                <Icon size={22}/>
+              </div>
+              <h3 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:700, fontSize:17, color:"var(--ink)", marginBottom:8 }}>{title}</h3>
+              <p style={{ fontSize:14, color:"var(--text)", lineHeight:1.65 }}>{desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────
+   AI Baithak — 4-session schedule
+───────────────────────────────────────── */
+const topics = [
+  { color:"#4285F4", Icon:SparkleIcon, title:"Prompt Engineering",   desc:"Communicate effectively with AI through structured prompts." },
+  { color:"#EA4335", Icon:BrainIcon,   title:"Artificial Intelligence", desc:"Explore AI fundamentals and real-world applications." },
+  { color:"#34A853", Icon:CodeIcon,    title:"App Development",      desc:"Design and build apps using modern development tools." },
+  { color:"#FBBC05", Icon:GlobeIcon,   title:"Google AI Studio",     desc:"Experiment with AI models and build AI-powered apps." },
+]
+
+const sessions = [
+  { num:1, date:"Friday, 06 November 2026" },
+  { num:2, date:"Friday, 20 November 2026" },
+  { num:3, date:"Friday, 04 December 2026" },
+  { num:4, date:"Friday, 18 December 2026" },
+]
+
+const sessionColors = ["#4285F4","#EA4335","#34A853","#FBBC05"]
 
 function AIBaithakSection() {
   return (
-    <section style={{ background:"var(--soft)", padding:"80px 0", borderTop:"1px solid var(--border)" }}>
+    <section style={{ background:"#fff", padding:"80px 0", borderTop:"1px solid var(--border)" }}>
       <div style={{ maxWidth:1140, margin:"0 auto", padding:"0 24px" }}>
 
         {/* Header */}
@@ -24,11 +175,10 @@ function AIBaithakSection() {
               Upcoming Event
             </span>
           </div>
-          <h2 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:800, fontSize:"clamp(28px,4.5vw,42px)", color:"var(--ink)", marginBottom:16, display:"flex", alignItems:"center", justifyContent:"center", gap:14 }}>
-            {/* SVG icon instead of emoji */}
-            <span style={{ width:52, height:52, borderRadius:16, background:"rgba(66,133,244,.12)", display:"inline-grid", placeItems:"center", color:"#4285F4", flexShrink:0 }}>
-              <AIBotIcon size={28}/>
-            </span>
+          <h2 style={{
+            fontFamily:"'Poppins',sans-serif", fontWeight:800,
+            fontSize:"clamp(28px,4.5vw,42px)", color:"var(--ink)", marginBottom:16,
+          }}>
             AI Baithak
           </h2>
           <p style={{ fontSize:17, color:"var(--text)", lineHeight:1.75 }}>
@@ -37,6 +187,30 @@ function AIBaithakSection() {
           </p>
           <div style={{ marginTop:10, fontSize:14, color:"var(--muted)", display:"flex", alignItems:"center", justifyContent:"center", gap:6 }}>
             <PinIcon size={14} style={{ color:"#EA4335" }}/> CASPAM, Bahauddin Zakariya University, Multan
+          </div>
+        </div>
+
+        {/* Session Schedule */}
+        <div style={{ marginBottom:44 }}>
+          <p style={{ fontWeight:600, fontSize:13, color:"var(--muted)", textTransform:"uppercase",
+            letterSpacing:".08em", textAlign:"center", marginBottom:20 }}>Session Schedule</p>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))", gap:14 }}>
+            {sessions.map(({ num, date }) => (
+              <div key={num} style={{
+                background:"#fff", border:`1px solid ${sessionColors[num-1]}33`,
+                borderLeft:`4px solid ${sessionColors[num-1]}`,
+                borderRadius:12, padding:"18px 20px",
+                boxShadow:"var(--shadow-sm)",
+                display:"flex", flexDirection:"column", gap:4,
+              }}>
+                <div style={{ fontSize:12, fontWeight:700, color:sessionColors[num-1],
+                  textTransform:"uppercase", letterSpacing:".06em" }}>Session {num}</div>
+                <div style={{ display:"flex", alignItems:"center", gap:7, fontSize:14, color:"var(--ink)", fontWeight:600 }}>
+                  <CalendarIcon size={13} style={{ color:"var(--blue)", flexShrink:0 }}/>
+                  {date}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -76,55 +250,17 @@ function AIBaithakSection() {
   )
 }
 
-/* ── FAQ Section ─────────────────────────────────────────── */
-const faqs = [
-  { q:"How can I get study notes and learning resources?", a:"You can explore our Notes section, where we share beginner-friendly notes, learning materials, and useful resources related to Artificial Intelligence, Prompt Engineering, Google AI Studio, App Development, and other technology topics. Stay connected for future updates." },
-  { q:"How can I participate in upcoming events?", a:"Visit our Events section to discover upcoming workshops, sessions, and community activities. Event details and registration information will be provided whenever available." },
-  { q:"What is AI Baithak?", a:"AI Baithak is an upcoming learning session organized by ZGDC-CASPAM, focusing on Artificial Intelligence, Prompt Engineering, Google AI Studio, and App Development." },
-  { q:"How can I register for an event?", a:"Visit the event details section and follow the registration instructions provided. For assistance, contact our chapter through the Contact section." },
-  { q:"Who can join ZGDC-CASPAM activities?", a:"Students interested in technology, programming, Artificial Intelligence, innovation, and development are welcome to explore our activities and learning opportunities." },
-  { q:"Where can I find updates about events and activities?", a:"Follow our official LinkedIn page to stay informed about upcoming events, community activities, announcements, and learning opportunities." },
-  { q:"Do I need programming experience to participate?", a:"Not necessarily. Many learning activities are suitable for beginners. Students with curiosity and an interest in technology are encouraged to participate." },
-  { q:"How can I contact the ZGDC-CASPAM team?", a:"Visit our Contact section to find our chapter information and available communication channels." },
-]
-
-function FAQSection() {
-  const [open, setOpen] = useState(null)
-  return (
-    <section style={{ background:"#fff", padding:"80px 0" }}>
-      <div style={{ maxWidth:760, margin:"0 auto", padding:"0 24px" }}>
-        <div style={{ textAlign:"center", marginBottom:52 }}>
-          <div className="eyebrow" style={{ justifyContent:"center" }}>FAQ</div>
-          <h2 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:700, fontSize:"clamp(26px,4vw,36px)", color:"var(--ink)", marginBottom:12 }}>
-            Frequently Asked Questions
-          </h2>
-          <p style={{ color:"var(--text)", fontSize:16 }}>Everything you need to know about ZGDC&ndash;CASPAM.</p>
-        </div>
-
-        <div style={{ display:"grid", gap:10 }}>
-          {faqs.map((f, i) => (
-            <div key={i} className="accordion-item">
-              <button className="accordion-btn" aria-expanded={open===i} onClick={()=>setOpen(open===i?null:i)}>
-                <span>{f.q}</span>
-                <span className="accordion-icon">{open===i ? "−" : "+"}</span>
-              </button>
-              {open===i && <div className="accordion-body">{f.a}</div>}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ── Home page ────────────────────────────────────────────── */
+/* ─────────────────────────────────────────
+   Home page — section order
+───────────────────────────────────────── */
 export default function Home() {
   return (
     <>
       <Hero />
       <Tracks />
+      <HodSection />
+      <WhatWeDoSection />
       <AIBaithakSection />
-      <FAQSection />
 
       {/* Join CTA */}
       <section style={{ background:"var(--soft)", padding:"80px 0", borderTop:"1px solid var(--border)" }}>
@@ -133,7 +269,7 @@ export default function Home() {
             Ready to join?
           </h2>
           <p style={{ color:"var(--text)", fontSize:17, marginBottom:32 }}>
-            Come to our next event or get in touch &mdash; we'd love to have you.
+            Come to our next event or get in touch &mdash; we&apos;d love to have you.
           </p>
           <div style={{ display:"flex", justifyContent:"center", gap:12, flexWrap:"wrap" }}>
             <a href="#/events" className="btn btn-primary"><StarIcon size={16}/> See Events</a>

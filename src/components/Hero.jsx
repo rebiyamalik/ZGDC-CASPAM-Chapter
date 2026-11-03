@@ -1,5 +1,4 @@
 import { lazy, Suspense } from 'react'
-import { ZGDC } from '../data/zgdcInfo'
 const Scene3D = lazy(() => import('./Scene3D'))
 
 const dots = [
@@ -14,7 +13,7 @@ export default function Hero() {
       <div style={{ maxWidth:1140, margin:"0 auto", padding:"0 24px" }}>
         <div className="hero-grid" style={{
           display:"grid", alignItems:"center", gap:48,
-          padding:"72px 0 56px",
+          padding:"72px 0 72px",
         }}>
           {/* Left */}
           <div className="fade-up">
@@ -61,41 +60,11 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── Stats strip (also used by About page) ── */}
-      <div style={{ background:"var(--soft)", borderTop:"1px solid var(--border)", borderBottom:"1px solid var(--border)" }}>
-        <div style={{ maxWidth:1140, margin:"0 auto", padding:"32px 24px" }}>
-          <div className="stats-grid" style={{ display:"grid", gap:24, textAlign:"center" }}>
-            {[
-              { num:`${ZGDC.members}`, label:"Members",       color:"#4285F4" },
-              { num:"1",              label:"Upcoming Event", color:"#EA4335" },
-              { num:ZGDC.founded,    label:"Year",           color:"#34A853" },
-              { num:"CASPAM · BZU", label:"Campus",          color:"#FBBC05" },
-            ].map(({ num, label, color }) => (
-              <div key={label} style={{ padding:"20px 16px" }}>
-                <div style={{ fontFamily:"'Poppins',sans-serif", fontWeight:800,
-                  fontSize:"clamp(28px,4vw,40px)", lineHeight:1,
-                  color, marginBottom:6 }}>
-                  {num}
-                </div>
-                <div style={{ fontSize:13, fontWeight:600, color:"var(--muted)",
-                  textTransform:"uppercase", letterSpacing:".08em" }}>
-                  {label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
       <style>{`
-        .hero-grid       { grid-template-columns: 1.1fr 1fr; }
-        .stats-grid      { grid-template-columns: repeat(4, 1fr); }
+        .hero-grid { grid-template-columns: 1.1fr 1fr; }
         @media (max-width:860px) {
           .hero-grid { grid-template-columns: 1fr; }
           .hero-grid > div:last-child { height: 260px; }
-        }
-        @media (max-width:600px) {
-          .stats-grid { grid-template-columns: repeat(2,1fr); }
         }
       `}</style>
     </section>

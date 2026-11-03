@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ZGDC } from '../data/zgdcInfo'
 import SocialLinks from '../components/SocialLinks'
-import { MailIcon, PinIcon, LinkedInIcon, SendIcon, CheckIcon, ArrowIcon } from '../components/Icons'
+import { MailIcon, PinIcon, LinkedInIcon, SendIcon, CheckIcon, ArrowIcon, SparkleIcon } from '../components/Icons'
 import '../styles/Contact.css'
 
 const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
@@ -12,6 +12,66 @@ const rules = {
   message: v => v.trim().length >= 10  ? '' : 'Message must be at least 10 characters.',
 }
 const EMPTY = { name:'', email:'', subject:'', message:'' }
+
+const faqs = [
+  {
+    q: "What is ZGDC–CASPAM?",
+    a: "Zakariyan Google Developer Club – CASPAM Chapter (ZGDC-CASPAM) is a student-driven technology community at the Center for Advanced Studies in Pure and Applied Mathematics (CASPAM), Bahauddin Zakariya University, Multan. We bring together students who are passionate about technology, learning, and innovation.",
+  },
+  {
+    q: "Who can join the community?",
+    a: "Any student at CASPAM, BZU who has an interest in technology, programming, artificial intelligence, innovation, and development is welcome to join and participate in our community activities.",
+  },
+  {
+    q: "How can students participate in events?",
+    a: "Visit our Events section to discover upcoming workshops, sessions, and community activities. Event details and registration information are provided whenever available.",
+  },
+  {
+    q: "How can students register for upcoming sessions?",
+    a: "For AI Baithak and other upcoming sessions, visit the Events page and complete the registration form. Seats are limited, so early registration is recommended.",
+  },
+  {
+    q: "What topics are covered in AI Baithak?",
+    a: "AI Baithak covers Prompt Engineering, Artificial Intelligence fundamentals, App Development, and Google AI Studio. It is designed to introduce students to modern AI tools, emerging technologies, and practical development concepts.",
+  },
+  {
+    q: "Where can students access event notes and learning resources?",
+    a: "Learning resources, session notes, and workshop materials are available in the Notes section. Materials are added after each session and organized by category for easy access.",
+  },
+  {
+    q: "How can students contact the society?",
+    a: "You can reach us through the contact form on this page, by email, or through our official LinkedIn page. Visit the Contact section for all available communication channels.",
+  },
+]
+
+function FAQSection() {
+  const [open, setOpen] = useState(null)
+  return (
+    <section style={{ background:"var(--soft)", padding:"80px 0", borderTop:"1px solid var(--border)" }}>
+      <div style={{ maxWidth:760, margin:"0 auto", padding:"0 24px" }}>
+        <div style={{ textAlign:"center", marginBottom:52 }}>
+          <div className="eyebrow" style={{ justifyContent:"center" }}>FAQ</div>
+          <h2 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:700, fontSize:"clamp(26px,4vw,36px)", color:"var(--ink)", marginBottom:12, marginTop:10 }}>
+            Frequently Asked Questions
+          </h2>
+          <p style={{ color:"var(--text)", fontSize:16 }}>Everything you need to know about ZGDC&ndash;CASPAM.</p>
+        </div>
+
+        <div style={{ display:"grid", gap:10 }}>
+          {faqs.map((f, i) => (
+            <div key={i} className="accordion-item">
+              <button className="accordion-btn" aria-expanded={open===i} onClick={()=>setOpen(open===i?null:i)}>
+                <span>{f.q}</span>
+                <span className="accordion-icon">{open===i ? "−" : "+"}</span>
+              </button>
+              {open===i && <div className="accordion-body">{f.a}</div>}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
 
 export default function Contact() {
   const [values,  setValues]  = useState(EMPTY)
@@ -64,7 +124,7 @@ export default function Contact() {
               Get in Touch
             </h1>
             <p style={{ fontSize:17, color:'var(--text)', lineHeight:1.75 }}>
-              Questions about events, workshops, or joining ZGDC–CASPAM? We'd love to hear from you.
+              Questions about events, workshops, or joining ZGDC&ndash;CASPAM? We&apos;d love to hear from you.
             </p>
           </div>
 
@@ -121,16 +181,22 @@ export default function Contact() {
               <div style={{ background:'#fff', border:'1px solid var(--border)',
                 borderTop:'4px solid #34A853', borderRadius:16, padding:24, boxShadow:'var(--shadow-sm)' }}>
                 <h3 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:700, fontSize:16, color:'var(--ink)', marginBottom:6 }}>Follow Us</h3>
-                <p style={{ fontSize:14, color:'var(--text)', marginBottom:14 }}>Find ZGDC–CASPAM on social media.</p>
+                <p style={{ fontSize:14, color:'var(--text)', marginBottom:14 }}>Find ZGDC&ndash;CASPAM on social media.</p>
                 <SocialLinks size={44}/>
               </div>
 
-              {/* AI Baithak CTA */}
+              {/* AI Baithak CTA — no emoji */}
               <div style={{ background:'linear-gradient(135deg,rgba(66,133,244,.07),rgba(52,168,83,.07))',
                 border:'1px solid rgba(66,133,244,.18)', borderRadius:16, padding:24 }}>
-                <h3 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:700, fontSize:17, color:'var(--ink)', marginBottom:8 }}>
-                  🤖 Interested in AI Baithak?
-                </h3>
+                <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:8 }}>
+                  <div style={{ width:36, height:36, borderRadius:10, background:'rgba(66,133,244,.12)',
+                    display:'grid', placeItems:'center', color:'#4285F4', flexShrink:0 }}>
+                    <SparkleIcon size={18}/>
+                  </div>
+                  <h3 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:700, fontSize:16, color:'var(--ink)', margin:0 }}>
+                    Interested in AI Baithak?
+                  </h3>
+                </div>
                 <p style={{ fontSize:14, color:'var(--text)', lineHeight:1.65, marginBottom:16 }}>
                   Want to explore AI, Prompt Engineering, Google AI Studio, and App Development?
                   Join us at AI Baithak!
@@ -216,6 +282,9 @@ export default function Contact() {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <FAQSection />
 
       <style>{`
         @media (max-width:820px) { .contact-grid { grid-template-columns: 1fr !important; } }

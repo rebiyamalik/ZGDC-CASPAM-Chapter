@@ -5,6 +5,14 @@ import { CalendarIcon, PinIcon, SparkleIcon, BrainIcon, CodeIcon, GlobeIcon } fr
 const topicIcons  = { prompt: SparkleIcon, ai: BrainIcon, app: CodeIcon, google: GlobeIcon }
 const topicColors = { prompt:"#4285F4", ai:"#EA4335", app:"#34A853", google:"#FBBC05" }
 
+const sessionColors = ["#4285F4","#EA4335","#34A853","#FBBC05"]
+const sessions = [
+  { num:1, date:"Friday, 06 November 2026" },
+  { num:2, date:"Friday, 20 November 2026" },
+  { num:3, date:"Friday, 04 December 2026" },
+  { num:4, date:"Friday, 18 December 2026" },
+]
+
 /* ── Event card ── */
 function EventCard({ ev }) {
   const upcoming = ev.status === 'upcoming'
@@ -42,6 +50,32 @@ function EventCard({ ev }) {
             <PinIcon size={15} style={{ color:"var(--red)" }}/> {ev.venue}
           </span>
         </div>
+
+        {/* Session Schedule — shown for upcoming events */}
+        {upcoming && (
+          <div style={{ marginBottom:24 }}>
+            <p style={{ fontWeight:600, fontSize:13, color:"var(--muted)", textTransform:"uppercase", letterSpacing:".08em", marginBottom:12 }}>
+              Session Schedule
+            </p>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))", gap:12 }}>
+              {sessions.map(({ num, date }) => (
+                <div key={num} style={{
+                  background:"var(--soft)", borderRadius:12, padding:"14px 16px",
+                  border:`1px solid ${sessionColors[num-1]}33`,
+                  borderLeft:`3px solid ${sessionColors[num-1]}`,
+                  display:"flex", flexDirection:"column", gap:4,
+                }}>
+                  <div style={{ fontSize:11, fontWeight:700, color:sessionColors[num-1],
+                    textTransform:"uppercase", letterSpacing:".06em" }}>Session {num}</div>
+                  <div style={{ display:"flex", alignItems:"center", gap:6, fontSize:13, color:"var(--ink)", fontWeight:500 }}>
+                    <CalendarIcon size={12} style={{ color:"var(--blue)", flexShrink:0 }}/>
+                    {date}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Topics */}
         {ev.topics && ev.topics.length > 0 && (
@@ -82,11 +116,11 @@ function EventCard({ ev }) {
             display:"flex", alignItems:"center", gap:8,
           }}>
             <span style={{ fontSize:16 }}>⚠️</span>
-            Seats are limited — only 20 seats available!
+            Seats are limited &mdash; only 20 seats available!
           </div>
         )}
 
-        {/* Registration — using original RegistrationForm component */}
+        {/* Registration form */}
         {upcoming && <RegistrationForm ev={ev}/>}
 
         {/* Past event notes */}
