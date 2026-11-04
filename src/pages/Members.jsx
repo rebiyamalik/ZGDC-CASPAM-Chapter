@@ -37,7 +37,7 @@ export const photoSlug = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-'
 // Upper-case endings are listed too because the web server is case sensitive.
 // Photos are looked up in public/team/ first, then in the public/ folder itself.
 const PHOTO_FOLDERS = ['/team/', '/']
-const PHOTO_TYPES = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG']
+const PHOTO_TYPES = ['png', 'jpg', 'jpeg', 'webp', 'JPG', 'JPEG', 'PNG']
 
 // Remembers, for this visit only, which photo type worked (or that there is none),
 // so moving between pages does not ask the server for the same missing files again.
