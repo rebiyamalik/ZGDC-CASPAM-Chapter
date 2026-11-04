@@ -4,6 +4,14 @@ import SocialLinks from '../components/SocialLinks'
 import { MailIcon, PinIcon, LinkedInIcon, SendIcon, CheckIcon, ArrowIcon, SparkleIcon } from '../components/Icons'
 import '../styles/Contact.css'
 
+const GoogleDots = () => (
+  <div style={{ display:"flex", gap:7, marginBottom:20 }}>
+    {["#4285F4","#EA4335","#FBBC05","#34A853"].map(c => (
+      <span key={c} style={{ width:11, height:11, borderRadius:"50%", background:c, display:"inline-block" }}/>
+    ))}
+  </div>
+)
+
 const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 const rules = {
   name:    v => v.trim().length >= 2   ? '' : 'Please enter your full name (at least 2 characters).',
@@ -50,11 +58,17 @@ function FAQSection() {
     <section style={{ background:"var(--soft)", padding:"80px 0", borderTop:"1px solid var(--border)" }}>
       <div style={{ maxWidth:760, margin:"0 auto", padding:"0 24px" }}>
         <div style={{ textAlign:"center", marginBottom:52 }}>
-          <div className="eyebrow" style={{ justifyContent:"center" }}>FAQ</div>
-          <h2 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:700, fontSize:"clamp(26px,4vw,36px)", color:"var(--ink)", marginBottom:12, marginTop:10 }}>
+          <GoogleDots/>
+          <p style={{ fontSize:12, fontWeight:700, color:"#4285F4", textTransform:"uppercase",
+            letterSpacing:".10em", marginBottom:12 }}>FAQ</p>
+          <h2 style={{
+            fontFamily:"'Poppins',sans-serif", fontWeight:800,
+            fontSize:"clamp(26px,4vw,40px)", color:"#202124",
+            lineHeight:1.15, marginBottom:12,
+          }}>
             Frequently Asked Questions
           </h2>
-          <p style={{ color:"var(--text)", fontSize:16 }}>Everything you need to know about ZGDC&ndash;CASPAM.</p>
+          <p style={{ color:"#5F6368", fontSize:16 }}>Everything you need to know about ZGDC&ndash;CASPAM.</p>
         </div>
 
         <div style={{ display:"grid", gap:10 }}>
@@ -118,12 +132,17 @@ export default function Contact() {
 
           {/* Header */}
           <div style={{ textAlign:'center', marginBottom:56, maxWidth:580, margin:'0 auto 56px' }}>
-            <div className="eyebrow" style={{ justifyContent:'center' }}>Contact</div>
-            <h1 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:800,
-              fontSize:'clamp(32px,5vw,46px)', color:'var(--ink)', marginBottom:14 }}>
+            <GoogleDots/>
+            <p style={{ fontSize:12, fontWeight:700, color:'#4285F4', textTransform:'uppercase',
+              letterSpacing:'.10em', marginBottom:12 }}>Contact</p>
+            <h1 style={{
+              fontFamily:"'Poppins',sans-serif", fontWeight:800,
+              fontSize:'clamp(32px,5vw,52px)', color:'#202124',
+              lineHeight:1.1, marginBottom:14,
+            }}>
               Get in Touch
             </h1>
-            <p style={{ fontSize:17, color:'var(--text)', lineHeight:1.75 }}>
+            <p style={{ fontSize:17, color:'#5F6368', lineHeight:1.75 }}>
               Questions about events, workshops, or joining ZGDC&ndash;CASPAM? We&apos;d love to hear from you.
             </p>
           </div>

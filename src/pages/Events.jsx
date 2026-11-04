@@ -2,6 +2,14 @@ import events from '../data/events.json'
 import RegistrationForm from '../components/RegistrationForm'
 import { CalendarIcon, PinIcon, SparkleIcon, BrainIcon, CodeIcon, GlobeIcon } from '../components/Icons'
 
+const GoogleDots = () => (
+  <div style={{ display:"flex", gap:7, marginBottom:20 }}>
+    {["#4285F4","#EA4335","#FBBC05","#34A853"].map(c => (
+      <span key={c} style={{ width:11, height:11, borderRadius:"50%", background:c, display:"inline-block" }}/>
+    ))}
+  </div>
+)
+
 const topicIcons  = { prompt: SparkleIcon, ai: BrainIcon, app: CodeIcon, google: GlobeIcon }
 const topicColors = { prompt:"#4285F4", ai:"#EA4335", app:"#34A853", google:"#FBBC05" }
 
@@ -153,13 +161,18 @@ export default function Events() {
       <div style={{ maxWidth:900, margin:"0 auto", padding:"0 24px" }}>
 
         {/* Page header */}
-        <div style={{ marginBottom:52 }}>
-          <div className="eyebrow">Events</div>
-          <h1 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:800,
-            fontSize:"clamp(32px,5vw,48px)", color:"var(--ink)", marginBottom:14 }}>
+        <div style={{ marginBottom:56 }}>
+          <GoogleDots/>
+          <p style={{ fontSize:12, fontWeight:700, color:"#4285F4", textTransform:"uppercase",
+            letterSpacing:".10em", marginBottom:12 }}>Events</p>
+          <h1 style={{
+            fontFamily:"'Poppins',sans-serif", fontWeight:800,
+            fontSize:"clamp(32px,5vw,52px)", color:"#202124",
+            lineHeight:1.1, marginBottom:14,
+          }}>
             Community Events
           </h1>
-          <p style={{ fontSize:17, color:"var(--text)", maxWidth:560 }}>
+          <p style={{ fontSize:17, color:"#5F6368", maxWidth:560, lineHeight:1.75 }}>
             Workshops, learning sessions, and community activities organized by ZGDC&ndash;CASPAM.
           </p>
         </div>
