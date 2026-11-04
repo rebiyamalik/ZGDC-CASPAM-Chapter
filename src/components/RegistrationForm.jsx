@@ -1,220 +1,148 @@
 
-import { useState } from 'react'
-import site from '../data/site.json'
+rules_version = '2';
 
-import {
-  dbEnabled,
-  registerForEvent,
-} from '../lib/db'
+service cloud.firestore {
+  match /databases/{database}/documents {
 
-export default function RegistrationForm({ ev }) {
-  const [state, setState] = useState('idle')
-
-  const submit = async (e) => {
-    e.preventDefault()
-
-    const form = e.currentTarget
-    const d = Object.fromEntries(new FormData(form))
-
-    if (d.website) return
-
-    const rec = {
-      eventId: ev.id,
-      event: ev.title,
-      name: d.name.trim(),
-      email: d.email.trim().toLowerCase(),
-      phone: d.phone.trim(),
-      roll: d.roll.trim(),
-      dept: d.dept.trim(),
-      semester: d.semester,
+    function maxSeats() {
+      return 30;
     }
 
-    setState('sending')
-
-    if (dbEnabled) {
-      try {
-        await registerForEvent(rec)
-
-        setState('done')
-        form.reset()
-
-      } catch (err) {
-        console.error('Registration failed:', {
-          code: err?.code,
-          message: err?.message,
-        })
-
-        if (err?.code === 'full') {
-          setState('full')
-        } else if (
-          err?.code === 'permission-denied' ||
-          err?.code === 'already-exists'
-        ) {
-          setState('check')
-        } else {
-          setState('error')
-        }
-      }
-
-      return
+    function regPath(id) {
+      return /databases/$(database)/documents/registrations/$(id);
     }
 
-    if (site.formEndpoint) {
-      try {
-        const response = await fetch(site.formEndpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(rec),
-        })
-
-        if (!response.ok) {
-          throw new Error('Form submission failed')
-        }
-
-        setState('done')
-        form.reset()
-
-      } catch (err) {
-        console.error(err)
-        setState('error')
-      }
-
-      return
+    function lockPath(id) {
+      return /databases/$(database)/documents/registrationLocks/$(id);
     }
 
-    window.location.href =
-      `mailto:${site.email}` +
-      `?subject=${encodeURIComponent('Registration: ' + ev.title)}` +
-      `&body=${encodeURIComponent(
-        Object.entries(rec)
-          .map(([k, v]) => `${k}: ${v}`)
-          .join('\n')
-      )}`
+    function statPath(eventId) {
+      return /databases/$(database)/documents/eventStats/$(eventId);
+    }
 
-    setState('done')
+    // Public counter, private registration records.
+    match /eventStats/{eventId} {
+
+      allow read: if true;
+
+      allow create: if
+        request.resource.data.keys().hasOnly([
+          'count', 'lastReg'
+        ])
+        && request.resource.data.count == 1
+        && request.resource.data.lastReg.matches(
+          '^' + eventId + '_.+'
+        )
+        && existsAfter(regPath(request.resource.data.lastReg))
+        && !exists(regPath(request.resource.data.lastReg))
+        && existsAfter(lockPath(request.resource.data.lastReg))
+        && !exists(lockPath(request.resource.data.lastReg));
+
+      allow update: if
+        request.resource.data.keys().hasOnly([
+          'count', 'lastReg'
+        ])
+        && request.resource.data.count == resource.data.count + 1
+        && request.resource.data.count <= maxSeats()
+        && request.resource.data.lastReg.matches(
+          '^' + eventId + '_.+'
+        )
+        && existsAfter(regPath(request.resource.data.lastReg))
+        && !exists(regPath(request.resource.data.lastReg))
+        && existsAfter(lockPath(request.resource.data.lastReg))
+        && !exists(lockPath(request.resource.data.lastReg));
+
+      allow delete: if false;
+    }
+
+    // Private student information.
+    match /registrations/{id} {
+
+      allow create: if
+        request.resource.data.keys().hasOnly([
+          'eventId',
+          'event',
+          'name',
+          'email',
+          'phone',
+          'roll',
+          'dept',
+          'semester',
+          'createdAt'
+        ])
+        && request.resource.data.eventId == 'ai-baithak'
+        && id == request.resource.data.eventId
+          + '_' + request.resource.data.email
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() < 100
+        && request.resource.data.email is string
+        && request.resource.data.email.size() > 0
+        && request.resource.data.email.size() < 150
+        && request.resource.data.phone is string
+        && request.resource.data.phone.size() > 0
+        && request.resource.data.phone.size() < 30
+        && request.resource.data.roll is string
+        && request.resource.data.roll.size() < 50
+        && request.resource.data.dept is string
+        && request.resource.data.dept.size() > 0
+        && request.resource.data.dept.size() < 150
+        && request.resource.data.semester is string
+        && request.resource.data.semester.size() < 10
+        && request.resource.data.createdAt == request.time
+
+        && existsAfter(lockPath(id))
+        && !exists(lockPath(id))
+
+        && getAfter(statPath(
+          request.resource.data.eventId
+        )).data.lastReg == id
+
+        && getAfter(statPath(
+          request.resource.data.eventId
+        )).data.count <= maxSeats();
+
+      allow read, update, delete: if false;
+    }
+
+    // Private duplicate-prevention lock.
+    match /registrationLocks/{id} {
+
+      allow create: if
+        request.resource.data.keys().hasOnly(['eventId'])
+        && request.resource.data.eventId == 'ai-baithak'
+        && id.matches('^ai-baithak_.+')
+        && !exists(regPath(id))
+        && existsAfter(regPath(id))
+        && !exists(lockPath(id))
+        && getAfter(statPath('ai-baithak')).data.lastReg == id
+        && getAfter(statPath('ai-baithak')).data.count <= maxSeats();
+
+      allow read, update, delete: if false;
+    }
+
+    // Contact form.
+    match /messages/{id} {
+
+      allow create: if
+        request.resource.data.keys().hasOnly([
+          'name',
+          'email',
+          'subject',
+          'message',
+          'createdAt'
+        ])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() < 100
+        && request.resource.data.email is string
+        && request.resource.data.email.size() < 150
+        && request.resource.data.subject is string
+        && request.resource.data.subject.size() < 150
+        && request.resource.data.message is string
+        && request.resource.data.message.size() < 2000
+        && request.resource.data.createdAt == request.time;
+
+      allow read, update, delete: if false;
+    }
   }
-
-  const f = 'mt-1 w-full rounded-lg border border-black/30 px-3 py-2'
-
-  if (state === 'done') {
-    return (
-      <p role="status" className="mt-4 font-semibold text-brand">
-        You're registered for {ev.title}. See you there!
-      </p>
-    )
-  }
-
-  return (
-    <form onSubmit={submit} className="mt-4 grid gap-3 sm:grid-cols-2">
-
-      <label className="text-sm font-medium">
-        Full name
-        <input
-          name="name"
-          required
-          autoComplete="name"
-          maxLength="100"
-          className={f}
-        />
-      </label>
-
-      <label className="text-sm font-medium">
-        Email
-        <input
-          name="email"
-          type="email"
-          required
-          autoComplete="email"
-          maxLength="150"
-          className={f}
-        />
-      </label>
-
-      <label className="text-sm font-medium">
-        WhatsApp / phone
-        <input
-          name="phone"
-          type="tel"
-          required
-          autoComplete="tel"
-          maxLength="30"
-          className={f}
-        />
-      </label>
-
-      <label className="text-sm font-medium">
-        Roll number
-        <input
-          name="roll"
-          required
-          maxLength="50"
-          className={f}
-        />
-      </label>
-
-      <label className="text-sm font-medium">
-        Department
-        <input
-          name="dept"
-          required
-          maxLength="150"
-          className={f}
-        />
-      </label>
-
-      <label className="text-sm font-medium">
-        Semester
-        <select
-          name="semester"
-          required
-          defaultValue=""
-          className={f}
-        >
-          <option value="" disabled>Select</option>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map(n => (
-            <option key={n} value={n}>{n}</option>
-          ))}
-        </select>
-      </label>
-
-      <input
-        name="website"
-        tabIndex="-1"
-        autoComplete="off"
-        aria-hidden="true"
-        className="hidden"
-      />
-
-      <div className="sm:col-span-2">
-
-        <button
-          type="submit"
-          disabled={state === 'sending'}
-          className="btn btn-primary"
-        >
-          {state === 'sending' ? 'Sending…' : 'Register'}
-        </button>
-
-        {state === 'check' && (
-          <p role="alert" className="mt-2 text-sm text-orange-600">
-            This email may already be registered. If this is your first
-            attempt, please contact the organizers.
-          </p>
-        )}
-
-        {state === 'full' && (
-          <p role="alert" className="mt-2 text-sm text-red-600">
-            Sorry! All registration seats are full.
-          </p>
-        )}
-
-        {state === 'error' && (
-          <p role="alert" className="mt-2 text-sm text-red-600">
-            Something went wrong. Please try again or contact the organizers.
-          </p>
-        )}
-
-      </div>
-    </form>
-  )
 }
