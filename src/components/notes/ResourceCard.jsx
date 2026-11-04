@@ -26,8 +26,11 @@ export default function ResourceCard({ resource, index, query = "", featured = f
   const cardRef = useRef(null);
   const frameRef = useRef(0);
 
-  const hasOpenLink = isValidUrl(resourceUrl);
+  const hasOpenLink = isValidUrl(openHref);
   const hasDownload = isValidUrl(downloadUrl);
+  const openHref = /\.(pdf|pptx?|docx?)$/i.test(String(resourceUrl).split('?')[0])
+  ? 'https://docs.google.com/viewer?url=' + encodeURIComponent(new URL(resourceUrl, window.location.origin).href)
+  : resourceUrl;
   const { text: dateText, isNew } = describeDate(addedOn);
   const theme = themeFor(category);
 
