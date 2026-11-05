@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import site from '../data/site.json'
-import { dbEnabled, registerForEvent } from '../lib/db'
+import { dbEnabled } from '../lib/db'
 
 /**
  * Event registration form.
- * Registration, duplicate lock, and seat counter are written together
- * by registerForEvent so they satisfy the Firestore security rules.
+ * Registration is submitted to the private server endpoint, which checks duplicates
+ * and writes the registration and seat counter atomically.
  */
 export default function RegistrationForm({ ev }) {
   const [state, setState] = useState('idle') // idle | sending | done | duplicate | full | error
@@ -32,29 +32,36 @@ export default function RegistrationForm({ ev }) {
 
     if (dbEnabled) {
       try {
-        await registerForEvent(rec)
+        const response = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(rec),
+        })
+
+        const result = await response.json().catch(() => ({}))
+
+        if (!response.ok) {
+          if (result.code === 'already-registered') {
+            setState('duplicate')
+          } else if (result.code === 'full') {
+            setState('full')
+          } else {
+            setErrorMessage(
+              [result.code || `HTTP ${response.status}`, result.message || response.statusText]
+                .filter(Boolean)
+                .join(': ')
+            )
+            setState('error')
+          }
+          return
+        }
+
         setState('done')
         form.reset()
       } catch (err) {
-        console.error('Registration failed:', {
-          code: err?.code,
-          message: err?.message,
-        })
-
-        const code = String(err?.code || '')
-        if (code === 'full') {
-          setState('full')
-        } else if (code === 'already-exists' || code.endsWith('/already-exists')) {
-          setState('duplicate')
-        } else {
-          // Preserve the actual Firebase error instead of mislabeling every
-          // permission/configuration failure as a duplicate registration.
-          setErrorMessage(
-            [code, err?.message].filter(Boolean).join(': ') ||
-            'Unknown registration error'
-          )
-          setState('error')
-        }
+        console.error('Registration API failed:', err)
+        setErrorMessage(err?.message || 'Network error while submitting registration.')
+        setState('error')
       }
       return
     }
