@@ -112,12 +112,12 @@ function WhatWeDoSection() {
           </div>
 
           {/* Real session photo */}
-          <div style={{ width:"min(100%,320px)" }} className="whatwedo-img">
+          <div style={{ width:"min(100%,420px)" }} className="whatwedo-img">
             <div style={{
               borderRadius:16, overflow:"hidden",
               boxShadow:"0 4px 20px rgba(60,64,67,.10)",
               border:"1px solid #E8EAED",
-              aspectRatio:"4/3",
+              aspectRatio:"16/9",
             }}>
               <img src="/home-activities-banner.jpg" alt="ZGDC CASPAM students representing the developer club"
                 style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }}/>
