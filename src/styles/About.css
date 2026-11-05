@@ -2,7 +2,7 @@
 .about-page{--about-ink:#202124;--about-muted:#667085;--about-line:#e8edf3;--about-soft:#f6f8fb;color:var(--about-ink);background:#fff}
 .about-page *{box-sizing:border-box}
 .about-shell{width:min(1120px,calc(100% - 48px));margin:0 auto}
-.about-eyebrow{display:inline-block;color:#2864ce;font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;margin-bottom:13px}
+.about-eyebrow{display:inline-flex;align-items:center;gap:10px;color:#2864ce;font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;margin-bottom:13px}
 .about-intro{position:relative;overflow:hidden;padding:76px 0 0;text-align:center;background:radial-gradient(ellipse at 82% 12%,rgba(66,133,244,.08),transparent 34%),linear-gradient(180deg,#fff,#fbfcff);border-bottom:1px solid #edf0f4}
 .about-intro:before,.about-intro:after{content:"";position:absolute;pointer-events:none;width:660px;height:235px;border:22px solid rgba(66,133,244,.055);border-radius:50%;transform:rotate(-13deg)}
 .about-intro:before{right:-210px;top:-155px}
