@@ -54,7 +54,7 @@ function HodSection() {
 
           <div className="home-gratitude-photo-wrap">
             <div className="home-gratitude-photo-frame">
-              <img src="/hod.jpg" alt="Prof. Dr. Imran Javaid, Head of Department at CASPAM"/>
+              <img src="/hod.jpg" alt="Prof. Dr. Imran Javaid, Director of CASPAM"/>
             </div>
             <div className="home-gratitude-photo-caption">
               <strong>Prof. Dr. Imran Javaid</strong>
