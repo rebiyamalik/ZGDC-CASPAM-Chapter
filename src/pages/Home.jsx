@@ -35,7 +35,7 @@ function HodSection() {
             </p>
             <p>
               We sincerely acknowledge and appreciate the guidance, encouragement, and
-              continuous support of <strong>Prof. Dr. Imran Javaid, Head of Department, CASPAM</strong>.
+              continuous support of <strong>Prof. Dr. Imran Javaid, Director of CASPAM</strong>.
               His commitment to academic excellence and student development provides
               valuable encouragement to our community.
             </p>
@@ -47,7 +47,7 @@ function HodSection() {
               <span className="home-gratitude-signature-rule"/>
               <div>
                 <strong>Prof. Dr. Imran Javaid</strong>
-                <span>Head of Department · CASPAM, BZU Multan</span>
+                <span>Director of CASPAM, BZU Multan</span>
               </div>
             </div>
           </div>
@@ -58,7 +58,7 @@ function HodSection() {
             </div>
             <div className="home-gratitude-photo-caption">
               <strong>Prof. Dr. Imran Javaid</strong>
-              <span>Head of Department, CASPAM</span>
+              <span>Director of CASPAM</span>
             </div>
             <span className="home-gratitude-photo-accent" aria-hidden="true"/>
           </div>
