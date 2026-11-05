@@ -134,7 +134,7 @@ function EventCard({ ev }) {
             display:"flex", alignItems:"center", gap:8,
           }}>
             <span style={{ fontSize:15 }}>⚠️</span>
-            Seats are limited &mdash; only 20 seats available. Register early to secure your spot.
+            Seats are limited &mdash; only 30 seats available. Register early to secure your spot.
           </div>
         )}
 
