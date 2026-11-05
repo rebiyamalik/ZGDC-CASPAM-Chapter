@@ -1,6 +1,7 @@
 import Hero from '../components/Hero'
 import '../styles/Home.css'
 import { StarIcon, PinIcon, CalendarIcon } from '../components/Icons'
+import { ZGDC } from '../data/zgdcInfo'
 
 /* ── Google colour dots ── */
 const GoogleDots = () => (
@@ -160,6 +161,53 @@ function WhatWeDoSection() {
   )
 }
 
+
+/* ── Upcoming event spotlight ── */
+function UpcomingEventSpotlight() {
+  return (
+    <section className="home-event-wrap">
+      <div className="home-event-card">
+        <div className="home-event-accent"/>
+        <div className="home-event-copy">
+          <span className="home-event-label"><i/> Upcoming event</span>
+          <h2>AI Baithak</h2>
+          <p>A practical learning series exploring modern AI tools, emerging technologies, and development concepts.</p>
+          <div className="home-event-details">
+            <span><PinIcon size={14}/> Computer Lab, CASPAM, BZU Multan</span>
+            <span><CalendarIcon size={14}/> Friday, 06 November 2026</span>
+            <strong>Free of cost</strong>
+          </div>
+        </div>
+        <div className="home-event-action">
+          <span className="home-event-free">30 seats available</span>
+          <a href="#/events" className="btn btn-primary">Register Now <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ── Chapter facts ── */
+function CommunityStats() {
+  const stats = [
+    { value:`${ZGDC.members}+`, label:"Community members", color:"#4285F4" },
+    { value:"4", label:"Focus areas", color:"#EA4335" },
+    { value:ZGDC.founded, label:"Chapter established", color:"#FBBC05" },
+    { value:"CASPAM", label:"BZU Multan", color:"#34A853" },
+  ]
+  return (
+    <section className="home-stats">
+      <div className="home-stats-grid">
+        {stats.map(item => (
+          <div className="home-stat" key={item.label} style={{"--stat-color":item.color}}>
+            <strong>{item.value}</strong><span>{item.label}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 /* ─────────────────────────────────────────
    AI Baithak — event info + 4 session dates
 ───────────────────────────────────────── */
@@ -281,9 +329,11 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <HodSection />
+      <UpcomingEventSpotlight />
       <WhatWeDoSection />
+      <CommunityStats />
       <AIBaithakSection />
+      <HodSection />
 
       {/* Join CTA */}
       <section className="home-join" style={{ background:"#fff", padding:"80px 0", borderTop:"1px solid #E8EAED" }}>
