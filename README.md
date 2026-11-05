@@ -176,20 +176,25 @@ Copy `.env.example` to `.env` and fill in your Firebase values.
 ## 🔐 Secure Event Registration API (Required)
 
 Event registrations are submitted through the Vercel serverless endpoint at `/api/register`.
-The endpoint uses the Firebase Admin SDK to check duplicate email addresses privately
-and create the registration, duplicate-prevention lock, and seat counter in one transaction.
+The endpoint uses Node.js built-in cryptography and the Firestore REST API to check duplicate
+email addresses privately and create the registration, duplicate-prevention lock, and seat
+counter together. It does not add a paid service or a separate server.
 
 **One-time Vercel setup**
 
-1. Open Firebase Console → Project settings → Service accounts.
-2. Generate a new private key and download the service-account JSON file.
-3. Open Vercel → this project → Settings → Environment Variables.
-4. Add `FIREBASE_SERVICE_ACCOUNT_JSON` and paste the **entire JSON file contents** as its value.
-5. Enable it for the Production environment, save, and redeploy.
+1. Open Firebase Console → Project settings → Service accounts → All service accounts.
+2. Select the service account for this Firebase project and create a JSON private key.
+3. In Vercel → Project → Settings → Environment Variables, add
+   `FIREBASE_SERVICE_ACCOUNT_JSON`.
+4. Paste the **entire contents** of the downloaded JSON file as the value.
+5. Select Production, save, and redeploy.
 
-Keep this JSON private. Never commit it to GitHub, put it in `public/`, or expose it through a `VITE_*` variable. The Admin SDK runs only on the server and bypasses Firestore Security Rules, so never import it into browser code.
+Keep this JSON private. Never commit it to GitHub, put it in `public/`, share it in chat,
+or expose it through a `VITE_*` variable. The service-account credential is used only by
+the server-side API route. It must have permission to read and write this project's Firestore.
 
-The server requires Node.js 22 or later. The project declares Node 22 in `package.json`.
+This setup uses the existing Firebase Firestore database and Vercel serverless API. No
+Firestore Security Rules need to be loosened for the private duplicate check.
 
 ## 🚀 Deployment (Vercel)
 
