@@ -90,8 +90,8 @@ function WhatWeDoSection() {
         {/* Section header */}
         <div className="whatwedo-header" style={{ display:"grid", gridTemplateColumns:"1fr auto", gap:40, alignItems:"end", marginBottom:44 }}>
           <div>
-            <GoogleDots/>
             <Eyebrow text="What We Do"/>
+            <GoogleDots/>
             <h2 style={{
               fontFamily:"'Poppins',sans-serif", fontWeight:800,
               fontSize:"clamp(26px,3.5vw,42px)", color:"#202124",
@@ -113,8 +113,9 @@ function WhatWeDoSection() {
               border:"1px solid #E8EAED",
               aspectRatio:"16/9",
             }}>
-              <img src="/home-activities-banner.jpg" alt="ZGDC CASPAM students representing the developer club"
-                style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }}/>
+              <img src="/zgdc-banner.jpg" alt="ZGDC CASPAM student developer community"
+                loading="lazy" decoding="async"
+                style={{ width:"100%", height:"100%", objectFit:"contain", background:"#111827", display:"block" }}/>
             </div>
           </div>
         </div>
