@@ -5,7 +5,7 @@ import { ZGDC } from "../data/zgdcInfo";
 const ZENO_API_URL = "https://zeno-ai.callmemrsheeqa.workers.dev";
 
 // Logo file lives in the project's public/ folder
-const ZENO_LOGO = "/zeno-logo.png";
+const ZENO_LOGO = "/zgdc-agent-logo.jpg";
 
 const WELCOME =
   "Assalam o Alaikum! I'm ZGDC Agent, the assistant of the Zakariyan Google Developer Club (CASPAM Chapter). Ask me about our events, members or the chapter.";
@@ -17,12 +17,12 @@ const SUGGESTIONS = [
 ];
 
 const css = `
-.zeno-fab{position:fixed;right:18px;bottom:18px;z-index:9999;width:84px;height:84px;padding:0;border:0;
+.zeno-fab{position:fixed;right:18px;bottom:18px;z-index:9999;width:96px;height:96px;padding:0;border:0;
   background:transparent;cursor:pointer;transition:transform .2s;animation:zeno-float 3s ease-in-out infinite}
 .zeno-fab img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 6px 12px rgba(0,0,0,.35))}
 .zeno-fab:hover{transform:scale(1.1)}
 @keyframes zeno-float{0%,100%{translate:0 0}50%{translate:0 -6px}}
-@media (max-width:480px){.zeno-fab{width:68px;height:68px;right:12px;bottom:12px}}
+@media (max-width:480px){.zeno-fab{width:82px;height:82px;right:12px;bottom:12px}}
 .zeno-head-logo{width:34px;height:34px;object-fit:contain;margin-right:10px;flex:none}
 .zeno-head-text{flex:1;min-width:0}
 .zeno-head-left{display:flex;align-items:center;min-width:0}
