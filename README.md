@@ -171,6 +171,26 @@ Copy `.env.example` to `.env` and fill in your Firebase values.
 
 ---
 
+
+
+## 🔐 Secure Event Registration API (Required)
+
+Event registrations are submitted through the Vercel serverless endpoint at `/api/register`.
+The endpoint uses the Firebase Admin SDK to check duplicate email addresses privately
+and create the registration, duplicate-prevention lock, and seat counter in one transaction.
+
+**One-time Vercel setup**
+
+1. Open Firebase Console → Project settings → Service accounts.
+2. Generate a new private key and download the service-account JSON file.
+3. Open Vercel → this project → Settings → Environment Variables.
+4. Add `FIREBASE_SERVICE_ACCOUNT_JSON` and paste the **entire JSON file contents** as its value.
+5. Enable it for the Production environment, save, and redeploy.
+
+Keep this JSON private. Never commit it to GitHub, put it in `public/`, or expose it through a `VITE_*` variable. The Admin SDK runs only on the server and bypasses Firestore Security Rules, so never import it into browser code.
+
+The server requires Node.js 22 or later. The project declares Node 22 in `package.json`.
+
 ## 🚀 Deployment (Vercel)
 
 1. Push code to the `main` branch on GitHub
