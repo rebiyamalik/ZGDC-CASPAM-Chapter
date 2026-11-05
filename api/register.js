@@ -1,46 +1,147 @@
-import { cert, getApps, initializeApp } from 'firebase-admin/app'
-import { FieldValue, getFirestore } from 'firebase-admin/firestore'
+import { createSign } from 'node:crypto'
 
 const MAX_SEATS = 30
-const ALLOWED_ORIGIN = 'https://zgdccaspamchapter.vercel.app'
+const TOKEN_SCOPE = 'https://www.googleapis.com/auth/datastore'
+const DEFAULT_ORIGIN = 'https://zgdccaspamchapter.vercel.app'
 
-function getDb() {
-  if (!getApps().length) {
-    const raw = process.env.FIREBASE_SERVICE_ACCOUNT_JSON
-    if (!raw) {
-      const error = new Error('Missing Vercel environment variable FIREBASE_SERVICE_ACCOUNT_JSON.')
-      error.code = 'missing-service-account'
-      throw error
-    }
+let cachedToken = ''
+let cachedTokenExpiresAt = 0
 
-    let serviceAccount
-    try {
-      serviceAccount = JSON.parse(raw)
-    } catch {
-      const error = new Error('FIREBASE_SERVICE_ACCOUNT_JSON is not valid JSON.')
-      error.code = 'invalid-service-account-json'
-      throw error
-    }
+function send(res, status, body) {
+  return res.status(status).json(body)
+}
 
-    initializeApp({
-      credential: cert(serviceAccount),
-      projectId: serviceAccount.project_id,
-    })
+function base64url(value) {
+  return Buffer.from(value).toString('base64url')
+}
+
+function makeError(message, code, status = 500) {
+  const error = new Error(message)
+  error.code = code
+  error.status = status
+  return error
+}
+
+function firestoreError(data, httpStatus) {
+  const apiError = data?.error || {}
+  const rawCode = apiError.status || `http-${httpStatus}`
+  const code = String(rawCode).toLowerCase().replaceAll('_', '-')
+  const message = apiError.message || `Firestore request failed with HTTP ${httpStatus}`
+  return makeError(message, code, httpStatus)
+}
+
+async function getAccessToken(serviceAccount) {
+  if (cachedToken && Date.now() < cachedTokenExpiresAt - 60_000) {
+    return cachedToken
   }
 
-  return getFirestore()
+  if (!serviceAccount.client_email || !serviceAccount.private_key) {
+    throw makeError(
+      'The service-account JSON is missing client_email or private_key.',
+      'invalid-service-account',
+    )
+  }
+
+  const tokenUri = serviceAccount.token_uri || 'https://oauth2.googleapis.com/token'
+  const now = Math.floor(Date.now() / 1000)
+  const jwtHeader = base64url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }))
+  const jwtClaims = base64url(JSON.stringify({
+    iss: serviceAccount.client_email,
+    scope: TOKEN_SCOPE,
+    aud: tokenUri,
+    iat: now,
+    exp: now + 3600,
+  }))
+  const unsignedJwt = `${jwtHeader}.${jwtClaims}`
+
+  const signer = createSign('RSA-SHA256')
+  signer.update(unsignedJwt)
+  signer.end()
+
+  const privateKey = serviceAccount.private_key.replace(/\\n/g, '\n')
+  const signature = signer.sign(privateKey).toString('base64url')
+  const assertion = `${unsignedJwt}.${signature}`
+
+  const response = await fetch(tokenUri, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+      assertion,
+    }),
+  })
+
+  const payload = await response.json().catch(() => ({}))
+  if (!response.ok || !payload.access_token) {
+    throw makeError(
+      payload.error_description || payload.error || 'Google service-account authentication failed.',
+      'service-account-auth-failed',
+      response.status || 500,
+    )
+  }
+
+  cachedToken = payload.access_token
+  cachedTokenExpiresAt = Date.now() + Number(payload.expires_in || 3600) * 1000
+  return cachedToken
 }
 
-function send(res, status, payload) {
-  return res.status(status).json(payload)
+function documentName(projectId, collection, id) {
+  return `projects/${projectId}/databases/(default)/documents/${collection}/${id}`
 }
 
-function clean(value) {
+function documentUrl(baseUrl, collection, id) {
+  return `${baseUrl}/${collection}/${encodeURIComponent(id)}`
+}
+
+async function readDocument(baseUrl, token, collection, id) {
+  const response = await fetch(documentUrl(baseUrl, collection, id), {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+
+  if (response.status === 404) return null
+
+  const payload = await response.json().catch(() => ({}))
+  if (!response.ok) throw firestoreError(payload, response.status)
+  return payload
+}
+
+async function commitWrites(baseUrl, token, writes) {
+  const response = await fetch(`${baseUrl}:commit`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ writes }),
+  })
+
+  const payload = await response.json().catch(() => ({}))
+  if (!response.ok) throw firestoreError(payload, response.status)
+  return payload
+}
+
+function stringField(value) {
+  return { stringValue: String(value) }
+}
+
+function integerField(value) {
+  return { integerValue: String(value) }
+}
+
+function makeUpdate(name, fields, currentDocument) {
+  return {
+    update: { name, fields },
+    currentDocument,
+  }
+}
+
+function cleanString(value) {
   return typeof value === 'string' ? value.trim() : ''
 }
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store')
+  res.setHeader('Content-Type', 'application/json')
 
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST')
@@ -51,7 +152,7 @@ export default async function handler(req, res) {
   }
 
   const origin = req.headers.origin
-  const allowedOrigins = (process.env.ALLOWED_REGISTRATION_ORIGINS || ALLOWED_ORIGIN)
+  const allowedOrigins = (process.env.ALLOWED_REGISTRATION_ORIGINS || DEFAULT_ORIGIN)
     .split(',')
     .map(value => value.trim())
     .filter(Boolean)
@@ -59,20 +160,29 @@ export default async function handler(req, res) {
   if (origin && !allowedOrigins.includes(origin)) {
     return send(res, 403, {
       code: 'origin-not-allowed',
-      message: 'This website is not allowed to submit registrations.',
+      message: 'This website origin is not allowed to submit registrations.',
+    })
+  }
+
+  let input
+  try {
+    input = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {})
+  } catch {
+    return send(res, 400, {
+      code: 'invalid-json',
+      message: 'The registration request body is not valid JSON.',
     })
   }
 
   try {
-    const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {})
-    const eventId = clean(body.eventId)
-    const event = clean(body.event)
-    const name = clean(body.name)
-    const email = clean(body.email).toLowerCase()
-    const phone = clean(body.phone)
-    const roll = clean(body.roll)
-    const dept = clean(body.dept)
-    const semester = clean(body.semester)
+    const eventId = cleanString(input.eventId)
+    const event = cleanString(input.event)
+    const name = cleanString(input.name)
+    const email = cleanString(input.email).toLowerCase()
+    const phone = cleanString(input.phone)
+    const roll = cleanString(input.roll)
+    const dept = cleanString(input.dept)
+    const semester = cleanString(input.semester)
 
     if (eventId !== 'ai-baithak') {
       return send(res, 400, {
@@ -95,91 +205,118 @@ export default async function handler(req, res) {
       })
     }
 
-    const db = getDb()
-    const registrationId = `${eventId}_${email}`
-    const registrationRef = db.collection('registrations').doc(registrationId)
-    const lockRef = db.collection('registrationLocks').doc(registrationId)
-    const statsRef = db.collection('eventStats').doc(eventId)
-
-    // Check the private registration record on the server. Admin SDK reads
-    // never expose student data to the public browser.
-    for (let attempt = 0; attempt < 3; attempt += 1) {
-      const outcome = await db.runTransaction(async transaction => {
-        const [registrationSnap, lockSnap, statsSnap] = await Promise.all([
-          transaction.get(registrationRef),
-          transaction.get(lockRef),
-          transaction.get(statsRef),
-        ])
-
-        if (registrationSnap.exists) {
-          return 'duplicate'
-        }
-
-        // Recover a lock left behind if an organizer manually removed only
-        // the registration document. The next request can then retry.
-        if (lockSnap.exists) {
-          transaction.delete(lockRef)
-          return 'retry'
-        }
-
-        const count = statsSnap.exists
-          ? Number(statsSnap.get('count') || 0)
-          : 0
-
-        if (!Number.isInteger(count) || count < 0) {
-          const error = new Error('The eventStats count is invalid.')
-          error.code = 'invalid-event-stats'
-          throw error
-        }
-
-        if (count >= MAX_SEATS) {
-          return 'full'
-        }
-
-        transaction.create(registrationRef, {
-          eventId,
-          event: event || 'AI Baithak',
-          name,
-          email,
-          phone,
-          roll,
-          dept,
-          semester,
-          createdAt: FieldValue.serverTimestamp(),
-        })
-
-        transaction.create(lockRef, { eventId })
-
-        transaction.set(statsRef, {
-          count: count + 1,
-          lastReg: registrationId,
-        })
-
-        return 'created'
+    const rawServiceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_JSON
+    if (!rawServiceAccount) {
+      return send(res, 500, {
+        code: 'missing-service-account',
+        message: 'Vercel environment variable FIREBASE_SERVICE_ACCOUNT_JSON is not configured.',
       })
+    }
 
-      if (outcome === 'duplicate') {
+    let serviceAccount
+    try {
+      serviceAccount = JSON.parse(rawServiceAccount)
+    } catch {
+      return send(res, 500, {
+        code: 'invalid-service-account-json',
+        message: 'FIREBASE_SERVICE_ACCOUNT_JSON is not valid JSON.',
+      })
+    }
+
+    const projectId = serviceAccount.project_id
+    if (!projectId) {
+      return send(res, 500, {
+        code: 'missing-project-id',
+        message: 'The service-account JSON does not contain project_id.',
+      })
+    }
+
+    const token = await getAccessToken(serviceAccount)
+    const baseUrl = `https://firestore.googleapis.com/v1/projects/${encodeURIComponent(projectId)}/databases/(default)/documents`
+    const registrationId = `${eventId}_${email}`
+    const registrationName = documentName(projectId, 'registrations', registrationId)
+    const lockName = documentName(projectId, 'registrationLocks', registrationId)
+    const statsName = documentName(projectId, 'eventStats', eventId)
+
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      const [registration, lock, stats] = await Promise.all([
+        readDocument(baseUrl, token, 'registrations', registrationId),
+        readDocument(baseUrl, token, 'registrationLocks', registrationId),
+        readDocument(baseUrl, token, 'eventStats', eventId),
+      ])
+
+      if (registration) {
         return send(res, 409, {
           code: 'already-registered',
           message: 'Already registered.',
         })
       }
 
-      if (outcome === 'full') {
+      // Recover a stale lock only when its registration document is absent.
+      if (lock) {
+        try {
+          await commitWrites(baseUrl, token, [{
+            delete: lockName,
+            currentDocument: { updateTime: lock.updateTime },
+          }])
+          continue
+        } catch (error) {
+          if (error.code === 'failed-precondition' || error.code === 'aborted') continue
+          throw error
+        }
+      }
+
+      const countValue = stats?.fields?.count?.integerValue ??
+        stats?.fields?.count?.doubleValue ?? '0'
+      const count = Number(countValue)
+
+      if (!Number.isSafeInteger(count) || count < 0) {
+        throw makeError('The eventStats count is invalid.', 'invalid-event-stats')
+      }
+
+      if (count >= MAX_SEATS) {
         return send(res, 409, {
           code: 'full',
           message: 'All 30 seats are full.',
         })
       }
 
-      if (outcome === 'created') {
+      const registrationFields = {
+        eventId: stringField(eventId),
+        event: stringField(event || 'AI Baithak'),
+        name: stringField(name),
+        email: stringField(email),
+        phone: stringField(phone),
+        roll: stringField(roll),
+        dept: stringField(dept),
+        semester: stringField(semester),
+        createdAt: { timestampValue: new Date().toISOString() },
+      }
+
+      const statsFields = {
+        count: integerField(count + 1),
+        lastReg: stringField(registrationId),
+      }
+
+      const statsPrecondition = stats
+        ? { updateTime: stats.updateTime }
+        : { exists: false }
+
+      try {
+        await commitWrites(baseUrl, token, [
+          makeUpdate(registrationName, registrationFields, { exists: false }),
+          makeUpdate(lockName, { eventId: stringField(eventId) }, { exists: false }),
+          makeUpdate(statsName, statsFields, statsPrecondition),
+        ])
+
         return send(res, 200, {
           ok: true,
           message: 'Registration successful.',
         })
+      } catch (error) {
+        if (error.code === 'failed-precondition' || error.code === 'aborted') continue
+        throw error
       }
-
-      // A stale lock was deleted. Run another transaction to register.
     }
 
     return send(res, 409, {
@@ -192,7 +329,7 @@ export default async function handler(req, res) {
       message: error?.message,
     })
 
-    return send(res, 500, {
+    return send(res, error?.status >= 400 && error.status < 600 ? error.status : 500, {
       code: error?.code || 'registration-server-error',
       message: error?.message || 'Unknown registration server error.',
     })
