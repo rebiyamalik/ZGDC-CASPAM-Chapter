@@ -13,8 +13,7 @@
     "gsap": "3.12.5",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "three": "0.160.0",
-    "firebase-admin": "^14.5.0"
+    "three": "0.160.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "4.3.1",
@@ -22,8 +21,5 @@
     "postcss": "8.4.38",
     "tailwindcss": "3.4.4",
     "vite": "5.3.1"
-  },
-  "engines": {
-    "node": "22.x"
   }
 }
