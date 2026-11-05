@@ -193,7 +193,7 @@ export default async function handler(req, res) {
 
     if (
       !name || name.length >= 100 ||
-      !email || email.length >= 150 || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email) ||
+      !email || email.length >= 150 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
       !phone || phone.length >= 30 ||
       !roll || roll.length >= 50 ||
       !dept || dept.length >= 150 ||
