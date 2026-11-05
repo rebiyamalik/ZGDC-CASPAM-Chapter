@@ -26,11 +26,9 @@ export default function ResourceCard({ resource, index, query = "", featured = f
   const cardRef = useRef(null);
   const frameRef = useRef(0);
 
+  const openHref = getOpenHref(resourceUrl);
   const hasOpenLink = isValidUrl(openHref);
   const hasDownload = isValidUrl(downloadUrl);
-  const openHref = /\.(pdf|pptx?|docx?)$/i.test(String(resourceUrl).split('?')[0])
-  ? 'https://docs.google.com/viewer?url=' + encodeURIComponent(new URL(resourceUrl, window.location.origin).href)
-  : resourceUrl;
   const { text: dateText, isNew } = describeDate(addedOn);
   const theme = themeFor(category);
 
@@ -105,7 +103,7 @@ export default function ResourceCard({ resource, index, query = "", featured = f
 
       <div className="zr-actions">
         {hasOpenLink && (
-          <a className="zr-btn zr-btn--primary" href={getOpenHref(resourceUrl)} target="_blank" rel="noopener noreferrer">
+          <a className="zr-btn zr-btn--primary" href={openHref} target="_blank" rel="noopener noreferrer">
             Open
             <span className="zr-sr-only"> {title} (opens in a new tab)</span>
             <span aria-hidden="true"> ↗</span>
