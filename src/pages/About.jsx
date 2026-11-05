@@ -25,7 +25,12 @@ function ColorRule() {
 }
 
 function Eyebrow({ children }) {
-  return <span className="about-eyebrow">{children}</span>
+  return (
+    <span className="about-eyebrow">
+      <span className="zgdc-animated-dots" aria-hidden="true"><i/><i/><i/><i/></span>
+      {children}
+    </span>
+  )
 }
 
 export default function About() {
