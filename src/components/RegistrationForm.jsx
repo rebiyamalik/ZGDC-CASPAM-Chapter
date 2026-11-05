@@ -1,35 +1,85 @@
 import { useState } from 'react'
 import site from '../data/site.json'
-import { dbEnabled, saveDoc } from '../lib/db'
+import { dbEnabled, registerForEvent } from '../lib/db'
 
 /**
- * Event registration form -> Firestore 'registrations'.
- * One registration per email per event (doc id = eventId + email).
+ * Event registration form.
+ * Registration, duplicate lock, and seat counter are written together
+ * by registerForEvent so they satisfy the Firestore security rules.
  */
 export default function RegistrationForm({ ev }) {
-  const [state, setState] = useState('idle') // idle | sending | done | duplicate | error
+  const [state, setState] = useState('idle') // idle | sending | done | full | blocked | error
+
   const submit = async (e) => {
     e.preventDefault()
-    const d = Object.fromEntries(new FormData(e.target))
+    const form = e.currentTarget
+    const d = Object.fromEntries(new FormData(form))
     if (d.website) return // honeypot
+
     const rec = {
-      eventId: ev.id, event: ev.title,
-      name: d.name.trim(), email: d.email.trim().toLowerCase(),
-      phone: d.phone.trim(), roll: d.roll.trim(),
-      dept: d.dept.trim(), semester: d.semester,
+      eventId: ev.id,
+      event: ev.title,
+      name: d.name.trim(),
+      email: d.email.trim().toLowerCase(),
+      phone: d.phone.trim(),
+      roll: d.roll.trim(),
+      dept: d.dept.trim(),
+      semester: d.semester,
     }
+
     setState('sending')
+
     if (dbEnabled) {
-      try { await saveDoc('registrations', rec, `${ev.id}_${rec.email}`); setState('done') }
-      catch (err) { setState(err?.code === 'permission-denied' ? 'duplicate' : 'error') }
+      try {
+        await registerForEvent(rec)
+        setState('done')
+        form.reset()
+      } catch (err) {
+        console.error('Registration failed:', {
+          code: err?.code,
+          message: err?.message,
+        })
+
+        if (err?.code === 'full') {
+          setState('full')
+        } else if (
+          err?.code === 'permission-denied' ||
+          err?.code === 'already-exists'
+        ) {
+          // Firestore can return permission-denied for either a duplicate
+          // registration/lock or a rules/configuration mismatch. Do not
+          // incorrectly claim that the email is definitely a duplicate.
+          setState('blocked')
+        } else {
+          setState('error')
+        }
+      }
       return
     }
+
     if (site.formEndpoint) {
-      try { await fetch(site.formEndpoint, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(rec) }); setState('done') }
-      catch { setState('error') }
+      try {
+        const response = await fetch(site.formEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(rec),
+        })
+        if (!response.ok) throw new Error('Form submission failed')
+        setState('done')
+        form.reset()
+      } catch (err) {
+        console.error('Registration endpoint failed:', err)
+        setState('error')
+      }
       return
     }
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent('Registration: '+ev.title)}&body=${encodeURIComponent(Object.entries(rec).map(([k,v])=>`${k}: ${v}`).join('\n'))}`
+
+    window.location.href =
+      `mailto:${site.email}` +
+      `?subject=${encodeURIComponent('Registration: ' + ev.title)}` +
+      `&body=${encodeURIComponent(
+        Object.entries(rec).map(([k, v]) => `${k}: ${v}`).join('\\n')
+      )}`
     setState('done')
   }
 
@@ -97,8 +147,9 @@ export default function RegistrationForm({ ev }) {
         <button disabled={state === 'sending'} className="btn btn-primary" style={{ padding:"12px 24px", fontSize:14 }}>
           {state === 'sending' ? 'Sending…' : 'Register Now'}
         </button>
-        {state === 'duplicate' && <span style={{ fontSize:13, color:"#c5221f", fontWeight:600 }}>This email is already registered for this event.</span>}
-        {state === 'error'     && <span style={{ fontSize:13, color:"#c5221f", fontWeight:600 }}>Something went wrong. Please try again.</span>}
+        {state === 'full' && <span role="alert" style={{ fontSize:13, color:"#c5221f", fontWeight:600 }}>Sorry, all 30 seats are full.</span>}
+        {state === 'blocked' && <span role="alert" style={{ fontSize:13, color:"#c5221f", fontWeight:600 }}>Registration was blocked. This email may already have a registration, or the database rules need checking. Please contact the organizers if this is your first attempt.</span>}
+        {state === 'error' && <span role="alert" style={{ fontSize:13, color:"#c5221f", fontWeight:600 }}>Something went wrong. Please try again or contact the organizers.</span>}
       </div>
       <style>{`
         @media (max-width:580px) { .reg-grid { grid-template-columns: 1fr !important; } }
