@@ -119,7 +119,7 @@ function WhatWeDoSection() {
               border:"1px solid #E8EAED",
               aspectRatio:"4/3",
             }}>
-              <img src="/session-photo.jpg" alt="ZGDC CASPAM session in progress"
+              <img src="/home-activities-banner.jpg" alt="ZGDC CASPAM students representing the developer club"
                 style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }}/>
             </div>
           </div>
