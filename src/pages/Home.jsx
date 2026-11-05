@@ -23,55 +23,48 @@ const Eyebrow = ({ text, color="#4285F4" }) => (
 ───────────────────────────────────────── */
 function HodSection() {
   return (
-    <section style={{ background:"#F8F9FA", padding:"72px 0", borderTop:"1px solid #E8EAED" }}>
-      <div style={{ maxWidth:1100, margin:"0 auto", padding:"0 24px" }}>
-        <div className="hod-grid" style={{ display:"grid", gap:56, alignItems:"center" }}>
-
-          {/* HOD portrait */}
-          <div style={{ display:"flex", justifyContent:"center" }}>
-            <div style={{
-              width:"min(100%,300px)", aspectRatio:"1",
-              borderRadius:20, overflow:"hidden",
-              boxShadow:"0 4px 32px rgba(66,133,244,.12), 0 2px 8px rgba(60,64,67,.08)",
-              border:"1px solid #E8EAED",
-            }}>
-              <img src="/hod.jpg" alt="Head of Department, CASPAM"
-                style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"top center", display:"block" }}/>
-            </div>
-          </div>
-
-          {/* Text */}
-          <div>
-            <GoogleDots/>
-            <Eyebrow text="A Message of Gratitude"/>
-            <h2 style={{
-              fontFamily:"'Poppins',sans-serif", fontWeight:800,
-              fontSize:"clamp(24px,3.2vw,38px)", color:"#202124",
-              lineHeight:1.2, marginBottom:18,
-            }}>
-              Guided by Excellence
-            </h2>
-            <p style={{ fontSize:16, lineHeight:1.85, color:"#5F6368", marginBottom:14 }}>
-              We sincerely acknowledge and appreciate the guidance, encouragement, and
-              continuous support of our respected Head of Department. His commitment to
-              academic excellence and student development provides valuable encouragement
-              to our community.
+    <section className="home-gratitude">
+      <div className="home-gratitude-shell">
+        <div className="home-gratitude-grid">
+          <div className="home-gratitude-copy">
+            <span className="home-gratitude-eyebrow">
+              <i aria-hidden="true"/> A Message of Gratitude
+            </span>
+            <h2>Guided by Excellence</h2>
+            <p className="home-gratitude-lead">
+              Recognising the guidance and support that help our student community grow.
             </p>
-            <p style={{ fontSize:16, lineHeight:1.85, color:"#5F6368" }}>
+            <p>
+              We sincerely acknowledge and appreciate the guidance, encouragement, and
+              continuous support of <strong>Prof. Dr. Imran Javaid, Head of Department, CASPAM</strong>.
+              His commitment to academic excellence and student development provides
+              valuable encouragement to our community.
+            </p>
+            <p>
               His support motivates us to explore new opportunities, strengthen our abilities,
               and create a meaningful impact through technology and collaboration.
             </p>
+            <div className="home-gratitude-signature">
+              <span className="home-gratitude-signature-rule"/>
+              <div>
+                <strong>Prof. Dr. Imran Javaid</strong>
+                <span>Head of Department · CASPAM, BZU Multan</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="home-gratitude-photo-wrap">
+            <div className="home-gratitude-photo-frame">
+              <img src="/hod.jpg" alt="Prof. Dr. Imran Javaid, Head of Department at CASPAM"/>
+            </div>
+            <div className="home-gratitude-photo-caption">
+              <strong>Prof. Dr. Imran Javaid</strong>
+              <span>Head of Department, CASPAM</span>
+            </div>
+            <span className="home-gratitude-photo-accent" aria-hidden="true"/>
           </div>
         </div>
       </div>
-
-      <style>{`
-        .hod-grid { grid-template-columns: auto 1fr; }
-        @media (max-width:820px) {
-          .hod-grid { grid-template-columns: 1fr; }
-          .hod-grid > div:first-child { justify-content: center; }
-        }
-      `}</style>
     </section>
   )
 }
@@ -330,10 +323,10 @@ export default function Home() {
     <>
       <Hero />
       <UpcomingEventSpotlight />
+      <HodSection />
       <WhatWeDoSection />
       <CommunityStats />
       <AIBaithakSection />
-      <HodSection />
 
       {/* Join CTA */}
       <section className="home-join" style={{ background:"#fff", padding:"80px 0", borderTop:"1px solid #E8EAED" }}>
