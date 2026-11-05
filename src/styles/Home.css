@@ -17,7 +17,6 @@
 .home-whatwedo .whatwedo-img{width:100%!important;max-width:460px;justify-self:end}
 .home-whatwedo .whatwedo-img>div{aspect-ratio:16/9!important;border-radius:20px!important;box-shadow:0 15px 35px rgba(31,47,70,.13)!important}
 .home-whatwedo .whatwedo-img img{object-position:center 42%}
-.home-whatwedo .whatwedo-header>div:first-child>div:first-child{display:none!important}
 .home-whatwedo .whatwedo-header>div:first-child>p:first-of-type{font-size:11px!important;letter-spacing:.13em!important}
 .home-whatwedo .whatwedo-header>div:first-child h2{margin-bottom:12px}
 .home-whatwedo .whatwedo-header>div:first-child>p:last-child{color:#697386}
