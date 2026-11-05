@@ -5,7 +5,7 @@ import { ZGDC } from "../data/zgdcInfo";
 const ZENO_API_URL = "https://zeno-ai.callmemrsheeqa.workers.dev";
 
 // Logo file lives in the project's public/ folder
-const ZENO_LOGO = "/zgdc-agent-logo.jpg";
+const ZENO_LOGO = "/zgdc-agent-logo.svg";
 
 const WELCOME =
   "Assalam o Alaikum! I'm ZGDC Agent, the assistant of the Zakariyan Google Developer Club (CASPAM Chapter). Ask me about our events, members or the chapter.";
