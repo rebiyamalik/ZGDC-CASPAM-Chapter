@@ -3,10 +3,8 @@ import RegistrationForm from '../components/RegistrationForm'
 import { CalendarIcon, PinIcon, SparkleIcon, BrainIcon, CodeIcon, GlobeIcon } from '../components/Icons'
 
 const GoogleDots = () => (
-  <div style={{ display:"flex", gap:7, marginBottom:18 }}>
-    {["#4285F4","#EA4335","#FBBC05","#34A853"].map(c => (
-      <span key={c} style={{ width:10, height:10, borderRadius:"50%", background:c, display:"inline-block" }}/>
-    ))}
+  <div style={{ marginBottom:18 }}>
+    <span className="zgdc-animated-dots" aria-hidden="true"><i/><i/><i/><i/></span>
   </div>
 )
 
