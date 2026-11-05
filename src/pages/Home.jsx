@@ -5,10 +5,8 @@ import { ZGDC } from '../data/zgdcInfo'
 
 /* ── Google colour dots ── */
 const GoogleDots = () => (
-  <div style={{ display:"flex", gap:7, marginBottom:18 }}>
-    {["#4285F4","#EA4335","#FBBC05","#34A853"].map(c => (
-      <span key={c} style={{ width:10, height:10, borderRadius:"50%", background:c, display:"inline-block" }}/>
-    ))}
+  <div style={{ marginBottom:18 }}>
+    <span className="zgdc-animated-dots" aria-hidden="true"><i/><i/><i/><i/></span>
   </div>
 )
 
@@ -28,7 +26,8 @@ function HodSection() {
         <div className="home-gratitude-grid">
           <div className="home-gratitude-copy">
             <span className="home-gratitude-eyebrow">
-              <i aria-hidden="true"/> A Message of Gratitude
+              <span className="zgdc-animated-dots" aria-hidden="true"><i/><i/><i/><i/></span>
+              A Message of Gratitude
             </span>
             <h2>Guided by Excellence</h2>
             <p className="home-gratitude-lead">
