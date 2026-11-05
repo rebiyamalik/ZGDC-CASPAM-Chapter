@@ -1,9 +1,4 @@
 /* Hero — logo replaces the 3D scene */
-const dots = [
-  { color:"#4285F4" }, { color:"#EA4335" },
-  { color:"#FBBC05" }, { color:"#34A853" },
-]
-
 export default function Hero() {
   return (
     <section className="home-hero" style={{ background:"#fff" }}>
@@ -16,13 +11,8 @@ export default function Hero() {
           {/* ── Left column ── */}
           <div className="fade-up">
             {/* Four Google colour dots */}
-            <div style={{ display:"flex", gap:7, marginBottom:22 }}>
-              {dots.map(d => (
-                <span key={d.color} style={{
-                  width:11, height:11, borderRadius:"50%",
-                  background:d.color, display:"inline-block",
-                }}/>
-              ))}
+            <div style={{ marginBottom:22 }}>
+              <span className="zgdc-animated-dots" aria-hidden="true"><i/><i/><i/><i/></span>
             </div>
 
             <p style={{
