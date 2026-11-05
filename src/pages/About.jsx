@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { ZGDC } from '../data/zgdcInfo'
-import { EyeIcon, ArrowIcon, HeartIcon } from '../components/Icons'
+import { ArrowIcon, HeartIcon } from '../components/Icons'
 import '../styles/About.css'
 
 /* ── Google colour dots ── */
@@ -212,23 +212,13 @@ export default function About() {
             </div>
 
             <div style={{
-              background:"linear-gradient(135deg,rgba(66,133,244,.05),rgba(52,168,83,.05))",
-              border:"1px solid rgba(66,133,244,.12)", borderRadius:20,
-              padding:"40px 36px", textAlign:"center",
+              borderRadius:20, overflow:"hidden",
+              border:"1px solid #E8EAED",
+              boxShadow:"0 8px 28px rgba(60,64,67,.12)",
+              minHeight:280,
             }}>
-              <div style={{
-                width:64, height:64, borderRadius:16, background:"rgba(66,133,244,.10)",
-                display:"grid", placeItems:"center", color:"#4285F4",
-                margin:"0 auto 20px",
-              }}>
-                <EyeIcon size={32}/>
-              </div>
-              <p style={{
-                fontFamily:"'Poppins',sans-serif", fontWeight:600, fontSize:18,
-                color:"#202124", lineHeight:1.55, fontStyle:"italic",
-              }}>
-                &ldquo;From curious students to confident technology leaders.&rdquo;
-              </p>
+              <img src="/about-lab.jpg" alt="ZGDC CASPAM students learning together in the computer lab"
+                style={{ width:"100%", height:"100%", minHeight:280, objectFit:"cover", display:"block" }}/>
             </div>
           </div>
 
