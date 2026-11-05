@@ -6,7 +6,7 @@ const dots = [
 
 export default function Hero() {
   return (
-    <section style={{ background:"#fff" }}>
+    <section className="home-hero" style={{ background:"#fff" }}>
       <div style={{ maxWidth:1140, margin:"0 auto", padding:"0 24px" }}>
         <div className="hero-grid" style={{
           display:"grid", alignItems:"center", gap:64,
