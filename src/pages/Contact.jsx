@@ -5,10 +5,8 @@ import { MailIcon, PinIcon, LinkedInIcon, SendIcon, CheckIcon, ArrowIcon, Sparkl
 import '../styles/Contact.css'
 
 const GoogleDots = () => (
-  <div style={{ display:"flex", gap:7, marginBottom:20 }}>
-    {["#4285F4","#EA4335","#FBBC05","#34A853"].map(c => (
-      <span key={c} style={{ width:11, height:11, borderRadius:"50%", background:c, display:"inline-block" }}/>
-    ))}
+  <div style={{ marginBottom:20 }}>
+    <span className="zgdc-animated-dots" aria-hidden="true"><i/><i/><i/><i/></span>
   </div>
 )
 
