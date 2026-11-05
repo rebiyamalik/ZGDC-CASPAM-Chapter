@@ -8,7 +8,8 @@ import { dbEnabled, registerForEvent } from '../lib/db'
  * by registerForEvent so they satisfy the Firestore security rules.
  */
 export default function RegistrationForm({ ev }) {
-  const [state, setState] = useState('idle') // idle | sending | done | full | blocked | error
+  const [state, setState] = useState('idle') // idle | sending | done | duplicate | full | error
+  const [errorMessage, setErrorMessage] = useState('')
 
   const submit = async (e) => {
     e.preventDefault()
@@ -40,17 +41,18 @@ export default function RegistrationForm({ ev }) {
           message: err?.message,
         })
 
-        if (err?.code === 'full') {
+        const code = String(err?.code || '')
+        if (code === 'full') {
           setState('full')
-        } else if (
-          err?.code === 'permission-denied' ||
-          err?.code === 'already-exists'
-        ) {
-          // Firestore can return permission-denied for either a duplicate
-          // registration/lock or a rules/configuration mismatch. Do not
-          // incorrectly claim that the email is definitely a duplicate.
-          setState('blocked')
+        } else if (code === 'already-exists' || code.endsWith('/already-exists')) {
+          setState('duplicate')
         } else {
+          // Preserve the actual Firebase error instead of mislabeling every
+          // permission/configuration failure as a duplicate registration.
+          setErrorMessage(
+            [code, err?.message].filter(Boolean).join(': ') ||
+            'Unknown registration error'
+          )
           setState('error')
         }
       }
@@ -64,11 +66,17 @@ export default function RegistrationForm({ ev }) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(rec),
         })
-        if (!response.ok) throw new Error('Form submission failed')
+        if (!response.ok) {
+          const responseText = await response.text().catch(() => '')
+          throw new Error(
+            `HTTP ${response.status} ${response.statusText}${responseText ? `: ${responseText}` : ''}`
+          )
+        }
         setState('done')
         form.reset()
       } catch (err) {
         console.error('Registration endpoint failed:', err)
+        setErrorMessage(err?.message || 'Unknown registration endpoint error')
         setState('error')
       }
       return
@@ -148,8 +156,8 @@ export default function RegistrationForm({ ev }) {
           {state === 'sending' ? 'Sending…' : 'Register Now'}
         </button>
         {state === 'full' && <span role="alert" style={{ fontSize:13, color:"#c5221f", fontWeight:600 }}>Sorry, all 30 seats are full.</span>}
-        {state === 'blocked' && <span role="alert" style={{ fontSize:13, color:"#c5221f", fontWeight:600 }}>Registration was blocked. This email may already have a registration, or the database rules need checking. Please contact the organizers if this is your first attempt.</span>}
-        {state === 'error' && <span role="alert" style={{ fontSize:13, color:"#c5221f", fontWeight:600 }}>Something went wrong. Please try again or contact the organizers.</span>}
+        {state === 'duplicate' && <span role="alert" style={{ fontSize:13, color:"#c5221f", fontWeight:600 }}>Already registered.</span>}
+        {state === 'error' && <span role="alert" style={{ fontSize:13, color:"#c5221f", fontWeight:600, overflowWrap:"anywhere" }}>{errorMessage}</span>}
       </div>
       <style>{`
         @media (max-width:580px) { .reg-grid { grid-template-columns: 1fr !important; } }
