@@ -20,7 +20,6 @@
 .home-whatwedo .whatwedo-header>div:first-child>div:first-child{display:none!important}
 .home-whatwedo .whatwedo-header>div:first-child>p:first-of-type{font-size:11px!important;letter-spacing:.13em!important}
 .home-whatwedo .whatwedo-header>div:first-child h2{margin-bottom:12px}
-.home-whatwedo .whatwedo-header>div:first-child h2:after{content:"";display:block;width:92px;height:4px;border-radius:8px;margin-top:17px;background:linear-gradient(90deg,#4285f4 0 25%,#ea4335 25% 50%,#fbbc05 50% 75%,#34a853 75%)}
 .home-whatwedo .whatwedo-header>div:first-child>p:last-child{color:#697386}
 .home-whatwedo .whatwedo-header+div{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:16px!important}
 .home-whatwedo .whatwedo-header+div>div{min-height:205px;padding:24px 22px 25px!important;border-radius:17px!important;box-shadow:0 3px 12px rgba(32,45,65,.04)!important}
