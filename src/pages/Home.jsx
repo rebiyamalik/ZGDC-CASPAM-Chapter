@@ -1,4 +1,5 @@
 import Hero from '../components/Hero'
+import '../styles/Home.css'
 import { StarIcon, PinIcon, CalendarIcon } from '../components/Icons'
 
 /* ── Google colour dots ── */
@@ -21,7 +22,7 @@ const Eyebrow = ({ text, color="#4285F4" }) => (
 ───────────────────────────────────────── */
 function HodSection() {
   return (
-    <section style={{ background:"#F8F9FA", padding:"80px 0", borderTop:"1px solid #E8EAED" }}>
+    <section style={{ background:"#F8F9FA", padding:"72px 0", borderTop:"1px solid #E8EAED" }}>
       <div style={{ maxWidth:1100, margin:"0 auto", padding:"0 24px" }}>
         <div className="hod-grid" style={{ display:"grid", gap:56, alignItems:"center" }}>
 
@@ -90,7 +91,7 @@ const activities = [
 
 function WhatWeDoSection() {
   return (
-    <section style={{ background:"#fff", padding:"80px 0", borderTop:"1px solid #E8EAED" }}>
+    <section className="home-whatwedo" style={{ background:"#fff", padding:"80px 0", borderTop:"1px solid #E8EAED" }}>
       <div style={{ maxWidth:1140, margin:"0 auto", padding:"0 24px" }}>
 
         {/* Section header */}
@@ -171,7 +172,7 @@ const sessions = [
 
 function AIBaithakSection() {
   return (
-    <section style={{ background:"#F8F9FA", padding:"80px 0", borderTop:"1px solid #E8EAED" }}>
+    <section className="home-baithak" style={{ background:"#F8F9FA", padding:"80px 0", borderTop:"1px solid #E8EAED" }}>
       <div style={{ maxWidth:1100, margin:"0 auto", padding:"0 24px" }}>
 
         {/* Two-col layout */}
@@ -285,7 +286,7 @@ export default function Home() {
       <AIBaithakSection />
 
       {/* Join CTA */}
-      <section style={{ background:"#fff", padding:"80px 0", borderTop:"1px solid #E8EAED" }}>
+      <section className="home-join" style={{ background:"#fff", padding:"80px 0", borderTop:"1px solid #E8EAED" }}>
         <div style={{ maxWidth:680, margin:"0 auto", padding:"0 24px", textAlign:"center" }}>
           <GoogleDots/>
           <h2 style={{
