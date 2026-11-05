@@ -88,7 +88,7 @@ function WhatWeDoSection() {
       <div style={{ maxWidth:1140, margin:"0 auto", padding:"0 24px" }}>
 
         {/* Section header */}
-        <div className="whatwedo-header" style={{ display:"grid", gridTemplateColumns:"1fr auto", gap:40, alignItems:"end", marginBottom:44 }}>
+        <div className="whatwedo-header" style={{ display:"grid", gridTemplateColumns:"1fr", gap:0, alignItems:"start", marginBottom:36 }}>
           <div>
             <Eyebrow text="What We Do"/>
             <GoogleDots/>
@@ -99,25 +99,13 @@ function WhatWeDoSection() {
             }}>
               Our Activities &amp;<br/>Focus Areas
             </h2>
-            <p style={{ fontSize:16, color:"#5F6368", lineHeight:1.75, maxWidth:480 }}>
+            <p style={{ fontSize:16, color:"#5F6368", lineHeight:1.75, maxWidth:760 }}>
               From AI workshops to collaborative projects &mdash; ZGDC&ndash;CASPAM brings students
               together across a wide range of technology disciplines.
             </p>
           </div>
 
-          {/* Real session photo */}
-          <div style={{ width:"min(100%,420px)" }} className="whatwedo-img">
-            <div style={{
-              borderRadius:16, overflow:"hidden",
-              boxShadow:"0 4px 20px rgba(60,64,67,.10)",
-              border:"1px solid #E8EAED",
-              aspectRatio:"16/9",
-            }}>
-              <img src="/zgdc-banner.jpg" alt="ZGDC CASPAM student developer community"
-                loading="lazy" decoding="async"
-                style={{ width:"100%", height:"100%", objectFit:"contain", background:"#111827", display:"block" }}/>
-            </div>
-          </div>
+
         </div>
 
         {/* 2×2 pill-bar cards */}
