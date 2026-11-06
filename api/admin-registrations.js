@@ -64,7 +64,7 @@ export default async function handler(req, res) {
   }
 
   const expected = process.env.ADMIN_EXPORT_PASSWORD || ''
-  const supplied = String(req.headers.authorization || '').replace(/^Bearer\\s+/i, '')
+  const supplied = String(req.headers.authorization || '').replace(/^Bearer\s+/i, '')
   const a = Buffer.from(expected)
   const b = Buffer.from(supplied)
   if (!expected || a.length !== b.length || !timingSafeEqual(a, b)) {
