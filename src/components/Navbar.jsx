@@ -148,6 +148,26 @@ export default function Navbar({ route }) {
         {/* Right side: theme button (Auto / Light / Dark) + mobile burger */}
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <ThemeToggle />
+          <a
+            href="#/admin"
+            aria-label="Admin login"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "9px 16px",
+              borderRadius: 999,
+              background: "var(--nav-accent)",
+              color: "#fff",
+              fontSize: 13,
+              fontWeight: 700,
+              textDecoration: "none",
+              whiteSpace: "nowrap",
+              boxShadow: "0 3px 10px rgba(66,133,244,.22)",
+            }}
+          >
+            Admin Login
+          </a>
           <button
             className="nav-burger"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -207,6 +227,27 @@ export default function Navbar({ route }) {
                 </li>
               );
             })}
+            <li>
+              <a
+                href="#/admin"
+                onClick={() => setOpen(false)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: 8,
+                  padding: "11px 16px",
+                  borderRadius: 10,
+                  fontSize: 15,
+                  fontWeight: 700,
+                  color: "#fff",
+                  background: "var(--nav-accent)",
+                  textDecoration: "none",
+                }}
+              >
+                Admin Login
+              </a>
+            </li>
           </ul>
         </div>
       )}
