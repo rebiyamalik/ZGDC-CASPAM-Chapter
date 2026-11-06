@@ -160,8 +160,8 @@ function UpcomingEventSpotlight() {
           </div>
         </div>
         <div className="home-event-action">
-          <span className="home-event-free">30 seats available</span>
-          <a href="#/events" className="btn btn-primary">Register Now <span aria-hidden="true">→</span></a>
+          <span className="home-event-free" style={{ color:"#c5221f" }}>Registration Closed</span>
+          <a href="#/events" className="btn btn-ghost" aria-label="View event details">View Details <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
