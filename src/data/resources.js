@@ -102,4 +102,17 @@ export const resources = [
     resourceUrl: file("Prompt_Engineering_Teaching_Notes.pdf"),
     downloadUrl: file("Prompt_Engineering_Teaching_Notes.pdf"),
   },
+  {
+  id: 4,
+  title: "AI Studio Deploy: Teaching Notes",
+  description: "Detailed teaching notes for the AI Studio Deploy session. Speaker: Zainab Akram Rao.",
+  category: "Workshop Materials",
+  topic: "AI Studio Deploy",
+  fileType: "PDF",
+  session: "AI Studio Deploy",
+  addedOn: "2026-11-06",
+  approved: true,
+  resourceUrl: file("ai-studio-deploy-notes.pdf"),
+  downloadUrl: file("ai-studio-deploy-notes.pdf"),
+},
 ];
