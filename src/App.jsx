@@ -9,6 +9,7 @@ import Members from './pages/Members'
 import Events from './pages/Events'
 import Notes from './pages/Notes'
 import Contact from './pages/Contact'
+import Admin from './pages/Admin'
 import ZenoChat from './components/ZenoChat'
 
 /** All pages. To add a page: create it in /pages and add a line here + in Navbar. */
@@ -19,6 +20,7 @@ const pages = {
   events: Events,
   notes: Notes,
   contact: Contact,
+  admin: Admin,
 }
 
 export default function App() {
