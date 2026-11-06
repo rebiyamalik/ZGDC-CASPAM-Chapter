@@ -151,6 +151,11 @@ export default async function handler(req, res) {
     })
   }
 
+  return send(res, 403, {
+    code: 'registration-closed',
+    message: 'Registration for this event is closed.',
+  })
+
   const origin = req.headers.origin
   const allowedOrigins = (process.env.ALLOWED_REGISTRATION_ORIGINS || DEFAULT_ORIGIN)
     .split(',')
