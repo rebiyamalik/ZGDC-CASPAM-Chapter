@@ -11,6 +11,20 @@ export default function RegistrationForm({ ev }) {
   const [state, setState] = useState('idle') // idle | sending | done | duplicate | full | error
   const [errorMessage, setErrorMessage] = useState('')
 
+  // Registration has been closed by the chapter.
+  return (
+    <div role="status" style={{
+      marginTop:20, padding:"18px 20px", borderRadius:12,
+      background:"rgba(234,67,53,.06)", border:"1px solid rgba(234,67,53,.22)",
+      color:"#c5221f", fontWeight:700, fontSize:15, textAlign:"center",
+    }}>
+      Registration Closed
+      <p style={{ margin:"6px 0 0", color:"#5F6368", fontSize:13, fontWeight:400 }}>
+        Registration for this event is no longer accepting responses.
+      </p>
+    </div>
+  )
+
   const submit = async (e) => {
     e.preventDefault()
     const form = e.currentTarget
